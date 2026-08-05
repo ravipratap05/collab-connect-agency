@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 
-const title = "Privacy Policy — Collab Connect";
+const title = "Privacy Policy — Collab Connect Agency";
 const description =
   "How Collab Connect collects, uses and protects the information you share with our social media management agency.";
 

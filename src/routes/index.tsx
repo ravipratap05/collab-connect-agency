@@ -11,7 +11,7 @@ import { Faq } from "@/components/site/Faq";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 
-const title = "Collab Connect — Social Media Management & Influencer Marketing";
+const title = "Collab Connect — Social Media & Influencer Marketing";
 const description =
   "Premium social media management, Instagram growth, influencer marketing and Meta Ads for creators and brands. Packages from ₹2,999/month.";
 

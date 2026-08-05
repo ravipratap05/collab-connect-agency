@@ -77,11 +77,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Collab Connect — Social Media & Influencer Marketing Agency" },
+      { title: "Collab Connect Agency" },
       {
         name: "description",
         content:
-          "Premium social media management, Instagram growth and influencer marketing for creators and brands.",
+          "Premium Instagram management, organic growth, influencer collaborations and Meta Ads for creators and brands.",
       },
       { name: "author", content: "Collab Connect" },
       { property: "og:site_name", content: "Collab Connect" },

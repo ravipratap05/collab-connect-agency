@@ -58,6 +58,20 @@ const addOns = [
   { title: "Campaign Management", price: "Starting ₹2,999", note: "Per campaign" },
 ];
 
+const websitePlans = [
+  {
+    name: "Website Development",
+    price: "₹3,999",
+    blurb: "Launch your business with a modern, high-converting website.",
+    features: [
+      "Responsive Website",
+      "Modern UI/UX",
+      "WhatsApp Integration",
+      "2 Days Delivery",
+    ],
+  },
+];
+
 export function Pricing() {
   return (
     <section id="pricing" className="surface-hero relative overflow-hidden py-24 sm:py-32">
@@ -131,6 +145,68 @@ export function Pricing() {
             </div>
           </div>
         </Reveal>
+        <Reveal delay={0.18}>
+  <div className="mt-24">
+    <SectionHeading
+      eyebrow="Website Development"
+      title={
+        <>
+          Build a <span className="italic">professional website.</span>
+        </>
+      }
+      subtitle="A modern website that builds trust, generates leads, and helps your business grow online."
+    />
+
+    <div className="mt-14 flex justify-center">
+      {websitePlans.map((plan) => (
+        <article
+          key={plan.name}
+          className="glass-panel lift w-full max-w-md rounded-[2.2rem] p-8"
+        >
+          <h3 className="text-2xl font-medium">{plan.name}</h3>
+
+          <p className="text-muted-foreground mt-2 text-sm">
+            {plan.blurb}
+          </p>
+
+          <p className="mt-6 flex items-baseline gap-2">
+            <span className="font-display text-5xl font-medium">
+              {plan.price}
+            </span>
+            <span className="text-muted-foreground text-sm">
+              Starting From
+            </span>
+          </p>
+
+          <div className="rose-rule mt-6" />
+
+          <ul className="mt-6 grid gap-3">
+            {plan.features.map((feature) => (
+              <li
+                key={feature}
+                className="flex items-start gap-2 text-sm"
+              >
+                <Check
+                  size={15}
+                  className="text-primary mt-0.5 shrink-0"
+                />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contact"
+            className="text-primary-foreground mt-8 flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-medium transition-transform hover:scale-[1.03]"
+            style={{ background: "var(--gradient-rose)" }}
+          >
+            Build My Website
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</Reveal>
       </div>
     </section>
   );

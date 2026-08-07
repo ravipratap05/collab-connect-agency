@@ -77,18 +77,81 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Collab Connect Agency" },
       {
-        name: "description",
-        content:
-          "Premium Instagram management, organic growth, influencer collaborations and Meta Ads for creators and brands.",
-      },
-      { name: "author", content: "Collab Connect" },
-      { property: "og:site_name", content: "Collab Connect" },
+  title:
+    "CollabConnect | Influencer Marketing Platform for Brands & Creators",
+},
+      {
+  name: "description",
+  content:
+    "CollabConnect helps brands connect with verified creators for influencer marketing, UGC content, paid collaborations, Instagram growth and social media campaigns across India.",
+},
+      { name: "author", content: "CollabConnect" },
+      {
+  name: "keywords",
+  content:
+    "Influencer Marketing India, Collab, Brand Deals, PR, Paid Collaboration, Barter Collaboration, Social Media Campaign, Social Media Manager, Social Media Agency, SMM, Brand Collaboration, UGC Creators, Instagram Influencers, Social Media Marketing, Creator Platform, Nano Influencers, Micro Influencers, CollabConnect",
+},
+      { property: "og:site_name", content: "CollabConnect" },
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "CollabConnect | Influencer Marketing Platform" },
+
+{
+  property: "og:description",
+  content:
+    "Connect brands with verified creators for influencer marketing, UGC content and paid collaborations.",
+},
+
+{ property: "og:url", content: "https://collabconnect.co.in" },
+
+{
+  property: "og:image",
+  content: "https://collabconnect.co.in/og-image.png",
+},
+
+{ property: "og:image:width", content: "1200" },
+{ property: "og:image:height", content: "630" },
+      {
+  property: "og:image:alt",
+  content:
+    "CollabConnect - Influencer Marketing Platform for Brands & Creators",
+},
+
+{ name: "twitter:title", content: "CollabConnect" },
+
+{
+  name: "twitter:description",
+  content:
+    "India's Influencer Marketing Platform",
+},
+
+{
+  name: "twitter:image",
+  content: "https://collabconnect.co.in/og-image.png",
+},
+      {
+  name: "twitter:url",
+  content: "https://collabconnect.co.in",
+},
       { name: "twitter:card", content: "summary_large_image" },
+      {
+  name: "robots",
+  content: "index, follow, max-image-preview:large",
+},
+      {
+  name: "theme-color",
+  content: "#E9C6A8",
+},
     ],
     links: [
+      {
+  rel: "canonical",
+  href: "https://collabconnect.co.in",
+},
+      {
+  rel: "apple-touch-icon",
+  href: "/favicon.png",
+},
       {
         rel: "stylesheet",
         href: appCss,
@@ -111,9 +174,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         <HeadContent />
+        <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "CollabConnect",
+      url: "https://collabconnect.co.in",
+      logo: "https://collabconnect.co.in/logo.png",
+      sameAs: [
+        "https://www.instagram.com/veer.collabs",
+        "https://www.threads.net/@veer.collabs"
+      ]
+    }),
+  }}
+/>
       </head>
       <body>
         {children}

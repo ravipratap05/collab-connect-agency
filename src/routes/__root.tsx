@@ -106,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 {
   property: "og:image",
-  content: "https://collabconnect.co.in/og-image.png",
+  content: "https://collabconnect.co.in/og-image.PNG",
 },
 
 { property: "og:image:width", content: "1200" },
@@ -127,7 +127,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 {
   name: "twitter:image",
-  content: "https://collabconnect.co.in/og-image.png",
+  content: "https://collabconnect.co.in/og-image.PNG",
 },
       {
   name: "twitter:url",
@@ -150,7 +150,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 },
       {
   rel: "apple-touch-icon",
-  href: "/favicon.png",
+  href: "/favicon.PNG",
 },
       {
         rel: "stylesheet",
@@ -185,7 +185,7 @@ function RootShell({ children }: { children: ReactNode }) {
       "@type": "Organization",
       name: "CollabConnect",
       url: "https://collabconnect.co.in",
-      logo: "https://collabconnect.co.in/logo.png",
+      logo: "https://collabconnect.co.in/logo.PNG",
       sameAs: [
         "https://www.instagram.com/veer.collabs",
         "https://www.threads.net/@veer.collabs"

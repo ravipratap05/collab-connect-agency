@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "https://collab-connect-agency.lovable.app";
+const BASE_URL = "https://collabconnect.co.in";
 
 interface SitemapEntry {
   path: string;

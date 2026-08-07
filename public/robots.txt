@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://collab-connect-agency.lovable.app/sitemap.xml
+Sitemap: https://collabconnect.co.in/sitemap.xml

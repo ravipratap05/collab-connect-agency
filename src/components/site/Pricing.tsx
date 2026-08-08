@@ -226,9 +226,20 @@ export function Pricing() {
     useState("social-media");
 
   const handleCategory = (id: string) => {
+    const scrollY = window.scrollY;
+
     setOpenCategory((current) =>
       current === id ? "" : id,
     );
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: scrollY,
+          behavior: "auto",
+        });
+      });
+    });
   };
 
   return (

@@ -1,5 +1,4 @@
 import {
-  Bot,
   Check,
   ChevronDown,
   Crown,
@@ -91,13 +90,15 @@ const pricingCategories: PricingCategory[] = [
   {
     id: "instagram-growth",
     name: "Instagram Growth",
-    description: "Flexible growth packages for followers, views and engagement.",
+    description:
+      "Flexible growth packages for followers, views and engagement.",
     icon: TrendingUp,
     plans: [
       {
         name: "Growth Packages",
         price: "Coming Soon",
-        blurb: "Followers, views, likes and engagement packages will be available here.",
+        blurb:
+          "Followers, views, likes and engagement packages will be available here.",
         features: [
           "Followers Packages",
           "Views Packages",
@@ -112,7 +113,8 @@ const pricingCategories: PricingCategory[] = [
   {
     id: "website",
     name: "Website Development",
-    description: "Modern websites designed to build trust and generate leads.",
+    description:
+      "Modern websites designed to build trust and generate leads.",
     icon: Globe,
     plans: [
       {
@@ -134,13 +136,15 @@ const pricingCategories: PricingCategory[] = [
   {
     id: "qr-menu",
     name: "QR Menu",
-    description: "Digital menus that make it easier for customers to explore your offerings.",
+    description:
+      "Digital menus that make it easier for customers to explore your offerings.",
     icon: QrCode,
     plans: [
       {
         name: "QR Menu",
         price: "₹999",
-        blurb: "A clean, mobile-friendly digital menu for your business.",
+        blurb:
+          "A clean, mobile-friendly digital menu for your business.",
         features: [
           "Digital QR Menu",
           "Mobile-Friendly Design",
@@ -154,29 +158,27 @@ const pricingCategories: PricingCategory[] = [
   },
 
   {
-  id: "whatsapp-ai",
-  name: "WhatsApp Automation & AI",
-  description:
-    "Automate conversations, capture leads and assist customers 24/7.",
-  icon: MessageCircle,
-  plans: [
-    {
-      name: "WhatsApp Automation & AI",
-      price: "₹2,499",
-      blurb:
-        "Automate customer conversations, capture leads and provide AI-powered assistance on WhatsApp.",
-      features: [
-        "Automated WhatsApp Replies",
-        "AI-Powered Customer Support",
-        "Lead Capture & Qualification",
-        "Customer Follow-ups",
-        "Order & Booking Automation",
-        "FAQ & Smart Responses",
-        "24/7 WhatsApp Assistance",
-      ],
-    },
-  ],
-},
+    id: "whatsapp-ai",
+    name: "WhatsApp Automation & AI",
+    description:
+      "Automate conversations, capture leads and assist customers 24/7.",
+    icon: MessageCircle,
+    plans: [
+      {
+        name: "WhatsApp Automation & AI",
+        price: "₹2,499",
+        blurb:
+          "Automate customer conversations, capture leads and provide AI-powered assistance on WhatsApp.",
+        features: [
+          "Automated WhatsApp Replies",
+          "AI-Powered Customer Support",
+          "Lead Capture & Qualification",
+          "Customer Follow-ups",
+          "Order & Booking Automation",
+          "FAQ & Smart Responses",
+          "24/7 WhatsApp Assistance",
+        ],
+      },
     ],
   },
 ];
@@ -229,8 +231,7 @@ export function Pricing() {
 
             return (
               <Reveal key={category.id} delay={categoryIndex * 0.05}>
-                <div className="overflow-hidden rounded-[2rem] glass-card">
-                  {/* Category Header */}
+                <div className="glass-card overflow-hidden rounded-[2rem]">
                   <button
                     type="button"
                     onClick={() => handleCategory(category.id)}
@@ -251,6 +252,7 @@ export function Pricing() {
                       <span className="block text-lg font-medium sm:text-xl">
                         {category.name}
                       </span>
+
                       <span className="text-muted-foreground mt-1 block text-xs sm:text-sm">
                         {category.description}
                       </span>
@@ -264,7 +266,6 @@ export function Pricing() {
                     />
                   </button>
 
-                  {/* Category Content */}
                   {isOpen && (
                     <div className="border-border/50 border-t px-5 pb-6 pt-6 sm:px-6 sm:pb-7">
                       <div
@@ -274,7 +275,7 @@ export function Pricing() {
                             : "lg:grid-cols-2"
                         }`}
                       >
-                        {category.plans.map((plan, planIndex) => (
+                        {category.plans.map((plan) => (
                           <article
                             key={plan.name}
                             className={`lift relative rounded-[2rem] p-7 ${
@@ -354,7 +355,6 @@ export function Pricing() {
                         ))}
                       </div>
 
-                      {/* Social Media Add-ons */}
                       {category.id === "social-media" && (
                         <div className="mt-10">
                           <p className="eyebrow text-center">

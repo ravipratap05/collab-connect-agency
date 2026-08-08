@@ -8,12 +8,7 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
-import {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useState } from "react";
 import { Reveal, SectionHeading } from "./Reveal";
 
 /* =========================================================
@@ -52,6 +47,10 @@ type PricingCategory = {
 ========================================================= */
 
 const pricingCategories: PricingCategory[] = [
+  /* -------------------------------------------------------
+     SOCIAL MEDIA MANAGEMENT
+  ------------------------------------------------------- */
+
   {
     id: "social-media",
     name: "Social Media Management",
@@ -121,6 +120,10 @@ const pricingCategories: PricingCategory[] = [
     ],
   },
 
+  /* -------------------------------------------------------
+     INSTAGRAM GROWTH
+  ------------------------------------------------------- */
+
   {
     id: "instagram-growth",
     name: "Instagram Growth",
@@ -154,6 +157,10 @@ const pricingCategories: PricingCategory[] = [
     },
   },
 
+  /* -------------------------------------------------------
+     WEBSITE DEVELOPMENT
+  ------------------------------------------------------- */
+
   {
     id: "website",
     name: "Website Development",
@@ -178,6 +185,10 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
+
+  /* -------------------------------------------------------
+     QR MENU
+  ------------------------------------------------------- */
 
   {
     id: "qr-menu",
@@ -204,6 +215,10 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
+
+  /* -------------------------------------------------------
+     WHATSAPP AUTOMATION & AI
+  ------------------------------------------------------- */
 
   {
     id: "whatsapp-ai",
@@ -266,228 +281,27 @@ export function Pricing() {
   const [openCategory, setOpenCategory] =
     useState("social-media");
 
-  /*
-   * Currently clicked category button.
-   */
-  const activeButtonRef =
-    useRef<HTMLButtonElement | null>(null);
-
-  /*
-   * Exact viewport Y position of the clicked
-   * category BEFORE accordion starts changing.
-   */
-  const targetTopRef = useRef<number | null>(null);
-
-  /*
-   * requestAnimationFrame ID.
-   */
-  const animationFrameRef =
-    useRef<number | null>(null);
-
-  /*
-   * Used to identify a new accordion transition.
-   */
-  const animationStartRef =
-    useRef<number>(0);
-
-  /*
-   * Accordion animation duration.
-   *
-   * Keep this exactly the same as the CSS duration.
-   */
-  const ACCORDION_DURATION = 350;
-
   /* =======================================================
-     HANDLE CATEGORY CLICK
+     CATEGORY CLICK
   ======================================================= */
 
-  const handleCategory = (
-    id: string,
-    button: HTMLButtonElement,
-  ) => {
-    /*
-     * Cancel previous correction animation.
-     */
-    if (animationFrameRef.current !== null) {
-      cancelAnimationFrame(
-        animationFrameRef.current,
-      );
-
-      animationFrameRef.current = null;
-    }
-
-    /*
-     * Store the exact clicked button.
-     */
-    activeButtonRef.current = button;
-
-    /*
-     * IMPORTANT:
-     *
-     * Capture the button position BEFORE React changes
-     * the accordion state.
-     */
-    targetTopRef.current =
-      button.getBoundingClientRect().top;
-
-    /*
-     * Start timing immediately.
-     */
-    animationStartRef.current =
-      performance.now();
-
-    /*
-     * Change accordion state.
-     */
+  const handleCategory = (id: string) => {
     setOpenCategory((current) =>
       current === id ? "" : id,
     );
   };
 
   /* =======================================================
-     KEEP CLICKED HEADER IN SAME VIEWPORT POSITION
-  ======================================================= */
-
-  useLayoutEffect(() => {
-    /*
-     * No active click = nothing to correct.
-     */
-    if (
-      !activeButtonRef.current ||
-      targetTopRef.current === null
-    ) {
-      return;
-    }
-
-    const correctPosition = () => {
-      const button =
-        activeButtonRef.current;
-
-      const targetTop =
-        targetTopRef.current;
-
-      if (
-        !button ||
-        targetTop === null
-      ) {
-        return;
-      }
-
-      /*
-       * Current position of clicked header.
-       */
-      const currentTop =
-        button.getBoundingClientRect().top;
-
-      /*
-       * How much the accordion pushed
-       * the clicked header.
-       */
-      const difference =
-        currentTop - targetTop;
-
-      /*
-       * Only correct meaningful movement.
-       */
-      if (Math.abs(difference) > 0.01) {
-        /*
-         * IMPORTANT:
-         *
-         * We use immediate scrolling.
-         * No smooth scroll here.
-         *
-         * The accordion itself is already animated,
-         * so the scroll compensation happens frame-by-frame
-         * and visually becomes part of the same animation.
-         */
-        window.scrollBy({
-          top: difference,
-          left: 0,
-          behavior: "auto",
-        });
-      }
-    };
-
-    /*
-     * FIRST correction happens immediately
-     * after React updates the DOM.
-     *
-     * This removes the "close first, then jump" effect.
-     */
-    correctPosition();
-
-    /*
-     * Continue correcting during the accordion animation.
-     */
-    const animate = (time: number) => {
-      correctPosition();
-
-      const elapsed =
-        time - animationStartRef.current;
-
-      if (elapsed < ACCORDION_DURATION) {
-        animationFrameRef.current =
-          requestAnimationFrame(animate);
-      } else {
-        /*
-         * One final correction.
-         */
-        correctPosition();
-
-        animationFrameRef.current =
-          null;
-
-        /*
-         * Clear temporary references.
-         */
-        activeButtonRef.current = null;
-        targetTopRef.current = null;
-      }
-    };
-
-    animationFrameRef.current =
-      requestAnimationFrame(animate);
-
-    /*
-     * Cleanup if another category is clicked.
-     */
-    return () => {
-      if (
-        animationFrameRef.current !== null
-      ) {
-        cancelAnimationFrame(
-          animationFrameRef.current,
-        );
-
-        animationFrameRef.current = null;
-      }
-    };
-  }, [openCategory]);
-
-  /* =======================================================
-     COMPONENT CLEANUP
-  ======================================================= */
-
-  useEffect(() => {
-    return () => {
-      if (
-        animationFrameRef.current !== null
-      ) {
-        cancelAnimationFrame(
-          animationFrameRef.current,
-        );
-      }
-    };
-  }, []);
-
-  /* =======================================================
      RENDER
-========================================================= */
+  ======================================================= */
 
   return (
     <section
       id="pricing"
       className="surface-hero relative overflow-hidden py-24 sm:py-32"
+      style={{
+        overflowAnchor: "auto",
+      }}
     >
       <div className="relative mx-auto max-w-6xl px-5">
 
@@ -517,11 +331,9 @@ export function Pricing() {
           {pricingCategories.map(
             (category, categoryIndex) => {
               const isOpen =
-                openCategory ===
-                category.id;
+                openCategory === category.id;
 
-              const Icon =
-                category.icon;
+              const Icon = category.icon;
 
               return (
                 <Reveal
@@ -538,10 +350,9 @@ export function Pricing() {
 
                     <button
                       type="button"
-                      onClick={(event) =>
+                      onClick={() =>
                         handleCategory(
                           category.id,
-                          event.currentTarget,
                         )
                       }
                       aria-expanded={
@@ -550,7 +361,7 @@ export function Pricing() {
                       className="flex w-full items-center gap-4 p-5 text-left transition-colors duration-200 hover:bg-primary/5 sm:p-6"
                     >
 
-                      {/* ICON */}
+                      {/* CATEGORY ICON */}
 
                       <span
                         className="grid size-12 shrink-0 place-items-center rounded-2xl"
@@ -565,12 +376,14 @@ export function Pricing() {
                         />
                       </span>
 
-                      {/* TEXT */}
+                      {/* CATEGORY TEXT */}
 
                       <span className="min-w-0 flex-1">
 
                         <span className="block text-lg font-medium sm:text-xl">
-                          {category.name}
+                          {
+                            category.name
+                          }
                         </span>
 
                         <span className="text-muted-foreground mt-1 block text-xs sm:text-sm">
@@ -581,11 +394,11 @@ export function Pricing() {
 
                       </span>
 
-                      {/* ARROW */}
+                      {/* DROPDOWN ARROW */}
 
                       <ChevronDown
                         size={20}
-                        className={`text-muted-foreground shrink-0 transition-transform duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        className={`text-muted-foreground shrink-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                           isOpen
                             ? "rotate-180"
                             : "rotate-0"
@@ -599,7 +412,7 @@ export function Pricing() {
                     ===================================== */}
 
                     <div
-                      className={`grid transition-[grid-template-rows] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      className={`grid transition-[grid-template-rows] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isOpen
                           ? "grid-rows-[1fr]"
                           : "grid-rows-[0fr]"
@@ -607,6 +420,10 @@ export function Pricing() {
                       aria-hidden={
                         !isOpen
                       }
+                      style={{
+                        overflowAnchor:
+                          "none",
+                      }}
                     >
 
                       <div className="min-h-0 overflow-hidden">
@@ -620,7 +437,9 @@ export function Pricing() {
                           {category.growthData ? (
                             <div className="grid gap-5 lg:grid-cols-2">
 
-                              {/* FOLLOWERS */}
+                              {/* =================================
+                                  FOLLOWERS
+                              ================================= */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
 
@@ -702,7 +521,9 @@ export function Pricing() {
 
                               </article>
 
-                              {/* VIEWS */}
+                              {/* =================================
+                                  VIEWS
+                              ================================= */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
 
@@ -789,7 +610,9 @@ export function Pricing() {
 
                               </article>
 
-                              {/* LIKES & COMMENTS */}
+                              {/* =================================
+                                  LIKES & COMMENTS
+                              ================================= */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 text-center sm:p-7 lg:col-span-2">
 
@@ -832,7 +655,7 @@ export function Pricing() {
                           ) : (
 
                             /* =================================
-                               NORMAL PLANS
+                               NORMAL PRICING PLANS
                             ================================= */
 
                             <div
@@ -857,7 +680,7 @@ export function Pricing() {
                                     }`}
                                   >
 
-                                    {/* POPULAR */}
+                                    {/* POPULAR BADGE */}
 
                                     {plan.popular && (
                                       <span
@@ -872,15 +695,20 @@ export function Pricing() {
                                             12
                                           }
                                         />
+
                                         Most Popular
                                       </span>
                                     )}
+
+                                    {/* PLAN NAME */}
 
                                     <h3 className="text-2xl font-medium">
                                       {
                                         plan.name
                                       }
                                     </h3>
+
+                                    {/* PLAN DESCRIPTION */}
 
                                     <p className="text-muted-foreground mt-2 text-sm">
                                       {
@@ -951,7 +779,7 @@ export function Pricing() {
                                       className={`mt-8 flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03] ${
                                         plan.popular
                                           ? "text-primary-foreground"
-                                          : "text-foreground border"
+                                          : "border text-foreground"
                                       }`}
                                       style={
                                         plan.popular
@@ -973,7 +801,7 @@ export function Pricing() {
                           )}
 
                           {/* =====================================
-                              ADD-ONS
+                              SOCIAL MEDIA ADD-ONS
                           ===================================== */}
 
                           {category.id ===

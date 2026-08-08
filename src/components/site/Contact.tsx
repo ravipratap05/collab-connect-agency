@@ -9,6 +9,7 @@ const SCRIPT_URL =
 export function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [type, setType] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -40,6 +41,7 @@ export function Contact() {
 
       setSuccess(true);
       form.reset();
+      setType("");
     } catch (error) {
       console.error(error);
       alert("Something went wrong. Please try again.");
@@ -128,20 +130,32 @@ export function Contact() {
                   <select
                     name="type"
                     required
-                    defaultValue=""
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
                     className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
                   >
                     <option value="" disabled>
                       Select type
                     </option>
-                    <option value="Creator">Creator</option>
-                    <option value="Brand">Brand</option>
+
+                    <option value="Creator">
+                      Creator
+                    </option>
+
+                    <option value="Brand">
+                      Brand
+                    </option>
                   </select>
                 </div>
               </div>
 
-              {/* SERVICE + BUDGET */}
-              <div className="grid gap-5 sm:grid-cols-2">
+              {/* SERVICE + CONDITIONAL BUDGET */}
+              <div
+                className={`grid gap-5 ${
+                  type === "Brand" ? "sm:grid-cols-2" : "sm:grid-cols-1"
+                }`}
+              >
+                {/* SERVICE */}
                 <div>
                   <label className="mb-2 block text-sm font-medium">
                     Service you need
@@ -156,57 +170,72 @@ export function Contact() {
                     <option value="" disabled>
                       Choose a service
                     </option>
+
                     <option value="Instagram Management">
                       Instagram Management
                     </option>
+
                     <option value="Creator Growth">
                       Creator Growth
                     </option>
+
                     <option value="Influencer Marketing">
                       Influencer Marketing
                     </option>
+
                     <option value="UGC Campaigns">
                       UGC Campaigns
                     </option>
+
                     <option value="Brand Campaigns">
                       Brand Campaigns
                     </option>
+
                     <option value="Meta Ads">
                       Meta Ads
                     </option>
+
                     <option value="Other">
                       Other
                     </option>
                   </select>
                 </div>
 
-                <div>
-                  <label className="mb-2 block text-sm font-medium">
-                    Budget <span className="text-muted-foreground">(Brand)</span>
-                  </label>
+                {/* BUDGET — ONLY FOR BRAND */}
+                {type === "Brand" && (
+                  <div>
+                    <label className="mb-2 block text-sm font-medium">
+                      Budget
+                    </label>
 
-                  <select
-                    name="budget"
-                    defaultValue=""
-                    className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
-                  >
-                    <option value="">
-                      Select budget
-                    </option>
-                    <option value="₹3,000 – ₹5,000">
-                      ₹3,000 – ₹5,000
-                    </option>
-                    <option value="₹5,000 – ₹10,000">
-                      ₹5,000 – ₹10,000
-                    </option>
-                    <option value="₹10,000 – ₹25,000">
-                      ₹10,000 – ₹25,000
-                    </option>
-                    <option value="₹25,000+">
-                      ₹25,000+
-                    </option>
-                  </select>
-                </div>
+                    <select
+                      name="budget"
+                      required
+                      defaultValue=""
+                      className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
+                    >
+                      <option value="" disabled>
+                        Select budget
+                      </option>
+
+                      <option value="₹3,000 – ₹5,000">
+                        ₹3,000 – ₹5,000
+                      </option>
+
+                      <option value="₹5,000 – ₹10,000">
+                        ₹5,000 – ₹10,000
+                      </option>
+
+                      <option value="₹10,000 – ₹25,000">
+                        ₹10,000 – ₹25,000
+                      </option>
+
+                      <option value="₹25,000+">
+                        ₹25,000+
+                      </option>
+                    </select>
+                  </div>
+                )}
               </div>
 
               {/* GOAL */}
@@ -238,6 +267,7 @@ export function Contact() {
                   : "Get My Free Growth Plan"}
               </button>
 
+              {/* SUCCESS */}
               {success && (
                 <div className="rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-center text-sm">
                   🎉 Thanks! Your details have been received. We’ll get

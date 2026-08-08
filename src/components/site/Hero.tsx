@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowUpRight, Heart, Instagram, MessageCircle, TrendingUp } from "lucide-react";
-import heroImage from "@/assets/hero-dashboard.jpg";
+import heroImage from "@/assets/hero.PNG";
 
 const stats = [
   { value: "100+", label: "Campaigns" },

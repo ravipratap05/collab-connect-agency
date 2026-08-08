@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Reveal, SectionHeading } from "./Reveal";
-
+//images uploaded
 import p1 from "@/assets/portfolio-1.PNG";
 import p2 from "@/assets/portfolio-2.PNG";
 import p3 from "@/assets/portfolio-3.PNG";

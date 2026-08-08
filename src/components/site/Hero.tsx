@@ -94,7 +94,7 @@ export function Hero() {
           <div className="glass-panel overflow-hidden rounded-[2.5rem] p-3">
             <img
               src={heroImage}
-              alt="Luxury Instagram analytics dashboard on a phone with growth charts"
+              alt="Luxury Instagram analytics dashboard on a phone with growth charts for collab connect"
               width={1280}
               height={1280}
               className="w-full rounded-[2rem] object-cover"

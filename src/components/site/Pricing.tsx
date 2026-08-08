@@ -139,7 +139,7 @@ const pricingCategories: PricingCategory[] = [
     plans: [
       {
         name: "QR Menu",
-        price: "Starting From",
+        price: "₹999",
         blurb: "A clean, mobile-friendly digital menu for your business.",
         features: [
           "Digital QR Menu",
@@ -154,39 +154,29 @@ const pricingCategories: PricingCategory[] = [
   },
 
   {
-    id: "whatsapp-ai",
-    name: "WhatsApp Automation & AI",
-    description: "Automate conversations, capture leads and assist customers 24/7.",
-    icon: MessageCircle,
-    plans: [
-      {
-        name: "WhatsApp Automation",
-        price: "Starting From",
-        blurb:
-          "Automate repetitive conversations and streamline customer communication.",
-        features: [
-          "Automated WhatsApp Replies",
-          "Lead Capture",
-          "Lead Qualification",
-          "Customer Follow-ups",
-          "Order & Booking Automation",
-          "Business Notifications",
-        ],
-      },
-      {
-        name: "AI WhatsApp Agent",
-        price: "Starting From",
-        blurb:
-          "An AI-powered assistant that handles customer conversations around the clock.",
-        features: [
-          "24/7 AI Customer Support",
-          "AI-Powered Replies",
-          "Lead Qualification",
-          "FAQ Automation",
-          "Appointment & Booking Assistance",
-          "Smart Follow-ups",
-        ],
-      },
+  id: "whatsapp-ai",
+  name: "WhatsApp Automation & AI",
+  description:
+    "Automate conversations, capture leads and assist customers 24/7.",
+  icon: MessageCircle,
+  plans: [
+    {
+      name: "WhatsApp Automation & AI",
+      price: "₹2,499",
+      blurb:
+        "Automate customer conversations, capture leads and provide AI-powered assistance on WhatsApp.",
+      features: [
+        "Automated WhatsApp Replies",
+        "AI-Powered Customer Support",
+        "Lead Capture & Qualification",
+        "Customer Follow-ups",
+        "Order & Booking Automation",
+        "FAQ & Smart Responses",
+        "24/7 WhatsApp Assistance",
+      ],
+    },
+  ],
+},
     ],
   },
 ];

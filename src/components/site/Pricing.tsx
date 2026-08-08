@@ -45,6 +45,11 @@ type PricingCategory = {
     followers: GrowthItem[];
     views: GrowthItem[];
   };
+
+  youtubeGrowthData?: {
+    subscribers: GrowthItem[];
+    likes: GrowthItem[];
+  };
 };
 
 /* =========================================================
@@ -52,6 +57,10 @@ type PricingCategory = {
 ========================================================= */
 
 const pricingCategories: PricingCategory[] = [
+  /* =======================================================
+     SOCIAL MEDIA MANAGEMENT
+  ======================================================= */
+
   {
     id: "social-media",
     name: "Social Media Management",
@@ -121,6 +130,10 @@ const pricingCategories: PricingCategory[] = [
     ],
   },
 
+  /* =======================================================
+     INSTAGRAM GROWTH
+  ======================================================= */
+
   {
     id: "instagram-growth",
     name: "Instagram Growth",
@@ -154,6 +167,42 @@ const pricingCategories: PricingCategory[] = [
     },
   },
 
+  /* =======================================================
+     YOUTUBE GROWTH
+  ======================================================= */
+
+  {
+    id: "youtube-growth",
+    name: "YouTube Growth",
+    description:
+      "Flexible packages for subscribers and likes to help grow your YouTube channel.",
+    icon: TrendingUp,
+
+    plans: [],
+
+    youtubeGrowthData: {
+      subscribers: [
+        { label: "100 Subscribers", price: "₹129" },
+        { label: "500 Subscribers", price: "₹549" },
+        { label: "1K Subscribers", price: "₹999" },
+        { label: "2K Subscribers", price: "₹1,899" },
+        { label: "5K Subscribers", price: "₹4,499" },
+        { label: "10K Subscribers", price: "₹8,999" },
+      ],
+
+      likes: [
+        { label: "100 Likes", price: "₹59" },
+        { label: "500 Likes", price: "₹249" },
+        { label: "1K Likes", price: "₹449" },
+        { label: "2K Likes", price: "₹849" },
+      ],
+    },
+  },
+
+  /* =======================================================
+     WEBSITE DEVELOPMENT
+  ======================================================= */
+
   {
     id: "website",
     name: "Website Development",
@@ -178,6 +227,10 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
+
+  /* =======================================================
+     QR MENU
+  ======================================================= */
 
   {
     id: "qr-menu",
@@ -204,6 +257,10 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
+
+  /* =======================================================
+     WHATSAPP AUTOMATION & AI
+  ======================================================= */
 
   {
     id: "whatsapp-ai",
@@ -322,8 +379,6 @@ export function Pricing() {
     activeButtonRef.current = button;
 
     /*
-     * IMPORTANT:
-     *
      * Capture the button position BEFORE React changes
      * the accordion state.
      */
@@ -390,16 +445,6 @@ export function Pricing() {
        * Only correct meaningful movement.
        */
       if (Math.abs(difference) > 0.01) {
-        /*
-         * IMPORTANT:
-         *
-         * We use immediate scrolling.
-         * No smooth scroll here.
-         *
-         * The accordion itself is already animated,
-         * so the scroll compensation happens frame-by-frame
-         * and visually becomes part of the same animation.
-         */
         window.scrollBy({
           top: difference,
           left: 0,
@@ -411,8 +456,6 @@ export function Pricing() {
     /*
      * FIRST correction happens immediately
      * after React updates the DOM.
-     *
-     * This removes the "close first, then jump" effect.
      */
     correctPosition();
 
@@ -480,9 +523,9 @@ export function Pricing() {
     };
   }, []);
 
-  /* =======================================================
+  /* =========================================================
      RENDER
-========================================================= */
+  ========================================================= */
 
   return (
     <section
@@ -614,13 +657,193 @@ export function Pricing() {
                         <div className="border-border/50 border-t px-5 pb-6 pt-6 sm:px-6 sm:pb-7">
 
                           {/* =================================
-                              INSTAGRAM GROWTH
+                              YOUTUBE GROWTH
                           ================================= */}
 
-                          {category.growthData ? (
+                          {category.youtubeGrowthData ? (
                             <div className="grid gap-5 lg:grid-cols-2">
 
-                              {/* FOLLOWERS */}
+                              {/* =================================
+                                  SUBSCRIBERS
+                              ================================= */}
+
+                              <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
+
+                                <div className="flex items-center justify-between gap-4">
+
+                                  <div>
+
+                                    <h3 className="text-2xl font-medium">
+                                      Subscribers
+                                    </h3>
+
+                                    <p className="text-muted-foreground mt-1 text-sm">
+                                      YouTube subscriber
+                                      packages
+                                    </p>
+
+                                  </div>
+
+                                  <span
+                                    className="grid size-12 shrink-0 place-items-center rounded-2xl"
+                                    style={{
+                                      background:
+                                        "var(--gradient-rose)",
+                                    }}
+                                  >
+                                    <Users
+                                      size={
+                                        20
+                                      }
+                                      className="text-primary-foreground"
+                                    />
+                                  </span>
+
+                                </div>
+
+                                <div className="rose-rule mt-5" />
+
+                                <div className="mt-3 divide-y divide-border/50">
+
+                                  {category.youtubeGrowthData.subscribers.map(
+                                    (
+                                      item,
+                                    ) => (
+                                      <div
+                                        key={
+                                          item.label
+                                        }
+                                        className="flex items-center justify-between gap-4 py-3"
+                                      >
+
+                                        <span className="text-sm">
+                                          {
+                                            item.label
+                                          }
+                                        </span>
+
+                                        <span className="text-primary text-sm font-medium">
+                                          {
+                                            item.price
+                                          }
+                                        </span>
+
+                                      </div>
+                                    ),
+                                  )}
+
+                                </div>
+
+                                <a
+                                  href="#contact"
+                                  className="text-primary-foreground mt-6 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
+                                  style={{
+                                    background:
+                                      "var(--gradient-rose)",
+                                  }}
+                                >
+                                  Get Started
+                                </a>
+
+                              </article>
+
+                              {/* =================================
+                                  LIKES
+                              ================================= */}
+
+                              <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
+
+                                <div className="flex items-center justify-between gap-4">
+
+                                  <div>
+
+                                    <h3 className="text-2xl font-medium">
+                                      Likes
+                                    </h3>
+
+                                    <p className="text-muted-foreground mt-1 text-sm">
+                                      YouTube likes
+                                      packages
+                                    </p>
+
+                                  </div>
+
+                                  <span
+                                    className="grid size-12 shrink-0 place-items-center rounded-2xl"
+                                    style={{
+                                      background:
+                                        "var(--gradient-rose)",
+                                    }}
+                                  >
+                                    <TrendingUp
+                                      size={
+                                        20
+                                      }
+                                      className="text-primary-foreground"
+                                    />
+                                  </span>
+
+                                </div>
+
+                                <div className="rose-rule mt-5" />
+
+                                <div className="mt-3 divide-y divide-border/50">
+
+                                  {category.youtubeGrowthData.likes.map(
+                                    (
+                                      item,
+                                    ) => (
+                                      <div
+                                        key={
+                                          item.label
+                                        }
+                                        className="flex items-center justify-between gap-4 py-3"
+                                      >
+
+                                        <span className="text-sm">
+                                          {
+                                            item.label
+                                          }
+                                        </span>
+
+                                        <span className="text-primary text-sm font-medium">
+                                          {
+                                            item.price
+                                          }
+                                        </span>
+
+                                      </div>
+                                    ),
+                                  )}
+
+                                </div>
+
+                                <a
+                                  href="#contact"
+                                  className="text-primary-foreground mt-6 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
+                                  style={{
+                                    background:
+                                      "var(--gradient-rose)",
+                                  }}
+                                >
+                                  Get Started
+                                </a>
+
+                              </article>
+
+                            </div>
+
+                          ) : category.growthData ? (
+
+                            /* =================================
+                               INSTAGRAM GROWTH
+                            ================================= */
+
+                            <div className="grid gap-5 lg:grid-cols-2">
+
+                              {/* =================================
+                                  FOLLOWERS
+                              ================================= */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
 
@@ -702,7 +925,9 @@ export function Pricing() {
 
                               </article>
 
-                              {/* VIEWS */}
+                              {/* =================================
+                                  VIEWS
+                              ================================= */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
 
@@ -789,7 +1014,9 @@ export function Pricing() {
 
                               </article>
 
-                              {/* LIKES & COMMENTS */}
+                              {/* =================================
+                                  LIKES & COMMENTS
+                              ================================= */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 text-center sm:p-7 lg:col-span-2">
 
@@ -829,6 +1056,7 @@ export function Pricing() {
                               </article>
 
                             </div>
+
                           ) : (
 
                             /* =================================

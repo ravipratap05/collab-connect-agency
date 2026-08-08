@@ -9,7 +9,6 @@ import {
   Users,
 } from "lucide-react";
 import {
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -42,8 +41,7 @@ type PricingCategory = {
   plans: Plan[];
 
   /*
-   * Instagram Growth uses a different layout
-   * because it contains multiple package lists.
+   * Instagram Growth has its own pricing layout.
    */
   growthData?: {
     followers: GrowthItem[];
@@ -140,10 +138,6 @@ const pricingCategories: PricingCategory[] = [
       "Flexible packages for followers, views and engagement.",
     icon: TrendingUp,
 
-    /*
-     * No normal plans here.
-     * This category uses growthData below.
-     */
     plans: [],
 
     growthData: {
@@ -289,40 +283,35 @@ const addOns = [
 
 export function Pricing() {
   /*
-   * Social Media Management remains open initially.
+   * Social Media Management stays open on first render.
    */
   const [openCategory, setOpenCategory] =
     useState("social-media");
 
   /*
-   * Stores the category header that was clicked.
+   * Reference to the category button that was clicked.
    *
-   * We do NOT lock window.scrollY.
-   *
-   * Instead, we keep this specific header at the
-   * same viewport position while the accordion animates.
+   * We use this to preserve the exact viewport position
+   * without continuously forcing window.scrollTo().
    */
   const activeButtonRef =
     useRef<HTMLButtonElement | null>(null);
 
   /*
-   * Stores the original screen position of the
-   * clicked category header.
+   * Stores the button's viewport position BEFORE
+   * the accordion state changes.
    */
-  const activeButtonTopRef = useRef<number | null>(
-    null,
-  );
-
-  /*
-   * Stores requestAnimationFrame ID so we can
-   * cancel it if the user clicks another category
-   * during an animation.
-   */
-  const animationFrameRef =
+  const activeButtonTopRef =
     useRef<number | null>(null);
 
+  /*
+   * Prevents multiple corrections from happening
+   * for the same click.
+   */
+  const correctingRef = useRef(false);
+
   /* =======================================================
-     HANDLE CATEGORY CLICK
+     CATEGORY CLICK
   ======================================================= */
 
   const handleCategory = (
@@ -330,41 +319,31 @@ export function Pricing() {
     button: HTMLButtonElement,
   ) => {
     /*
-     * Cancel any previous viewport correction loop.
-     */
-    if (animationFrameRef.current !== null) {
-      cancelAnimationFrame(
-        animationFrameRef.current,
-      );
-
-      animationFrameRef.current = null;
-    }
-
-    /*
-     * Remember exactly which header was clicked.
+     * Save the clicked button.
      */
     activeButtonRef.current = button;
 
     /*
-     * Capture its current position in the viewport.
+     * Save its exact viewport position.
      *
      * Example:
-     * top = 240px
+     * button top = 280px
      *
-     * We want this header to remain around 240px
-     * while the previous accordion closes.
+     * After the accordion changes, we restore this
+     * exact position.
      */
     activeButtonTopRef.current =
       button.getBoundingClientRect().top;
 
     /*
-     * Toggle the selected category.
+     * Mark that a viewport correction is expected.
+     */
+    correctingRef.current = true;
+
+    /*
+     * Open the clicked category.
      *
-     * If the same category is clicked,
-     * it closes.
-     *
-     * If another category is clicked,
-     * the previous one closes and the new one opens.
+     * If it is already open, close it.
      */
     setOpenCategory((current) =>
       current === id ? "" : id,
@@ -372,15 +351,15 @@ export function Pricing() {
   };
 
   /* =======================================================
-     KEEP CLICKED HEADER STABLE
+     PRESERVE VIEWPORT
   ======================================================= */
 
   useLayoutEffect(() => {
     /*
-     * Nothing to correct if the user hasn't clicked
-     * a category.
+     * Nothing to do when there was no click.
      */
     if (
+      !correctingRef.current ||
       !activeButtonRef.current ||
       activeButtonTopRef.current === null
     ) {
@@ -389,114 +368,46 @@ export function Pricing() {
 
     const button = activeButtonRef.current;
 
+    const targetTop =
+      activeButtonTopRef.current;
+
     /*
-     * The first correction happens synchronously
-     * after React updates the DOM.
+     * React has now updated the DOM.
      *
-     * This prevents the initial viewport jump.
+     * Measure where the clicked button moved.
      */
-    const correctPosition = () => {
-      if (
-        !activeButtonRef.current ||
-        activeButtonTopRef.current === null
-      ) {
-        return;
-      }
-
-      const currentTop =
-        activeButtonRef.current.getBoundingClientRect()
-          .top;
-
-      const targetTop =
-        activeButtonTopRef.current;
-
-      /*
-       * Difference between where the header is now
-       * and where it originally was.
-       */
-      const difference =
-        currentTop - targetTop;
-
-      /*
-       * Only compensate when the movement is
-       * meaningful.
-       */
-      if (Math.abs(difference) > 0.1) {
-        window.scrollBy({
-          top: difference,
-          left: 0,
-          behavior: "auto",
-        });
-      }
-    };
+    const currentTop =
+      button.getBoundingClientRect().top;
 
     /*
-     * Correct immediately.
+     * Calculate how much the page moved.
      */
-    correctPosition();
-
-    const startTime = performance.now();
+    const difference =
+      currentTop - targetTop;
 
     /*
-     * Must match the CSS accordion duration.
-     */
-    const duration = 450;
-
-    /*
-     * Keep checking while the CSS accordion
-     * animation is running.
+     * Correct the viewport ONCE.
      *
-     * This is much better than locking scrollY,
-     * because we're only correcting the movement
-     * caused by the accordion itself.
+     * We intentionally do not use requestAnimationFrame
+     * loops or repeated scrollTo calls.
+     *
+     * This prevents the "jhatka" / fighting effect.
      */
-    const animate = (time: number) => {
-      correctPosition();
-
-      if (time - startTime < duration) {
-        animationFrameRef.current =
-          requestAnimationFrame(animate);
-      } else {
-        /*
-         * Final correction.
-         */
-        correctPosition();
-
-        animationFrameRef.current = null;
-      }
-    };
-
-    animationFrameRef.current =
-      requestAnimationFrame(animate);
+    if (Math.abs(difference) > 0.5) {
+      window.scrollBy({
+        top: difference,
+        left: 0,
+        behavior: "auto",
+      });
+    }
 
     /*
-     * Cleanup if another category is clicked
-     * before this animation finishes.
+     * Reset the temporary references.
      */
-    return () => {
-      if (animationFrameRef.current !== null) {
-        cancelAnimationFrame(
-          animationFrameRef.current,
-        );
-
-        animationFrameRef.current = null;
-      }
-    };
+    correctingRef.current = false;
+    activeButtonRef.current = null;
+    activeButtonTopRef.current = null;
   }, [openCategory]);
-
-  /* =======================================================
-     COMPONENT CLEANUP
-  ======================================================= */
-
-  useEffect(() => {
-    return () => {
-      if (animationFrameRef.current !== null) {
-        cancelAnimationFrame(
-          animationFrameRef.current,
-        );
-      }
-    };
-  }, []);
 
   /* =======================================================
      RENDER
@@ -505,11 +416,12 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="surface-hero relative overflow-hidden py-24 sm:py-32"
+      className="surface-hero relative overflow-hidden overflow-anchor-none py-24 sm:py-32"
     >
       <div className="relative mx-auto max-w-6xl px-5">
+
         {/* =================================================
-            SECTION HEADER
+            SECTION HEADING
         ================================================= */}
 
         <SectionHeading
@@ -528,6 +440,7 @@ export function Pricing() {
         ================================================= */}
 
         <div className="mx-auto mt-14 max-w-5xl space-y-4">
+
           {pricingCategories.map(
             (category, categoryIndex) => {
               const isOpen =
@@ -541,6 +454,7 @@ export function Pricing() {
                   delay={categoryIndex * 0.05}
                 >
                   <div className="glass-card overflow-hidden rounded-[2rem]">
+
                     {/* =====================================
                         CATEGORY HEADER
                     ===================================== */}
@@ -554,8 +468,9 @@ export function Pricing() {
                         )
                       }
                       aria-expanded={isOpen}
-                      className="flex w-full items-center gap-4 p-5 text-left transition-colors hover:bg-primary/5 sm:p-6"
+                      className="flex w-full items-center gap-4 p-5 text-left transition-colors duration-200 hover:bg-primary/5 sm:p-6"
                     >
+
                       {/* Category Icon */}
 
                       <span
@@ -587,10 +502,10 @@ export function Pricing() {
 
                       <ChevronDown
                         size={20}
-                        className={`text-muted-foreground shrink-0 transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        className={`text-muted-foreground shrink-0 transition-transform duration-300 ease-out ${
                           isOpen
                             ? "rotate-180"
-                            : ""
+                            : "rotate-0"
                         }`}
                       />
                     </button>
@@ -598,14 +513,16 @@ export function Pricing() {
                     {/* =====================================
                         ACCORDION CONTENT
 
-                        Content stays mounted in DOM.
+                        Instead of continuously changing
+                        window.scroll position, the content
+                        uses a simple smooth reveal.
 
-                        CSS grid animation gives us a
-                        smooth open/close transition.
+                        This keeps the viewport stable and
+                        avoids the previous jump/jhatka.
                     ===================================== */}
 
                     <div
-                      className={`grid transition-[grid-template-rows] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      className={`grid transition-[grid-template-rows] duration-300 ease-out ${
                         isOpen
                           ? "grid-rows-[1fr]"
                           : "grid-rows-[0fr]"
@@ -613,19 +530,30 @@ export function Pricing() {
                       aria-hidden={!isOpen}
                     >
                       <div className="min-h-0 overflow-hidden">
-                        <div className="border-border/50 border-t px-5 pb-6 pt-6 sm:px-6 sm:pb-7">
+
+                        <div
+                          className={`border-border/50 border-t px-5 pb-6 pt-6 transition-opacity duration-200 ease-out sm:px-6 sm:pb-7 ${
+                            isOpen
+                              ? "opacity-100"
+                              : "opacity-0"
+                          }`}
+                        >
+
                           {/* =================================
                               INSTAGRAM GROWTH
                           ================================= */}
 
                           {category.growthData ? (
                             <div className="grid gap-5 lg:grid-cols-2">
+
                               {/* =================================
                                   FOLLOWERS
                               ================================= */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
+
                                 <div className="flex items-center justify-between gap-4">
+
                                   <div>
                                     <h3 className="text-2xl font-medium">
                                       Followers
@@ -649,6 +577,7 @@ export function Pricing() {
                                       className="text-primary-foreground"
                                     />
                                   </span>
+
                                 </div>
 
                                 <div className="rose-rule mt-5" />
@@ -656,6 +585,7 @@ export function Pricing() {
                                 {/* Followers pricing */}
 
                                 <div className="mt-3 divide-y divide-border/50">
+
                                   {category.growthData.followers.map(
                                     (item) => (
                                       <div
@@ -672,11 +602,12 @@ export function Pricing() {
                                       </div>
                                     ),
                                   )}
+
                                 </div>
 
                                 <a
                                   href="#contact"
-                                  className="text-primary-foreground mt-6 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform hover:scale-[1.03]"
+                                  className="text-primary-foreground mt-6 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
                                   style={{
                                     background:
                                       "var(--gradient-rose)",
@@ -684,6 +615,7 @@ export function Pricing() {
                                 >
                                   Get Started
                                 </a>
+
                               </article>
 
                               {/* =================================
@@ -691,7 +623,9 @@ export function Pricing() {
                               ================================= */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
+
                                 <div className="flex items-center justify-between gap-4">
+
                                   <div>
                                     <h3 className="text-2xl font-medium">
                                       Views
@@ -715,6 +649,7 @@ export function Pricing() {
                                       className="text-primary-foreground"
                                     />
                                   </span>
+
                                 </div>
 
                                 <div className="rose-rule mt-5" />
@@ -722,6 +657,7 @@ export function Pricing() {
                                 {/* Views pricing */}
 
                                 <div className="mt-3 divide-y divide-border/50">
+
                                   {category.growthData.views.map(
                                     (item) => (
                                       <div
@@ -738,6 +674,7 @@ export function Pricing() {
                                       </div>
                                     ),
                                   )}
+
                                 </div>
 
                                 <p className="text-muted-foreground mt-4 text-xs">
@@ -747,7 +684,7 @@ export function Pricing() {
 
                                 <a
                                   href="#contact"
-                                  className="text-primary-foreground mt-5 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform hover:scale-[1.03]"
+                                  className="text-primary-foreground mt-5 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
                                   style={{
                                     background:
                                       "var(--gradient-rose)",
@@ -755,6 +692,7 @@ export function Pricing() {
                                 >
                                   Get Started
                                 </a>
+
                               </article>
 
                               {/* =================================
@@ -762,7 +700,9 @@ export function Pricing() {
                               ================================= */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 text-center sm:p-7 lg:col-span-2">
+
                                 <div className="mx-auto max-w-xl">
+
                                   <h3 className="text-xl font-medium">
                                     Likes & Comments
                                   </h3>
@@ -782,7 +722,7 @@ export function Pricing() {
                                     href="https://www.instagram.com/veer.collabs"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="text-primary-foreground mt-5 inline-flex rounded-full px-6 py-3.5 text-sm font-medium transition-transform hover:scale-[1.03]"
+                                    className="text-primary-foreground mt-5 inline-flex rounded-full px-6 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
                                     style={{
                                       background:
                                         "var(--gradient-rose)",
@@ -790,10 +730,14 @@ export function Pricing() {
                                   >
                                     DM on Instagram
                                   </a>
+
                                 </div>
+
                               </article>
+
                             </div>
                           ) : (
+
                             /* =================================
                                NORMAL PRICING PLANS
                             ================================= */
@@ -805,6 +749,7 @@ export function Pricing() {
                                   : "lg:grid-cols-3"
                               }`}
                             >
+
                               {category.plans.map(
                                 (plan) => (
                                   <article
@@ -815,6 +760,7 @@ export function Pricing() {
                                         : "glass-card"
                                     }`}
                                   >
+
                                     {/* Most Popular Badge */}
 
                                     {plan.popular && (
@@ -843,6 +789,7 @@ export function Pricing() {
                                     {/* Price */}
 
                                     <p className="mt-6 flex flex-wrap items-baseline gap-2">
+
                                       <span className="font-display text-4xl font-medium sm:text-5xl">
                                         {plan.price}
                                       </span>
@@ -852,6 +799,7 @@ export function Pricing() {
                                           {plan.suffix}
                                         </span>
                                       )}
+
                                     </p>
 
                                     <div className="rose-rule mt-6" />
@@ -859,6 +807,7 @@ export function Pricing() {
                                     {/* Features */}
 
                                     <ul className="mt-6 grid gap-2.5">
+
                                       {plan.features.map(
                                         (feature) => (
                                           <li
@@ -876,13 +825,14 @@ export function Pricing() {
                                           </li>
                                         ),
                                       )}
+
                                     </ul>
 
                                     {/* CTA */}
 
                                     <a
                                       href="#contact"
-                                      className={`mt-8 flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-medium transition-transform hover:scale-[1.03] ${
+                                      className={`mt-8 flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03] ${
                                         plan.popular
                                           ? "text-primary-foreground"
                                           : "text-foreground border"
@@ -898,9 +848,11 @@ export function Pricing() {
                                     >
                                       Get Started
                                     </a>
+
                                   </article>
                                 ),
                               )}
+
                             </div>
                           )}
 
@@ -911,17 +863,20 @@ export function Pricing() {
                           {category.id ===
                             "social-media" && (
                             <div className="mt-10">
+
                               <p className="eyebrow text-center">
                                 Optional Add-ons
                               </p>
 
                               <div className="mt-5 grid gap-4 sm:grid-cols-3">
+
                                 {addOns.map(
                                   (addon) => (
                                     <div
                                       key={addon.title}
                                       className="glass-card lift rounded-3xl p-5 text-center"
                                     >
+
                                       <h4 className="text-base font-medium">
                                         {addon.title}
                                       </h4>
@@ -933,12 +888,16 @@ export function Pricing() {
                                       <p className="text-muted-foreground mt-1 text-xs">
                                         {addon.note}
                                       </p>
+
                                     </div>
                                   ),
                                 )}
+
                               </div>
+
                             </div>
                           )}
+
                         </div>
                       </div>
                     </div>
@@ -947,6 +906,7 @@ export function Pricing() {
               );
             },
           )}
+
         </div>
       </div>
     </section>

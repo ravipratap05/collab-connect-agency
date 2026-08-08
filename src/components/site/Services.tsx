@@ -1,4 +1,12 @@
-import { Check, Handshake, Instagram, Megaphone, TrendingUp } from "lucide-react";
+import {
+  Check,
+  Handshake,
+  Instagram,
+  Megaphone,
+  TrendingUp,
+  QrCode,
+  MessageCircle,
+} from "lucide-react";
 import { Reveal, SectionHeading } from "./Reveal";
 
 const services = [
@@ -42,6 +50,29 @@ const services = [
       "Retargeting",
     ],
   },
+    {
+    icon: QrCode,
+    title: "QR Menu",
+    items: [
+      "Digital QR Menu",
+      "Mobile-Friendly Menu",
+      "Easy Menu Updates",
+      "No App Required",
+      "Customer-Friendly Experience",
+    ],
+  },
+  {
+    icon: MessageCircle,
+    title: "WhatsApp Automation & AI Agents",
+    items: [
+      "AI-Powered WhatsApp Replies",
+      "Lead Capture & Qualification",
+      "Automated Customer Support",
+      "Order & Booking Automation",
+      "Follow-ups & Reminders",
+      "24/7 WhatsApp Assistance",
+    ],
+  },
 ];
 
 export function Services() {
@@ -56,7 +87,7 @@ export function Services() {
               Everything your brand needs, <span className="italic">handled.</span>
             </>
           }
-          subtitle="Four core service pillars, delivered with studio-grade craft and measurable outcomes."
+          subtitle="Six core service pillars, delivered with studio-grade craft and measurable outcomes."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2">

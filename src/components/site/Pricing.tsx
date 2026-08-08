@@ -9,7 +9,7 @@ import {
   Users,
 } from "lucide-react";
 import { useState } from "react";
-import { Reveal, SectionHeading } from "./Reveal";
+import { SectionHeading } from "./Reveal";
 
 /* =========================================================
    TYPES
@@ -47,9 +47,9 @@ type PricingCategory = {
 ========================================================= */
 
 const pricingCategories: PricingCategory[] = [
-  /* -------------------------------------------------------
+  /* =======================================================
      SOCIAL MEDIA MANAGEMENT
-  ------------------------------------------------------- */
+  ======================================================= */
 
   {
     id: "social-media",
@@ -120,9 +120,9 @@ const pricingCategories: PricingCategory[] = [
     ],
   },
 
-  /* -------------------------------------------------------
+  /* =======================================================
      INSTAGRAM GROWTH
-  ------------------------------------------------------- */
+  ======================================================= */
 
   {
     id: "instagram-growth",
@@ -157,9 +157,9 @@ const pricingCategories: PricingCategory[] = [
     },
   },
 
-  /* -------------------------------------------------------
+  /* =======================================================
      WEBSITE DEVELOPMENT
-  ------------------------------------------------------- */
+  ======================================================= */
 
   {
     id: "website",
@@ -186,9 +186,9 @@ const pricingCategories: PricingCategory[] = [
     ],
   },
 
-  /* -------------------------------------------------------
+  /* =======================================================
      QR MENU
-  ------------------------------------------------------- */
+  ======================================================= */
 
   {
     id: "qr-menu",
@@ -216,9 +216,9 @@ const pricingCategories: PricingCategory[] = [
     ],
   },
 
-  /* -------------------------------------------------------
+  /* =======================================================
      WHATSAPP AUTOMATION & AI
-  ------------------------------------------------------- */
+  ======================================================= */
 
   {
     id: "whatsapp-ai",
@@ -271,6 +271,16 @@ const addOns = [
 ];
 
 /* =========================================================
+   ANIMATION
+========================================================= */
+
+const ACCORDION_DURATION =
+  "duration-[420ms]";
+
+const ACCORDION_EASING =
+  "ease-[cubic-bezier(0.22,1,0.36,1)]";
+
+/* =========================================================
    PRICING COMPONENT
 ========================================================= */
 
@@ -298,15 +308,12 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="surface-hero relative overflow-hidden py-24 sm:py-32"
-      style={{
-        overflowAnchor: "auto",
-      }}
+      className="surface-hero relative py-24 sm:py-32"
     >
       <div className="relative mx-auto max-w-6xl px-5">
 
         {/* =================================================
-            SECTION HEADER
+            SECTION HEADING
         ================================================= */}
 
         <SectionHeading
@@ -326,522 +333,219 @@ export function Pricing() {
             PRICING ACCORDION
         ================================================= */}
 
-        <div className="mx-auto mt-14 max-w-5xl space-y-4">
+        <div
+          className="mx-auto mt-14 max-w-5xl space-y-4"
+          style={{
+            overflowAnchor: "auto",
+          }}
+        >
 
           {pricingCategories.map(
-            (category, categoryIndex) => {
+            (category) => {
               const isOpen =
                 openCategory === category.id;
 
               const Icon = category.icon;
 
               return (
-                <Reveal
+                <div
                   key={category.id}
-                  delay={
-                    categoryIndex * 0.05
-                  }
+                  className="glass-card overflow-hidden rounded-[2rem]"
                 >
-                  <div className="glass-card overflow-hidden rounded-[2rem]">
 
-                    {/* =====================================
-                        CATEGORY HEADER
-                    ===================================== */}
+                  {/* =====================================
+                      CATEGORY HEADER
+                  ===================================== */}
 
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleCategory(
-                          category.id,
-                        )
-                      }
-                      aria-expanded={
-                        isOpen
-                      }
-                      className="flex w-full items-center gap-4 p-5 text-left transition-colors duration-200 hover:bg-primary/5 sm:p-6"
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleCategory(
+                        category.id,
+                      )
+                    }
+                    aria-expanded={isOpen}
+                    className={`
+                      pricing-accordion-header
+                      flex w-full items-center gap-4
+                      p-5 text-left
+                      transition-colors duration-200
+                      hover:bg-primary/5
+                      sm:p-6
+                    `}
+                    style={{
+                      overflowAnchor:
+                        "auto",
+                    }}
+                  >
+
+                    {/* ICON */}
+
+                    <span
+                      className="grid size-12 shrink-0 place-items-center rounded-2xl"
+                      style={{
+                        background:
+                          "var(--gradient-rose)",
+                      }}
                     >
-
-                      {/* CATEGORY ICON */}
-
-                      <span
-                        className="grid size-12 shrink-0 place-items-center rounded-2xl"
-                        style={{
-                          background:
-                            "var(--gradient-rose)",
-                        }}
-                      >
-                        <Icon
-                          size={20}
-                          className="text-primary-foreground"
-                        />
-                      </span>
-
-                      {/* CATEGORY TEXT */}
-
-                      <span className="min-w-0 flex-1">
-
-                        <span className="block text-lg font-medium sm:text-xl">
-                          {
-                            category.name
-                          }
-                        </span>
-
-                        <span className="text-muted-foreground mt-1 block text-xs sm:text-sm">
-                          {
-                            category.description
-                          }
-                        </span>
-
-                      </span>
-
-                      {/* DROPDOWN ARROW */}
-
-                      <ChevronDown
+                      <Icon
                         size={20}
-                        className={`text-muted-foreground shrink-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        className="text-primary-foreground"
+                      />
+                    </span>
+
+                    {/* TEXT */}
+
+                    <span className="min-w-0 flex-1">
+
+                      <span className="block text-lg font-medium sm:text-xl">
+                        {category.name}
+                      </span>
+
+                      <span className="text-muted-foreground mt-1 block text-xs sm:text-sm">
+                        {
+                          category.description
+                        }
+                      </span>
+
+                    </span>
+
+                    {/* ARROW */}
+
+                    <ChevronDown
+                      size={20}
+                      className={`
+                        text-muted-foreground
+                        shrink-0
+                        transition-transform
+                        ${ACCORDION_DURATION}
+                        ${ACCORDION_EASING}
+                        ${
                           isOpen
                             ? "rotate-180"
                             : "rotate-0"
-                        }`}
-                      />
+                        }
+                      `}
+                    />
 
-                    </button>
+                  </button>
 
-                    {/* =====================================
-                        ACCORDION CONTENT
-                    ===================================== */}
+                  {/* =====================================
+                      ACCORDION CONTENT
 
-                    <div
-                      className={`grid transition-[grid-template-rows] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      IMPORTANT:
+                      No JS scroll manipulation.
+                      Browser handles normal document
+                      positioning.
+                  ===================================== */}
+
+                  <div
+                    className={`
+                      grid
+                      ${ACCORDION_DURATION}
+                      ${ACCORDION_EASING}
+                      transition-[grid-template-rows]
+                      ${
                         isOpen
                           ? "grid-rows-[1fr]"
                           : "grid-rows-[0fr]"
-                      }`}
-                      aria-hidden={
-                        !isOpen
                       }
-                      style={{
-                        overflowAnchor:
-                          "none",
-                      }}
-                    >
+                    `}
+                    aria-hidden={!isOpen}
+                    style={{
+                      overflowAnchor:
+                        "none",
+                    }}
+                  >
 
-                      <div className="min-h-0 overflow-hidden">
+                    <div className="min-h-0 overflow-hidden">
 
-                        <div className="border-border/50 border-t px-5 pb-6 pt-6 sm:px-6 sm:pb-7">
+                      <div
+                        className={`
+                          border-border/50
+                          border-t
+                          px-5
+                          pb-6
+                          pt-6
+                          sm:px-6
+                          sm:pb-7
+                          transition-opacity
+                          duration-200
+                          ${
+                            isOpen
+                              ? "opacity-100"
+                              : "opacity-0"
+                          }
+                        `}
+                      >
 
-                          {/* =================================
-                              INSTAGRAM GROWTH
-                          ================================= */}
+                        {/* =================================
+                            INSTAGRAM GROWTH
+                        ================================= */}
 
-                          {category.growthData ? (
-                            <div className="grid gap-5 lg:grid-cols-2">
+                        {category.growthData ? (
+                          <div className="grid gap-5 lg:grid-cols-2">
 
-                              {/* =================================
-                                  FOLLOWERS
-                              ================================= */}
+                            {/* =================================
+                                FOLLOWERS
+                            ================================= */}
 
-                              <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
+                            <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
 
-                                <div className="flex items-center justify-between gap-4">
+                              <div className="flex items-center justify-between gap-4">
 
-                                  <div>
+                                <div>
 
-                                    <h3 className="text-2xl font-medium">
-                                      Followers
-                                    </h3>
-
-                                    <p className="text-muted-foreground mt-1 text-sm">
-                                      Instagram follower
-                                      packages
-                                    </p>
-
-                                  </div>
-
-                                  <span
-                                    className="grid size-12 shrink-0 place-items-center rounded-2xl"
-                                    style={{
-                                      background:
-                                        "var(--gradient-rose)",
-                                    }}
-                                  >
-                                    <Users
-                                      size={
-                                        20
-                                      }
-                                      className="text-primary-foreground"
-                                    />
-                                  </span>
-
-                                </div>
-
-                                <div className="rose-rule mt-5" />
-
-                                <div className="mt-3 divide-y divide-border/50">
-
-                                  {category.growthData.followers.map(
-                                    (
-                                      item,
-                                    ) => (
-                                      <div
-                                        key={
-                                          item.label
-                                        }
-                                        className="flex items-center justify-between gap-4 py-3"
-                                      >
-
-                                        <span className="text-sm">
-                                          {
-                                            item.label
-                                          }
-                                        </span>
-
-                                        <span className="text-primary text-sm font-medium">
-                                          {
-                                            item.price
-                                          }
-                                        </span>
-
-                                      </div>
-                                    ),
-                                  )}
-
-                                </div>
-
-                                <a
-                                  href="#contact"
-                                  className="text-primary-foreground mt-6 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
-                                  style={{
-                                    background:
-                                      "var(--gradient-rose)",
-                                  }}
-                                >
-                                  Get Started
-                                </a>
-
-                              </article>
-
-                              {/* =================================
-                                  VIEWS
-                              ================================= */}
-
-                              <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
-
-                                <div className="flex items-center justify-between gap-4">
-
-                                  <div>
-
-                                    <h3 className="text-2xl font-medium">
-                                      Views
-                                    </h3>
-
-                                    <p className="text-muted-foreground mt-1 text-sm">
-                                      Instagram views
-                                      packages
-                                    </p>
-
-                                  </div>
-
-                                  <span
-                                    className="grid size-12 shrink-0 place-items-center rounded-2xl"
-                                    style={{
-                                      background:
-                                        "var(--gradient-rose)",
-                                    }}
-                                  >
-                                    <TrendingUp
-                                      size={
-                                        20
-                                      }
-                                      className="text-primary-foreground"
-                                    />
-                                  </span>
-
-                                </div>
-
-                                <div className="rose-rule mt-5" />
-
-                                <div className="mt-3 divide-y divide-border/50">
-
-                                  {category.growthData.views.map(
-                                    (
-                                      item,
-                                    ) => (
-                                      <div
-                                        key={
-                                          item.label
-                                        }
-                                        className="flex items-center justify-between gap-4 py-3"
-                                      >
-
-                                        <span className="text-sm">
-                                          {
-                                            item.label
-                                          }
-                                        </span>
-
-                                        <span className="text-primary text-sm font-medium">
-                                          {
-                                            item.price
-                                          }
-                                        </span>
-
-                                      </div>
-                                    ),
-                                  )}
-
-                                </div>
-
-                                <p className="text-muted-foreground mt-4 text-xs">
-                                  Views can be split
-                                  across multiple posts.
-                                </p>
-
-                                <a
-                                  href="#contact"
-                                  className="text-primary-foreground mt-5 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
-                                  style={{
-                                    background:
-                                      "var(--gradient-rose)",
-                                  }}
-                                >
-                                  Get Started
-                                </a>
-
-                              </article>
-
-                              {/* =================================
-                                  LIKES & COMMENTS
-                              ================================= */}
-
-                              <article className="glass-card lift rounded-[2rem] p-6 text-center sm:p-7 lg:col-span-2">
-
-                                <div className="mx-auto max-w-xl">
-
-                                  <h3 className="text-xl font-medium">
-                                    Likes &
-                                    Comments
+                                  <h3 className="text-2xl font-medium">
+                                    Followers
                                   </h3>
 
-                                  <p className="text-muted-foreground mt-2 text-sm">
-                                    Custom likes and
-                                    comments packages
-                                    are available.
+                                  <p className="text-muted-foreground mt-1 text-sm">
+                                    Instagram follower
+                                    packages
                                   </p>
-
-                                  <p className="text-primary mt-2 text-sm font-medium">
-                                    DM us on Instagram
-                                    for pricing.
-                                  </p>
-
-                                  <a
-                                    href="https://www.instagram.com/veer.collabs"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="text-primary-foreground mt-5 inline-flex rounded-full px-6 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
-                                    style={{
-                                      background:
-                                        "var(--gradient-rose)",
-                                    }}
-                                  >
-                                    DM on Instagram
-                                  </a>
 
                                 </div>
 
-                              </article>
+                                <span
+                                  className="grid size-12 shrink-0 place-items-center rounded-2xl"
+                                  style={{
+                                    background:
+                                      "var(--gradient-rose)",
+                                  }}
+                                >
+                                  <Users
+                                    size={20}
+                                    className="text-primary-foreground"
+                                  />
+                                </span>
 
-                            </div>
-                          ) : (
+                              </div>
 
-                            /* =================================
-                               NORMAL PRICING PLANS
-                            ================================= */
+                              <div className="rose-rule mt-5" />
 
-                            <div
-                              className={`grid gap-5 ${
-                                category.plans.length ===
-                                1
-                                  ? "mx-auto max-w-md"
-                                  : "lg:grid-cols-3"
-                              }`}
-                            >
+                              <div className="mt-3 divide-y divide-border/50">
 
-                              {category.plans.map(
-                                (plan) => (
-                                  <article
-                                    key={
-                                      plan.name
-                                    }
-                                    className={`lift relative rounded-[2rem] p-7 ${
-                                      plan.popular
-                                        ? "glass-panel"
-                                        : "glass-card"
-                                    }`}
-                                  >
-
-                                    {/* POPULAR BADGE */}
-
-                                    {plan.popular && (
-                                      <span
-                                        className="text-primary-foreground absolute -top-3 left-7 inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[0.65rem] tracking-[0.2em] uppercase"
-                                        style={{
-                                          background:
-                                            "var(--gradient-rose)",
-                                        }}
-                                      >
-                                        <Crown
-                                          size={
-                                            12
-                                          }
-                                        />
-
-                                        Most Popular
-                                      </span>
-                                    )}
-
-                                    {/* PLAN NAME */}
-
-                                    <h3 className="text-2xl font-medium">
-                                      {
-                                        plan.name
-                                      }
-                                    </h3>
-
-                                    {/* PLAN DESCRIPTION */}
-
-                                    <p className="text-muted-foreground mt-2 text-sm">
-                                      {
-                                        plan.blurb
-                                      }
-                                    </p>
-
-                                    {/* PRICE */}
-
-                                    <p className="mt-6 flex flex-wrap items-baseline gap-2">
-
-                                      <span className="font-display text-4xl font-medium sm:text-5xl">
-                                        {
-                                          plan.price
-                                        }
-                                      </span>
-
-                                      {plan.suffix && (
-                                        <span className="text-muted-foreground text-sm">
-                                          {
-                                            plan.suffix
-                                          }
-                                        </span>
-                                      )}
-
-                                    </p>
-
-                                    <div className="rose-rule mt-6" />
-
-                                    {/* FEATURES */}
-
-                                    <ul className="mt-6 grid gap-2.5">
-
-                                      {plan.features.map(
-                                        (
-                                          feature,
-                                        ) => (
-                                          <li
-                                            key={
-                                              feature
-                                            }
-                                            className="flex items-start gap-2 text-sm"
-                                          >
-
-                                            <Check
-                                              size={
-                                                15
-                                              }
-                                              className="text-primary mt-0.5 shrink-0"
-                                            />
-
-                                            <span>
-                                              {
-                                                feature
-                                              }
-                                            </span>
-
-                                          </li>
-                                        ),
-                                      )}
-
-                                    </ul>
-
-                                    {/* CTA */}
-
-                                    <a
-                                      href="#contact"
-                                      className={`mt-8 flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03] ${
-                                        plan.popular
-                                          ? "text-primary-foreground"
-                                          : "border text-foreground"
-                                      }`}
-                                      style={
-                                        plan.popular
-                                          ? {
-                                              background:
-                                                "var(--gradient-rose)",
-                                            }
-                                          : undefined
-                                      }
-                                    >
-                                      Get Started
-                                    </a>
-
-                                  </article>
-                                ),
-                              )}
-
-                            </div>
-                          )}
-
-                          {/* =====================================
-                              SOCIAL MEDIA ADD-ONS
-                          ===================================== */}
-
-                          {category.id ===
-                            "social-media" && (
-                            <div className="mt-10">
-
-                              <p className="eyebrow text-center">
-                                Optional Add-ons
-                              </p>
-
-                              <div className="mt-5 grid gap-4 sm:grid-cols-3">
-
-                                {addOns.map(
-                                  (
-                                    addon,
-                                  ) => (
+                                {category.growthData.followers.map(
+                                  (item) => (
                                     <div
                                       key={
-                                        addon.title
+                                        item.label
                                       }
-                                      className="glass-card lift rounded-3xl p-5 text-center"
+                                      className="flex items-center justify-between gap-4 py-3"
                                     >
 
-                                      <h4 className="text-base font-medium">
+                                      <span className="text-sm">
                                         {
-                                          addon.title
+                                          item.label
                                         }
-                                      </h4>
+                                      </span>
 
-                                      <p className="text-primary mt-2 text-sm font-medium">
+                                      <span className="text-primary text-sm font-medium">
                                         {
-                                          addon.price
+                                          item.price
                                         }
-                                      </p>
-
-                                      <p className="text-muted-foreground mt-1 text-xs">
-                                        {
-                                          addon.note
-                                        }
-                                      </p>
+                                      </span>
 
                                     </div>
                                   ),
@@ -849,17 +553,374 @@ export function Pricing() {
 
                               </div>
 
-                            </div>
-                          )}
+                              <a
+                                href="#contact"
+                                className="text-primary-foreground mt-6 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
+                                style={{
+                                  background:
+                                    "var(--gradient-rose)",
+                                }}
+                              >
+                                Get Started
+                              </a>
 
-                        </div>
+                            </article>
+
+                            {/* =================================
+                                VIEWS
+                            ================================= */}
+
+                            <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
+
+                              <div className="flex items-center justify-between gap-4">
+
+                                <div>
+
+                                  <h3 className="text-2xl font-medium">
+                                    Views
+                                  </h3>
+
+                                  <p className="text-muted-foreground mt-1 text-sm">
+                                    Instagram views
+                                    packages
+                                  </p>
+
+                                </div>
+
+                                <span
+                                  className="grid size-12 shrink-0 place-items-center rounded-2xl"
+                                  style={{
+                                    background:
+                                      "var(--gradient-rose)",
+                                  }}
+                                >
+                                  <TrendingUp
+                                    size={20}
+                                    className="text-primary-foreground"
+                                  />
+                                </span>
+
+                              </div>
+
+                              <div className="rose-rule mt-5" />
+
+                              <div className="mt-3 divide-y divide-border/50">
+
+                                {category.growthData.views.map(
+                                  (item) => (
+                                    <div
+                                      key={
+                                        item.label
+                                      }
+                                      className="flex items-center justify-between gap-4 py-3"
+                                    >
+
+                                      <span className="text-sm">
+                                        {
+                                          item.label
+                                        }
+                                      </span>
+
+                                      <span className="text-primary text-sm font-medium">
+                                        {
+                                          item.price
+                                        }
+                                      </span>
+
+                                    </div>
+                                  ),
+                                )}
+
+                              </div>
+
+                              <p className="text-muted-foreground mt-4 text-xs">
+                                Views can be split
+                                across multiple posts.
+                              </p>
+
+                              <a
+                                href="#contact"
+                                className="text-primary-foreground mt-5 flex items-center justify-center rounded-full px-5 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
+                                style={{
+                                  background:
+                                    "var(--gradient-rose)",
+                                }}
+                              >
+                                Get Started
+                              </a>
+
+                            </article>
+
+                            {/* =================================
+                                LIKES & COMMENTS
+                            ================================= */}
+
+                            <article className="glass-card lift rounded-[2rem] p-6 text-center sm:p-7 lg:col-span-2">
+
+                              <div className="mx-auto max-w-xl">
+
+                                <h3 className="text-xl font-medium">
+                                  Likes &
+                                  Comments
+                                </h3>
+
+                                <p className="text-muted-foreground mt-2 text-sm">
+                                  Custom likes and
+                                  comments packages
+                                  are available.
+                                </p>
+
+                                <p className="text-primary mt-2 text-sm font-medium">
+                                  DM us on Instagram
+                                  for pricing.
+                                </p>
+
+                                <a
+                                  href="https://www.instagram.com/veer.collabs"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="text-primary-foreground mt-5 inline-flex rounded-full px-6 py-3.5 text-sm font-medium transition-transform duration-200 hover:scale-[1.03]"
+                                  style={{
+                                    background:
+                                      "var(--gradient-rose)",
+                                  }}
+                                >
+                                  DM on Instagram
+                                </a>
+
+                              </div>
+
+                            </article>
+
+                          </div>
+                        ) : (
+
+                          /* =================================
+                             NORMAL PRICING PLANS
+                          ================================= */
+
+                          <div
+                            className={`
+                              grid gap-5
+                              ${
+                                category.plans
+                                  .length ===
+                                1
+                                  ? "mx-auto max-w-md"
+                                  : "lg:grid-cols-3"
+                              }
+                            `}
+                          >
+
+                            {category.plans.map(
+                              (plan) => (
+                                <article
+                                  key={
+                                    plan.name
+                                  }
+                                  className={`
+                                    lift
+                                    relative
+                                    rounded-[2rem]
+                                    p-7
+                                    ${
+                                      plan.popular
+                                        ? "glass-panel"
+                                        : "glass-card"
+                                    }
+                                  `}
+                                >
+
+                                  {/* POPULAR BADGE */}
+
+                                  {plan.popular && (
+                                    <span
+                                      className="text-primary-foreground absolute -top-3 left-7 inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[0.65rem] tracking-[0.2em] uppercase"
+                                      style={{
+                                        background:
+                                          "var(--gradient-rose)",
+                                      }}
+                                    >
+                                      <Crown
+                                        size={
+                                          12
+                                        }
+                                      />
+
+                                      Most Popular
+                                    </span>
+                                  )}
+
+                                  {/* NAME */}
+
+                                  <h3 className="text-2xl font-medium">
+                                    {
+                                      plan.name
+                                    }
+                                  </h3>
+
+                                  {/* DESCRIPTION */}
+
+                                  <p className="text-muted-foreground mt-2 text-sm">
+                                    {
+                                      plan.blurb
+                                    }
+                                  </p>
+
+                                  {/* PRICE */}
+
+                                  <p className="mt-6 flex flex-wrap items-baseline gap-2">
+
+                                    <span className="font-display text-4xl font-medium sm:text-5xl">
+                                      {
+                                        plan.price
+                                      }
+                                    </span>
+
+                                    {plan.suffix && (
+                                      <span className="text-muted-foreground text-sm">
+                                        {
+                                          plan.suffix
+                                        }
+                                      </span>
+                                    )}
+
+                                  </p>
+
+                                  <div className="rose-rule mt-6" />
+
+                                  {/* FEATURES */}
+
+                                  <ul className="mt-6 grid gap-2.5">
+
+                                    {plan.features.map(
+                                      (
+                                        feature,
+                                      ) => (
+                                        <li
+                                          key={
+                                            feature
+                                          }
+                                          className="flex items-start gap-2 text-sm"
+                                        >
+
+                                          <Check
+                                            size={
+                                              15
+                                            }
+                                            className="text-primary mt-0.5 shrink-0"
+                                          />
+
+                                          <span>
+                                            {
+                                              feature
+                                            }
+                                          </span>
+
+                                        </li>
+                                      ),
+                                    )}
+
+                                  </ul>
+
+                                  {/* CTA */}
+
+                                  <a
+                                    href="#contact"
+                                    className={`
+                                      mt-8
+                                      flex
+                                      items-center
+                                      justify-center
+                                      rounded-full
+                                      px-6
+                                      py-3.5
+                                      text-sm
+                                      font-medium
+                                      transition-transform
+                                      duration-200
+                                      hover:scale-[1.03]
+                                      ${
+                                        plan.popular
+                                          ? "text-primary-foreground"
+                                          : "border text-foreground"
+                                      }
+                                    `}
+                                    style={
+                                      plan.popular
+                                        ? {
+                                            background:
+                                              "var(--gradient-rose)",
+                                          }
+                                        : undefined
+                                    }
+                                  >
+                                    Get Started
+                                  </a>
+
+                                </article>
+                              ),
+                            )}
+
+                          </div>
+                        )}
+
+                        {/* =====================================
+                            SOCIAL MEDIA ADD-ONS
+                        ===================================== */}
+
+                        {category.id ===
+                          "social-media" && (
+                          <div className="mt-10">
+
+                            <p className="eyebrow text-center">
+                              Optional Add-ons
+                            </p>
+
+                            <div className="mt-5 grid gap-4 sm:grid-cols-3">
+
+                              {addOns.map(
+                                (addon) => (
+                                  <div
+                                    key={
+                                      addon.title
+                                    }
+                                    className="glass-card lift rounded-3xl p-5 text-center"
+                                  >
+
+                                    <h4 className="text-base font-medium">
+                                      {
+                                        addon.title
+                                      }
+                                    </h4>
+
+                                    <p className="text-primary mt-2 text-sm font-medium">
+                                      {
+                                        addon.price
+                                      }
+                                    </p>
+
+                                    <p className="text-muted-foreground mt-1 text-xs">
+                                      {
+                                        addon.note
+                                      }
+                                    </p>
+
+                                  </div>
+                                ),
+                              )}
+
+                            </div>
+
+                          </div>
+                        )}
 
                       </div>
 
                     </div>
 
                   </div>
-                </Reveal>
+                </div>
               );
             },
           )}

@@ -9,7 +9,7 @@ import {
   Users,
 } from "lucide-react";
 import {
-  useLayoutEffect,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -40,9 +40,6 @@ type PricingCategory = {
   icon: typeof Users;
   plans: Plan[];
 
-  /*
-   * Instagram Growth has its own pricing layout.
-   */
   growthData?: {
     followers: GrowthItem[];
     views: GrowthItem[];
@@ -54,10 +51,6 @@ type PricingCategory = {
 ========================================================= */
 
 const pricingCategories: PricingCategory[] = [
-  /* -------------------------------------------------------
-     SOCIAL MEDIA MANAGEMENT
-  ------------------------------------------------------- */
-
   {
     id: "social-media",
     name: "Social Media Management",
@@ -127,10 +120,6 @@ const pricingCategories: PricingCategory[] = [
     ],
   },
 
-  /* -------------------------------------------------------
-     INSTAGRAM GROWTH
-  ------------------------------------------------------- */
-
   {
     id: "instagram-growth",
     name: "Instagram Growth",
@@ -164,10 +153,6 @@ const pricingCategories: PricingCategory[] = [
     },
   },
 
-  /* -------------------------------------------------------
-     WEBSITE DEVELOPMENT
-  ------------------------------------------------------- */
-
   {
     id: "website",
     name: "Website Development",
@@ -192,10 +177,6 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
-
-  /* -------------------------------------------------------
-     QR MENU
-  ------------------------------------------------------- */
 
   {
     id: "qr-menu",
@@ -222,10 +203,6 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
-
-  /* -------------------------------------------------------
-     WHATSAPP AUTOMATION & AI
-  ------------------------------------------------------- */
 
   {
     id: "whatsapp-ai",
@@ -283,131 +260,72 @@ const addOns = [
 
 export function Pricing() {
   /*
-   * Social Media Management stays open on first render.
+   * Social Media Management is open initially.
    */
   const [openCategory, setOpenCategory] =
     useState("social-media");
 
   /*
-   * Reference to the category button that was clicked.
-   *
-   * We use this to preserve the exact viewport position
-   * without continuously forcing window.scrollTo().
+   * Prevents accidental rapid clicks while the
+   * accordion is transitioning.
    */
-  const activeButtonRef =
-    useRef<HTMLButtonElement | null>(null);
+  const isAnimatingRef = useRef(false);
 
   /*
-   * Stores the button's viewport position BEFORE
-   * the accordion state changes.
+   * Unlock timer.
    */
-  const activeButtonTopRef =
-    useRef<number | null>(null);
-
-  /*
-   * Prevents multiple corrections from happening
-   * for the same click.
-   */
-  const correctingRef = useRef(false);
+  const unlockTimerRef =
+    useRef<ReturnType<typeof setTimeout> | null>(null);
 
   /* =======================================================
      CATEGORY CLICK
   ======================================================= */
 
-  const handleCategory = (
-    id: string,
-    button: HTMLButtonElement,
-  ) => {
+  const handleCategory = (id: string) => {
     /*
-     * Save the clicked button.
+     * Ignore another click for a very short moment
+     * while the current accordion transition settles.
+     *
+     * This prevents two layout transitions fighting
+     * with each other.
      */
-    activeButtonRef.current = button;
+    if (isAnimatingRef.current) {
+      return;
+    }
+
+    isAnimatingRef.current = true;
 
     /*
-     * Save its exact viewport position.
-     *
-     * Example:
-     * button top = 280px
-     *
-     * After the accordion changes, we restore this
-     * exact position.
-     */
-    activeButtonTopRef.current =
-      button.getBoundingClientRect().top;
-
-    /*
-     * Mark that a viewport correction is expected.
-     */
-    correctingRef.current = true;
-
-    /*
-     * Open the clicked category.
-     *
-     * If it is already open, close it.
+     * Toggle category.
      */
     setOpenCategory((current) =>
       current === id ? "" : id,
     );
+
+    /*
+     * Unlock after the same duration as the CSS
+     * accordion animation.
+     */
+    if (unlockTimerRef.current !== null) {
+      clearTimeout(unlockTimerRef.current);
+    }
+
+    unlockTimerRef.current = setTimeout(() => {
+      isAnimatingRef.current = false;
+    }, 380);
   };
 
   /* =======================================================
-     PRESERVE VIEWPORT
+     CLEANUP
   ======================================================= */
 
-  useLayoutEffect(() => {
-    /*
-     * Nothing to do when there was no click.
-     */
-    if (
-      !correctingRef.current ||
-      !activeButtonRef.current ||
-      activeButtonTopRef.current === null
-    ) {
-      return;
-    }
-
-    const button = activeButtonRef.current;
-
-    const targetTop =
-      activeButtonTopRef.current;
-
-    /*
-     * React has now updated the DOM.
-     *
-     * Measure where the clicked button moved.
-     */
-    const currentTop =
-      button.getBoundingClientRect().top;
-
-    /*
-     * Calculate how much the page moved.
-     */
-    const difference =
-      currentTop - targetTop;
-
-    /*
-     * Correct the viewport ONCE.
-     *
-     * We intentionally do not use requestAnimationFrame
-     * loops or repeated scrollTo calls.
-     *
-     * This prevents the "jhatka" / fighting effect.
-     */
-    if (Math.abs(difference) > 0.5) {
-      window.scrollBy({
-        top: difference,
-        left: 0,
-        behavior: "auto",
-      });
-    }
-
-    /*
-     * Reset the temporary references.
-     */
-    correctingRef.current = false;
-    activeButtonRef.current = null;
-    activeButtonTopRef.current = null;
-  }, [openCategory]);
+  useEffect(() => {
+    return () => {
+      if (unlockTimerRef.current !== null) {
+        clearTimeout(unlockTimerRef.current);
+      }
+    };
+  }, []);
 
   /* =======================================================
      RENDER
@@ -416,7 +334,7 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="surface-hero relative overflow-hidden overflow-anchor-none py-24 sm:py-32"
+      className="surface-hero relative overflow-hidden py-24 sm:py-32"
     >
       <div className="relative mx-auto max-w-6xl px-5">
 
@@ -461,11 +379,8 @@ export function Pricing() {
 
                     <button
                       type="button"
-                      onClick={(event) =>
-                        handleCategory(
-                          category.id,
-                          event.currentTarget,
-                        )
+                      onClick={() =>
+                        handleCategory(category.id)
                       }
                       aria-expanded={isOpen}
                       className="flex w-full items-center gap-4 p-5 text-left transition-colors duration-200 hover:bg-primary/5 sm:p-6"
@@ -489,6 +404,7 @@ export function Pricing() {
                       {/* Category Text */}
 
                       <span className="min-w-0 flex-1">
+
                         <span className="block text-lg font-medium sm:text-xl">
                           {category.name}
                         </span>
@@ -496,47 +412,43 @@ export function Pricing() {
                         <span className="text-muted-foreground mt-1 block text-xs sm:text-sm">
                           {category.description}
                         </span>
+
                       </span>
 
                       {/* Dropdown Arrow */}
 
                       <ChevronDown
                         size={20}
-                        className={`text-muted-foreground shrink-0 transition-transform duration-300 ease-out ${
+                        className={`text-muted-foreground shrink-0 transition-transform duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                           isOpen
                             ? "rotate-180"
                             : "rotate-0"
                         }`}
                       />
+
                     </button>
 
                     {/* =====================================
                         ACCORDION CONTENT
-
-                        Instead of continuously changing
-                        window.scroll position, the content
-                        uses a simple smooth reveal.
-
-                        This keeps the viewport stable and
-                        avoids the previous jump/jhatka.
                     ===================================== */}
 
                     <div
-                      className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                      className={`grid transition-[grid-template-rows] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isOpen
                           ? "grid-rows-[1fr]"
                           : "grid-rows-[0fr]"
                       }`}
                       aria-hidden={!isOpen}
                     >
+
                       <div className="min-h-0 overflow-hidden">
 
                         <div
-                          className={`border-border/50 border-t px-5 pb-6 pt-6 transition-opacity duration-200 ease-out sm:px-6 sm:pb-7 ${
+                          className={`border-border/50 border-t px-5 pb-6 pt-6 sm:px-6 sm:pb-7 ${
                             isOpen
                               ? "opacity-100"
                               : "opacity-0"
-                          }`}
+                          } transition-opacity duration-[180ms] ease-out`}
                         >
 
                           {/* =================================
@@ -555,6 +467,7 @@ export function Pricing() {
                                 <div className="flex items-center justify-between gap-4">
 
                                   <div>
+
                                     <h3 className="text-2xl font-medium">
                                       Followers
                                     </h3>
@@ -563,6 +476,7 @@ export function Pricing() {
                                       Instagram follower
                                       packages
                                     </p>
+
                                   </div>
 
                                   <span
@@ -582,8 +496,6 @@ export function Pricing() {
 
                                 <div className="rose-rule mt-5" />
 
-                                {/* Followers pricing */}
-
                                 <div className="mt-3 divide-y divide-border/50">
 
                                   {category.growthData.followers.map(
@@ -592,6 +504,7 @@ export function Pricing() {
                                         key={item.label}
                                         className="flex items-center justify-between gap-4 py-3"
                                       >
+
                                         <span className="text-sm">
                                           {item.label}
                                         </span>
@@ -599,6 +512,7 @@ export function Pricing() {
                                         <span className="text-primary text-sm font-medium">
                                           {item.price}
                                         </span>
+
                                       </div>
                                     ),
                                   )}
@@ -627,6 +541,7 @@ export function Pricing() {
                                 <div className="flex items-center justify-between gap-4">
 
                                   <div>
+
                                     <h3 className="text-2xl font-medium">
                                       Views
                                     </h3>
@@ -635,6 +550,7 @@ export function Pricing() {
                                       Instagram views
                                       packages
                                     </p>
+
                                   </div>
 
                                   <span
@@ -654,8 +570,6 @@ export function Pricing() {
 
                                 <div className="rose-rule mt-5" />
 
-                                {/* Views pricing */}
-
                                 <div className="mt-3 divide-y divide-border/50">
 
                                   {category.growthData.views.map(
@@ -664,6 +578,7 @@ export function Pricing() {
                                         key={item.label}
                                         className="flex items-center justify-between gap-4 py-3"
                                       >
+
                                         <span className="text-sm">
                                           {item.label}
                                         </span>
@@ -671,6 +586,7 @@ export function Pricing() {
                                         <span className="text-primary text-sm font-medium">
                                           {item.price}
                                         </span>
+
                                       </div>
                                     ),
                                   )}
@@ -761,7 +677,7 @@ export function Pricing() {
                                     }`}
                                   >
 
-                                    {/* Most Popular Badge */}
+                                    {/* Most Popular */}
 
                                     {plan.popular && (
                                       <span
@@ -814,6 +730,7 @@ export function Pricing() {
                                             key={feature}
                                             className="flex items-start gap-2 text-sm"
                                           >
+
                                             <Check
                                               size={15}
                                               className="text-primary mt-0.5 shrink-0"
@@ -822,6 +739,7 @@ export function Pricing() {
                                             <span>
                                               {feature}
                                             </span>
+
                                           </li>
                                         ),
                                       )}
@@ -899,8 +817,11 @@ export function Pricing() {
                           )}
 
                         </div>
+
                       </div>
+
                     </div>
+
                   </div>
                 </Reveal>
               );
@@ -908,6 +829,7 @@ export function Pricing() {
           )}
 
         </div>
+
       </div>
     </section>
   );

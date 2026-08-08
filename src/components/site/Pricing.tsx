@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import {
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -266,70 +267,222 @@ export function Pricing() {
     useState("social-media");
 
   /*
-   * Prevents accidental rapid clicks while the
-   * accordion is transitioning.
+   * Currently clicked category button.
    */
-  const isAnimatingRef = useRef(false);
+  const activeButtonRef =
+    useRef<HTMLButtonElement | null>(null);
 
   /*
-   * Unlock timer.
+   * Exact viewport Y position of the clicked
+   * category BEFORE accordion starts changing.
    */
-  const unlockTimerRef =
-    useRef<ReturnType<typeof setTimeout> | null>(null);
+  const targetTopRef = useRef<number | null>(null);
+
+  /*
+   * requestAnimationFrame ID.
+   */
+  const animationFrameRef =
+    useRef<number | null>(null);
+
+  /*
+   * Used to identify a new accordion transition.
+   */
+  const animationStartRef =
+    useRef<number>(0);
+
+  /*
+   * Accordion animation duration.
+   *
+   * Keep this exactly the same as the CSS duration.
+   */
+  const ACCORDION_DURATION = 350;
 
   /* =======================================================
-     CATEGORY CLICK
+     HANDLE CATEGORY CLICK
   ======================================================= */
 
-  const handleCategory = (id: string) => {
+  const handleCategory = (
+    id: string,
+    button: HTMLButtonElement,
+  ) => {
     /*
-     * Ignore another click for a very short moment
-     * while the current accordion transition settles.
-     *
-     * This prevents two layout transitions fighting
-     * with each other.
+     * Cancel previous correction animation.
      */
-    if (isAnimatingRef.current) {
-      return;
+    if (animationFrameRef.current !== null) {
+      cancelAnimationFrame(
+        animationFrameRef.current,
+      );
+
+      animationFrameRef.current = null;
     }
 
-    isAnimatingRef.current = true;
+    /*
+     * Store the exact clicked button.
+     */
+    activeButtonRef.current = button;
 
     /*
-     * Toggle category.
+     * IMPORTANT:
+     *
+     * Capture the button position BEFORE React changes
+     * the accordion state.
+     */
+    targetTopRef.current =
+      button.getBoundingClientRect().top;
+
+    /*
+     * Start timing immediately.
+     */
+    animationStartRef.current =
+      performance.now();
+
+    /*
+     * Change accordion state.
      */
     setOpenCategory((current) =>
       current === id ? "" : id,
     );
-
-    /*
-     * Unlock after the same duration as the CSS
-     * accordion animation.
-     */
-    if (unlockTimerRef.current !== null) {
-      clearTimeout(unlockTimerRef.current);
-    }
-
-    unlockTimerRef.current = setTimeout(() => {
-      isAnimatingRef.current = false;
-    }, 380);
   };
 
   /* =======================================================
-     CLEANUP
+     KEEP CLICKED HEADER IN SAME VIEWPORT POSITION
+  ======================================================= */
+
+  useLayoutEffect(() => {
+    /*
+     * No active click = nothing to correct.
+     */
+    if (
+      !activeButtonRef.current ||
+      targetTopRef.current === null
+    ) {
+      return;
+    }
+
+    const correctPosition = () => {
+      const button =
+        activeButtonRef.current;
+
+      const targetTop =
+        targetTopRef.current;
+
+      if (
+        !button ||
+        targetTop === null
+      ) {
+        return;
+      }
+
+      /*
+       * Current position of clicked header.
+       */
+      const currentTop =
+        button.getBoundingClientRect().top;
+
+      /*
+       * How much the accordion pushed
+       * the clicked header.
+       */
+      const difference =
+        currentTop - targetTop;
+
+      /*
+       * Only correct meaningful movement.
+       */
+      if (Math.abs(difference) > 0.01) {
+        /*
+         * IMPORTANT:
+         *
+         * We use immediate scrolling.
+         * No smooth scroll here.
+         *
+         * The accordion itself is already animated,
+         * so the scroll compensation happens frame-by-frame
+         * and visually becomes part of the same animation.
+         */
+        window.scrollBy({
+          top: difference,
+          left: 0,
+          behavior: "auto",
+        });
+      }
+    };
+
+    /*
+     * FIRST correction happens immediately
+     * after React updates the DOM.
+     *
+     * This removes the "close first, then jump" effect.
+     */
+    correctPosition();
+
+    /*
+     * Continue correcting during the accordion animation.
+     */
+    const animate = (time: number) => {
+      correctPosition();
+
+      const elapsed =
+        time - animationStartRef.current;
+
+      if (elapsed < ACCORDION_DURATION) {
+        animationFrameRef.current =
+          requestAnimationFrame(animate);
+      } else {
+        /*
+         * One final correction.
+         */
+        correctPosition();
+
+        animationFrameRef.current =
+          null;
+
+        /*
+         * Clear temporary references.
+         */
+        activeButtonRef.current = null;
+        targetTopRef.current = null;
+      }
+    };
+
+    animationFrameRef.current =
+      requestAnimationFrame(animate);
+
+    /*
+     * Cleanup if another category is clicked.
+     */
+    return () => {
+      if (
+        animationFrameRef.current !== null
+      ) {
+        cancelAnimationFrame(
+          animationFrameRef.current,
+        );
+
+        animationFrameRef.current = null;
+      }
+    };
+  }, [openCategory]);
+
+  /* =======================================================
+     COMPONENT CLEANUP
   ======================================================= */
 
   useEffect(() => {
     return () => {
-      if (unlockTimerRef.current !== null) {
-        clearTimeout(unlockTimerRef.current);
+      if (
+        animationFrameRef.current !== null
+      ) {
+        cancelAnimationFrame(
+          animationFrameRef.current,
+        );
       }
     };
   }, []);
 
   /* =======================================================
      RENDER
-  ======================================================= */
+========================================================= */
 
   return (
     <section
@@ -339,7 +492,7 @@ export function Pricing() {
       <div className="relative mx-auto max-w-6xl px-5">
 
         {/* =================================================
-            SECTION HEADING
+            SECTION HEADER
         ================================================= */}
 
         <SectionHeading
@@ -347,7 +500,9 @@ export function Pricing() {
           title={
             <>
               Plans built around your{" "}
-              <span className="italic">growth.</span>
+              <span className="italic">
+                growth.
+              </span>
             </>
           }
           subtitle="Choose the service that fits your business today. Scale, upgrade or customize as you grow."
@@ -362,14 +517,18 @@ export function Pricing() {
           {pricingCategories.map(
             (category, categoryIndex) => {
               const isOpen =
-                openCategory === category.id;
+                openCategory ===
+                category.id;
 
-              const Icon = category.icon;
+              const Icon =
+                category.icon;
 
               return (
                 <Reveal
                   key={category.id}
-                  delay={categoryIndex * 0.05}
+                  delay={
+                    categoryIndex * 0.05
+                  }
                 >
                   <div className="glass-card overflow-hidden rounded-[2rem]">
 
@@ -379,14 +538,19 @@ export function Pricing() {
 
                     <button
                       type="button"
-                      onClick={() =>
-                        handleCategory(category.id)
+                      onClick={(event) =>
+                        handleCategory(
+                          category.id,
+                          event.currentTarget,
+                        )
                       }
-                      aria-expanded={isOpen}
+                      aria-expanded={
+                        isOpen
+                      }
                       className="flex w-full items-center gap-4 p-5 text-left transition-colors duration-200 hover:bg-primary/5 sm:p-6"
                     >
 
-                      {/* Category Icon */}
+                      {/* ICON */}
 
                       <span
                         className="grid size-12 shrink-0 place-items-center rounded-2xl"
@@ -401,7 +565,7 @@ export function Pricing() {
                         />
                       </span>
 
-                      {/* Category Text */}
+                      {/* TEXT */}
 
                       <span className="min-w-0 flex-1">
 
@@ -410,12 +574,14 @@ export function Pricing() {
                         </span>
 
                         <span className="text-muted-foreground mt-1 block text-xs sm:text-sm">
-                          {category.description}
+                          {
+                            category.description
+                          }
                         </span>
 
                       </span>
 
-                      {/* Dropdown Arrow */}
+                      {/* ARROW */}
 
                       <ChevronDown
                         size={20}
@@ -438,18 +604,14 @@ export function Pricing() {
                           ? "grid-rows-[1fr]"
                           : "grid-rows-[0fr]"
                       }`}
-                      aria-hidden={!isOpen}
+                      aria-hidden={
+                        !isOpen
+                      }
                     >
 
                       <div className="min-h-0 overflow-hidden">
 
-                        <div
-                          className={`border-border/50 border-t px-5 pb-6 pt-6 sm:px-6 sm:pb-7 ${
-                            isOpen
-                              ? "opacity-100"
-                              : "opacity-0"
-                          } transition-opacity duration-[180ms] ease-out`}
-                        >
+                        <div className="border-border/50 border-t px-5 pb-6 pt-6 sm:px-6 sm:pb-7">
 
                           {/* =================================
                               INSTAGRAM GROWTH
@@ -458,9 +620,7 @@ export function Pricing() {
                           {category.growthData ? (
                             <div className="grid gap-5 lg:grid-cols-2">
 
-                              {/* =================================
-                                  FOLLOWERS
-                              ================================= */}
+                              {/* FOLLOWERS */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
 
@@ -487,7 +647,9 @@ export function Pricing() {
                                     }}
                                   >
                                     <Users
-                                      size={20}
+                                      size={
+                                        20
+                                      }
                                       className="text-primary-foreground"
                                     />
                                   </span>
@@ -499,18 +661,26 @@ export function Pricing() {
                                 <div className="mt-3 divide-y divide-border/50">
 
                                   {category.growthData.followers.map(
-                                    (item) => (
+                                    (
+                                      item,
+                                    ) => (
                                       <div
-                                        key={item.label}
+                                        key={
+                                          item.label
+                                        }
                                         className="flex items-center justify-between gap-4 py-3"
                                       >
 
                                         <span className="text-sm">
-                                          {item.label}
+                                          {
+                                            item.label
+                                          }
                                         </span>
 
                                         <span className="text-primary text-sm font-medium">
-                                          {item.price}
+                                          {
+                                            item.price
+                                          }
                                         </span>
 
                                       </div>
@@ -532,9 +702,7 @@ export function Pricing() {
 
                               </article>
 
-                              {/* =================================
-                                  VIEWS
-                              ================================= */}
+                              {/* VIEWS */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 sm:p-7">
 
@@ -561,7 +729,9 @@ export function Pricing() {
                                     }}
                                   >
                                     <TrendingUp
-                                      size={20}
+                                      size={
+                                        20
+                                      }
                                       className="text-primary-foreground"
                                     />
                                   </span>
@@ -573,18 +743,26 @@ export function Pricing() {
                                 <div className="mt-3 divide-y divide-border/50">
 
                                   {category.growthData.views.map(
-                                    (item) => (
+                                    (
+                                      item,
+                                    ) => (
                                       <div
-                                        key={item.label}
+                                        key={
+                                          item.label
+                                        }
                                         className="flex items-center justify-between gap-4 py-3"
                                       >
 
                                         <span className="text-sm">
-                                          {item.label}
+                                          {
+                                            item.label
+                                          }
                                         </span>
 
                                         <span className="text-primary text-sm font-medium">
-                                          {item.price}
+                                          {
+                                            item.price
+                                          }
                                         </span>
 
                                       </div>
@@ -611,16 +789,15 @@ export function Pricing() {
 
                               </article>
 
-                              {/* =================================
-                                  LIKES & COMMENTS
-                              ================================= */}
+                              {/* LIKES & COMMENTS */}
 
                               <article className="glass-card lift rounded-[2rem] p-6 text-center sm:p-7 lg:col-span-2">
 
                                 <div className="mx-auto max-w-xl">
 
                                   <h3 className="text-xl font-medium">
-                                    Likes & Comments
+                                    Likes &
+                                    Comments
                                   </h3>
 
                                   <p className="text-muted-foreground mt-2 text-sm">
@@ -655,12 +832,13 @@ export function Pricing() {
                           ) : (
 
                             /* =================================
-                               NORMAL PRICING PLANS
+                               NORMAL PLANS
                             ================================= */
 
                             <div
                               className={`grid gap-5 ${
-                                category.plans.length === 1
+                                category.plans.length ===
+                                1
                                   ? "mx-auto max-w-md"
                                   : "lg:grid-cols-3"
                               }`}
@@ -669,7 +847,9 @@ export function Pricing() {
                               {category.plans.map(
                                 (plan) => (
                                   <article
-                                    key={plan.name}
+                                    key={
+                                      plan.name
+                                    }
                                     className={`lift relative rounded-[2rem] p-7 ${
                                       plan.popular
                                         ? "glass-panel"
@@ -677,7 +857,7 @@ export function Pricing() {
                                     }`}
                                   >
 
-                                    {/* Most Popular */}
+                                    {/* POPULAR */}
 
                                     {plan.popular && (
                                       <span
@@ -688,31 +868,41 @@ export function Pricing() {
                                         }}
                                       >
                                         <Crown
-                                          size={12}
+                                          size={
+                                            12
+                                          }
                                         />
                                         Most Popular
                                       </span>
                                     )}
 
                                     <h3 className="text-2xl font-medium">
-                                      {plan.name}
+                                      {
+                                        plan.name
+                                      }
                                     </h3>
 
                                     <p className="text-muted-foreground mt-2 text-sm">
-                                      {plan.blurb}
+                                      {
+                                        plan.blurb
+                                      }
                                     </p>
 
-                                    {/* Price */}
+                                    {/* PRICE */}
 
                                     <p className="mt-6 flex flex-wrap items-baseline gap-2">
 
                                       <span className="font-display text-4xl font-medium sm:text-5xl">
-                                        {plan.price}
+                                        {
+                                          plan.price
+                                        }
                                       </span>
 
                                       {plan.suffix && (
                                         <span className="text-muted-foreground text-sm">
-                                          {plan.suffix}
+                                          {
+                                            plan.suffix
+                                          }
                                         </span>
                                       )}
 
@@ -720,24 +910,32 @@ export function Pricing() {
 
                                     <div className="rose-rule mt-6" />
 
-                                    {/* Features */}
+                                    {/* FEATURES */}
 
                                     <ul className="mt-6 grid gap-2.5">
 
                                       {plan.features.map(
-                                        (feature) => (
+                                        (
+                                          feature,
+                                        ) => (
                                           <li
-                                            key={feature}
+                                            key={
+                                              feature
+                                            }
                                             className="flex items-start gap-2 text-sm"
                                           >
 
                                             <Check
-                                              size={15}
+                                              size={
+                                                15
+                                              }
                                               className="text-primary mt-0.5 shrink-0"
                                             />
 
                                             <span>
-                                              {feature}
+                                              {
+                                                feature
+                                              }
                                             </span>
 
                                           </li>
@@ -775,7 +973,7 @@ export function Pricing() {
                           )}
 
                           {/* =====================================
-                              SOCIAL MEDIA ADD-ONS
+                              ADD-ONS
                           ===================================== */}
 
                           {category.id ===
@@ -789,22 +987,32 @@ export function Pricing() {
                               <div className="mt-5 grid gap-4 sm:grid-cols-3">
 
                                 {addOns.map(
-                                  (addon) => (
+                                  (
+                                    addon,
+                                  ) => (
                                     <div
-                                      key={addon.title}
+                                      key={
+                                        addon.title
+                                      }
                                       className="glass-card lift rounded-3xl p-5 text-center"
                                     >
 
                                       <h4 className="text-base font-medium">
-                                        {addon.title}
+                                        {
+                                          addon.title
+                                        }
                                       </h4>
 
                                       <p className="text-primary mt-2 text-sm font-medium">
-                                        {addon.price}
+                                        {
+                                          addon.price
+                                        }
                                       </p>
 
                                       <p className="text-muted-foreground mt-1 text-xs">
-                                        {addon.note}
+                                        {
+                                          addon.note
+                                        }
                                       </p>
 
                                     </div>

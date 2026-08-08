@@ -54,9 +54,9 @@ function Index() {
         <Hero />
         <About />
         <Services />
-        <Pricing />
         <WhyUs />
         <Portfolio />
+        <Pricing />
         <Testimonials />
         <Faq />
         <Contact />

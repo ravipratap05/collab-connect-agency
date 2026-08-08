@@ -8,7 +8,11 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
-import { useState } from "react";
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { Reveal, SectionHeading } from "./Reveal";
 
 type Plan = {
@@ -225,27 +229,54 @@ export function Pricing() {
   const [openCategory, setOpenCategory] =
     useState("social-media");
 
-  const handleCategory = (id: string) => {
-    const scrollY = window.scrollY;
+  // Stores the clicked category's screen position
+  // before the accordion changes its height.
+  const pendingScrollRef = useRef<{
+    element: HTMLElement;
+    top: number;
+  } | null>(null);
+
+  const handleCategory = (
+    id: string,
+    button: HTMLButtonElement,
+  ) => {
+    pendingScrollRef.current = {
+      element: button,
+      top: button.getBoundingClientRect().top,
+    };
 
     setOpenCategory((current) =>
       current === id ? "" : id,
     );
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        window.scrollTo({
-          top: scrollY,
-          behavior: "auto",
-        });
-      });
-    });
   };
+
+  // Restore the clicked category to exactly the same
+  // viewport position after the accordion layout changes.
+  useLayoutEffect(() => {
+    const pending = pendingScrollRef.current;
+
+    if (!pending) return;
+
+    const newTop =
+      pending.element.getBoundingClientRect().top;
+
+    const difference = newTop - pending.top;
+
+    if (Math.abs(difference) > 0.5) {
+      window.scrollBy({
+        top: difference,
+        left: 0,
+        behavior: "auto",
+      });
+    }
+
+    pendingScrollRef.current = null;
+  }, [openCategory]);
 
   return (
     <section
       id="pricing"
-      className="surface-hero relative overflow-hidden py-24 sm:py-32"
+      className="surface-hero relative overflow-hidden overflow-anchor-none py-24 sm:py-32"
     >
       <div className="relative mx-auto max-w-6xl px-5">
         <SectionHeading
@@ -264,6 +295,7 @@ export function Pricing() {
             (category, categoryIndex) => {
               const isOpen =
                 openCategory === category.id;
+
               const Icon = category.icon;
 
               return (
@@ -275,8 +307,11 @@ export function Pricing() {
                     {/* Category Header */}
                     <button
                       type="button"
-                      onClick={() =>
-                        handleCategory(category.id)
+                      onClick={(event) =>
+                        handleCategory(
+                          category.id,
+                          event.currentTarget,
+                        )
                       }
                       aria-expanded={isOpen}
                       className="flex w-full items-center gap-4 p-5 text-left transition-colors hover:bg-primary/5 sm:p-6"

@@ -1,9 +1,9 @@
 import { ArrowUpRight } from "lucide-react";
 import { Reveal, SectionHeading } from "./Reveal";
-import p1 from "@/assets/portfolio-1.jpg";
-import p2 from "@/assets/portfolio-2.jpg";
-import p3 from "@/assets/portfolio-3.jpg";
-import hero from "@/assets/hero-dashboard.jpg";
+import p1 from "@/assets/portfolio-1.PNG";
+import p2 from "@/assets/portfolio-2.PNG";
+import p3 from "@/assets/portfolio-3.PNG";
+import hero from "@/assets/hero.PNG";
 
 const projects = [
   {

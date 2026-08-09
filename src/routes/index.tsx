@@ -13,36 +13,140 @@ import { Footer } from "@/components/site/Footer";
 
 const title = "Collab Connect Agency";
 const description =
-  "Premium Instagram management, organic growth, influencer collaborations and Meta Ads for creators and brands. Packages from ₹2,999/month.";
+  "CollabConnect is an influencer marketing agency connecting brands with creators for impactful collaborations, campaigns, and organic growth.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "ProfessionalService",
-          name: "Collab Connect",
-          slogan: "Creators • Brands • Growth",
-          description,
-          email: "veercollabs@gmail.com",
-          sameAs: ["https://instagram.com/veer.collabs"],
-          areaServed: "IN",
-        }),
-      },
-    ],
-  }),
+  meta: [
+    {
+      title: "CollabConnect — Where Creators & Brands Collab",
+    },
+
+    {
+  name: "description",
+  content:
+    "CollabConnect is a social media management and influencer marketing agency connecting brands with creators for impactful collaborations, campaigns, content strategy, and organic growth.",
+},
+
+    {
+  name: "keywords",
+  content:
+    "CollabConnect, social media management, SMM, social media marketing, influencer marketing agency, creator collaborations, brand collaborations, influencers, creators, influencer campaigns, content strategy, Instagram management, Creator growth, Paid collaboration, Barter collaboration, UGC, Reel growth, Websites development, QR menu, Agents, Follower growth",
+},
+
+    {
+      name: "robots",
+      content: "index, follow",
+    },
+
+    {
+      property: "og:title",
+      content: "CollabConnect — Where Creators & Brands Collab",
+    },
+
+    {
+      property: "og:description",
+      content:
+        "Connect with creators, discover campaigns, collaborate with brands, and grow your online presence with CollabConnect.",
+    },
+
+    {
+      property: "og:type",
+      content: "website",
+    },
+
+    {
+      property: "og:url",
+      content: "https://www.collabconnect.co.in/",
+    },
+
+    {
+      property: "og:image",
+      content: "https://www.collabconnect.co.in/og-image.PNG",
+    },
+
+    {
+      property: "og:site_name",
+      content: "CollabConnect",
+    },
+
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+
+    {
+      name: "twitter:title",
+      content: "CollabConnect — Where Creators & Brands Collab",
+    },
+
+    {
+      name: "twitter:description",
+      content:
+        "Connect creators and brands through meaningful collaborations and influencer campaigns.",
+    },
+
+    {
+      name: "twitter:image",
+      content: "https://www.collabconnect.co.in/og-image.PNG",
+    },
+
+    {
+      name: "theme-color",
+      content: "#FDFBF6",
+    },
+
+    {
+      name: "msapplication-TileColor",
+      content: "#FDFBF6",
+    },
+  ],
+
+  links: [
+    {
+      rel: "canonical",
+      href: "https://www.collabconnect.co.in/",
+    },
+
+    {
+      rel: "icon",
+      type: "image/png",
+      href: "/favicon.PNG",
+    },
+
+    {
+      rel: "apple-touch-icon",
+      href: "/favicon.PNG",
+    },
+  ],
+
+  scripts: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+
+        name: "CollabConnect",
+
+        slogan: "Creators • Brands • Growth",
+
+        description:
+          "CollabConnect is an influencer marketing agency connecting brands with creators for impactful collaborations, campaigns, and organic growth.",
+
+        url: "https://www.collabconnect.co.in/",
+
+        email: "veercollabs@gmail.com",
+
+        sameAs: [
+          "https://www.instagram.com/veer.collabs",
+        ],
+
+        areaServed: "IN",
+      }),
+    },
+  ],
+}),
   component: Index,
 });
 

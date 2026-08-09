@@ -11,142 +11,209 @@ import { Faq } from "@/components/site/Faq";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 
-const title = "Collab Connect Agency";
+const title =
+  "CollabConnect | Influencer Marketing & Social Media Management Agency";
+
 const description =
-  "CollabConnect is an influencer marketing agency connecting brands with creators for impactful collaborations, campaigns, and organic growth.";
+  "CollabConnect is an influencer marketing and social media management agency connecting brands with creators for UGC content, paid collaborations, brand campaigns, content strategy and social media growth across India.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-  meta: [
-    {
-      title: "CollabConnect — Where Creators & Brands Collab",
-    },
+    meta: [
+      {
+        title,
+      },
 
-    {
-  name: "description",
-  content:
-    "CollabConnect is a social media management and influencer marketing agency connecting brands with creators for impactful collaborations, campaigns, content strategy, and organic growth.",
-},
+      {
+        name: "description",
+        content: description,
+      },
 
-    {
-  name: "keywords",
-  content:
-    "CollabConnect, social media management, SMM, social media marketing, influencer marketing agency, creator collaborations, brand collaborations, influencers, creators, influencer campaigns, content strategy, Instagram management, Creator growth, Paid collaboration, Barter collaboration, UGC, Reel growth, Websites development, QR menu, Agents, Follower growth",
-},
+      {
+        name: "keywords",
+        content:
+          "CollabConnect, influencer marketing agency, influencer marketing India, social media management, social media marketing, SMM, social media agency, brand collaboration, creator collaboration, UGC creators, Instagram influencers, paid collaboration, barter collaboration, brand deals, PR campaigns, social media campaigns, content strategy, Instagram management, creator growth, follower growth, reel growth, nano influencers, micro influencers",
+      },
 
-    {
-      name: "robots",
-      content: "index, follow",
-    },
+      {
+        name: "robots",
+        content:
+          "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      },
 
-    {
-      property: "og:title",
-      content: "CollabConnect — Where Creators & Brands Collab",
-    },
+      {
+        name: "author",
+        content: "CollabConnect",
+      },
 
-    {
-      property: "og:description",
-      content:
-        "Connect with creators, discover campaigns, collaborate with brands, and grow your online presence with CollabConnect.",
-    },
+      {
+        name: "language",
+        content: "English",
+      },
 
-    {
-      property: "og:type",
-      content: "website",
-    },
+      {
+        name: "geo.region",
+        content: "IN",
+      },
 
-    {
-      property: "og:url",
-      content: "https://www.collabconnect.co.in/",
-    },
+      {
+        name: "theme-color",
+        content: "#FDFBF6",
+      },
 
-    {
-      property: "og:image",
-      content: "https://www.collabconnect.co.in/og-image.PNG",
-    },
+      // Open Graph
+      {
+        property: "og:title",
+        content: title,
+      },
 
-    {
-      property: "og:site_name",
-      content: "CollabConnect",
-    },
+      {
+        property: "og:description",
+        content:
+          "Connect brands with creators for influencer marketing, UGC content, paid collaborations, social media management and impactful brand campaigns.",
+      },
 
-    {
-      name: "twitter:card",
-      content: "summary_large_image",
-    },
+      {
+        property: "og:type",
+        content: "website",
+      },
 
-    {
-      name: "twitter:title",
-      content: "CollabConnect — Where Creators & Brands Collab",
-    },
+      {
+        property: "og:url",
+        content: "https://www.collabconnect.co.in/",
+      },
 
-    {
-      name: "twitter:description",
-      content:
-        "Connect creators and brands through meaningful collaborations and influencer campaigns.",
-    },
+      {
+        property: "og:site_name",
+        content: "CollabConnect",
+      },
 
-    {
-      name: "twitter:image",
-      content: "https://www.collabconnect.co.in/og-image.PNG",
-    },
+      {
+        property: "og:image",
+        content: "https://www.collabconnect.co.in/og-image.jpg",
+      },
 
-    {
-      name: "theme-color",
-      content: "#FDFBF6",
-    },
+      {
+        property: "og:image:width",
+        content: "1200",
+      },
 
-    {
-      name: "msapplication-TileColor",
-      content: "#FDFBF6",
-    },
-  ],
+      {
+        property: "og:image:height",
+        content: "630",
+      },
 
-  links: [
-    {
-      rel: "canonical",
-      href: "https://www.collabconnect.co.in/",
-    },
+      {
+        property: "og:image:alt",
+        content:
+          "CollabConnect - Influencer Marketing and Social Media Management Agency",
+      },
 
-    {
-      rel: "icon",
-      type: "image/png",
-      href: "/favicon.PNG",
-    },
+      // Twitter / X
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
 
-    {
-      rel: "apple-touch-icon",
-      href: "/favicon.PNG",
-    },
-  ],
+      {
+        name: "twitter:title",
+        content: title,
+      },
 
-  scripts: [
-    {
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
+      {
+        name: "twitter:description",
+        content:
+          "India's influencer marketing and social media management agency connecting brands with creators.",
+      },
 
-        name: "CollabConnect",
+      {
+        name: "twitter:image",
+        content: "https://www.collabconnect.co.in/og-image.jpg",
+      },
 
-        slogan: "Creators • Brands • Growth",
+      {
+        name: "twitter:url",
+        content: "https://www.collabconnect.co.in/",
+      },
 
-        description:
-          "CollabConnect is an influencer marketing agency connecting brands with creators for impactful collaborations, campaigns, and organic growth.",
+      {
+        name: "msapplication-TileColor",
+        content: "#FDFBF6",
+      },
+    ],
 
-        url: "https://www.collabconnect.co.in/",
+    links: [
+      {
+        rel: "canonical",
+        href: "https://www.collabconnect.co.in/",
+      },
 
-        email: "veercollabs@gmail.com",
+      {
+        rel: "icon",
+        type: "image/jpeg",
+        href: "/favicon.jpg",
+      },
 
-        sameAs: [
-          "https://www.instagram.com/veer.collabs",
-        ],
+      {
+        rel: "apple-touch-icon",
+        href: "/favicon.jpg",
+      },
+    ],
 
-        areaServed: "IN",
-      }),
-    },
-  ],
-}),
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+
+          name: "CollabConnect",
+
+          description,
+
+          url: "https://www.collabconnect.co.in/",
+
+          logo: "https://www.collabconnect.co.in/logo.jpg",
+
+          image: "https://www.collabconnect.co.in/og-image.jpg",
+
+          email: "veercollabs@gmail.com",
+
+          areaServed: {
+            "@type": "Country",
+            name: "India",
+          },
+
+          serviceType: [
+            "Influencer Marketing",
+            "Social Media Management",
+            "Social Media Marketing",
+            "UGC Content",
+            "Brand Collaborations",
+            "Content Strategy",
+          ],
+
+          sameAs: [
+            "https://www.instagram.com/veer.collabs",
+            "https://www.threads.net/@veer.collabs",
+          ],
+        }),
+      },
+
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+
+          name: "CollabConnect",
+
+          url: "https://www.collabconnect.co.in/",
+        }),
+      },
+    ],
+  }),
+
   component: Index,
 });
 
@@ -154,6 +221,7 @@ function Index() {
   return (
     <div className="min-h-screen">
       <Nav />
+
       <main>
         <Hero />
         <About />
@@ -165,6 +233,7 @@ function Index() {
         <Faq />
         <Contact />
       </main>
+
       <Footer />
     </div>
   );

@@ -134,70 +134,7 @@ const pricingCategories: PricingCategory[] = [
      INSTAGRAM GROWTH
   ======================================================= */
 
-  {
-    id: "instagram-growth",
-    name: "Instagram Growth",
-    description:
-      "Flexible packages for followers, views and engagement.",
-    icon: TrendingUp,
 
-    plans: [],
-
-    growthData: {
-      followers: [
-        { label: "1K Followers", price: "₹139" },
-        { label: "2K Followers", price: "₹269" },
-        { label: "3K Followers", price: "₹410" },
-        { label: "4K Followers", price: "₹549" },
-        { label: "5K Followers", price: "₹689" },
-        { label: "6K Followers", price: "₹825" },
-        { label: "7K Followers", price: "₹965" },
-        { label: "8K Followers", price: "₹1,100" },
-        { label: "9K Followers", price: "₹1,240" },
-        { label: "10K Followers", price: "₹1,360" },
-      ],
-
-      views: [
-        { label: "10K Views", price: "₹40" },
-        { label: "20K Views", price: "₹60" },
-        { label: "30K Views", price: "₹80" },
-        { label: "40K Views", price: "₹110" },
-        { label: "50K Views", price: "₹140" },
-      ],
-    },
-  },
-
-  /* =======================================================
-     YOUTUBE GROWTH
-  ======================================================= */
-
-  {
-    id: "youtube-growth",
-    name: "YouTube Growth",
-    description:
-      "Flexible packages for subscribers and likes to help grow your YouTube channel.",
-    icon: TrendingUp,
-
-    plans: [],
-
-    youtubeGrowthData: {
-      subscribers: [
-        { label: "100 Subscribers", price: "₹129" },
-        { label: "500 Subscribers", price: "₹549" },
-        { label: "1K Subscribers", price: "₹999" },
-        { label: "2K Subscribers", price: "₹1,899" },
-        { label: "5K Subscribers", price: "₹4,499" },
-        { label: "10K Subscribers", price: "₹8,999" },
-      ],
-
-      likes: [
-        { label: "100 Likes", price: "₹59" },
-        { label: "500 Likes", price: "₹249" },
-        { label: "1K Likes", price: "₹449" },
-        { label: "2K Likes", price: "₹849" },
-      ],
-    },
-  },
 
   /* =======================================================
      WEBSITE DEVELOPMENT

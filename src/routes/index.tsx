@@ -178,7 +178,7 @@ export const Route = createFileRoute("/")({
 
           image: "https://www.collabconnect.co.in/og-image.jpg",
 
-          email: "veercollabs@gmail.com",
+          email: "work.collabconnect@gmail.com",
 
           areaServed: {
             "@type": "Country",
@@ -195,7 +195,7 @@ export const Route = createFileRoute("/")({
           ],
 
           sameAs: [
-            "https://www.instagram.com/veer.collabs",
+            "https://www.instagram.com/_collab.connect",
             "https://www.threads.net/@veer.collabs",
           ],
         }),

@@ -10,8 +10,8 @@ const links = [
   { label: "FAQ", href: "#faq" },
 ];
 
-export const INSTAGRAM = "https://instagram.com/veer.collabs";
-export const EMAIL = "mailto:veercollabs@gmail.com";
+export const INSTAGRAM = "https://instagram.com/_collab.connect";
+export const EMAIL = "mailto:work.collabconnect@gmail.com";
 
 export function Nav() {
   const [open, setOpen] = useState(false);

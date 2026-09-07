@@ -25,7 +25,7 @@ export function Whatsapp() {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-[9999] sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-3 right-5 z-[9999] sm:bottom-3 sm:right-6">
       {/* CHAT POPUP */}
       {open && (
         <div className="absolute bottom-[76px] right-0 w-[calc(100vw-40px)] max-w-[360px] overflow-hidden rounded-[24px] bg-white shadow-2xl ring-1 ring-black/10 sm:w-[360px]">

@@ -32,7 +32,7 @@ export function Footer() {
                   rel="noreferrer"
                   className="text-muted-foreground hover:text-primary inline-flex items-center gap-2 transition-colors"
                 >
-                  <Instagram size={14} /> veer.collabs
+                  <Instagram size={14} /> _collab.connect
                 </a>
               </li>
               <li>
@@ -40,7 +40,7 @@ export function Footer() {
                   href={EMAIL}
                   className="text-muted-foreground hover:text-primary inline-flex items-center gap-2 transition-colors"
                 >
-                  <Mail size={14} /> veercollabs@gmail.com
+                  <Mail size={14} /> work.collabconnect@gmail.com
                 </a>
               </li>
             </ul>

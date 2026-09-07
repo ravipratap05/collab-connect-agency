@@ -10,6 +10,7 @@ import { Testimonials } from "@/components/site/Testimonials";
 import { Faq } from "@/components/site/Faq";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
+import { WhatsApp } from "@/components/site/Whatsapp";
 
 const title =
   "CollabConnect | Influencer Marketing & Social Media Management Agency";
@@ -235,6 +236,7 @@ function Index() {
       </main>
 
       <Footer />
+      <WhatsApp />
        
     </div>
   );

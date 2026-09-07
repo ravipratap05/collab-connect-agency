@@ -22,7 +22,7 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="glass-card inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs tracking-[0.22em] uppercase"
           >
-            <Instagram size={13} className="text-primary" /> @veer.collabs
+            <Instagram size={13} className="text-primary" /> _collab.connect
           </motion.p>
 
           <motion.h1

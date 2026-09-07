@@ -236,7 +236,7 @@ function Index() {
       </main>
 
       <Footer />
-      <Whatsapp /
+      <Whatsapp />
        
     </div>
   );

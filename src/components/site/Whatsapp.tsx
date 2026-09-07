@@ -15,20 +15,44 @@ export function Whatsapp() {
     );
   };
 
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLTextAreaElement>
+  ) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
+
   return (
-    <div className="fixed bottom-6 right-6 z-[9999]">
+    <div className="fixed bottom-5 right-5 z-[9999] sm:bottom-6 sm:right-6">
+      {/* CHAT POPUP */}
       {open && (
-        <div className="absolute bottom-20 right-0 w-[320px] overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <div className="absolute bottom-[76px] right-0 w-[calc(100vw-40px)] max-w-[360px] overflow-hidden rounded-[24px] bg-white shadow-2xl ring-1 ring-black/10 sm:w-[360px]">
+          
+          {/* HEADER */}
           <div className="bg-[#008069] px-5 py-4 text-white">
             <div className="flex items-center justify-between">
-              <div>
-                <div className="font-semibold">CollabConnect</div>
-                <div className="text-xs opacity-90">Online</div>
+              <div className="flex items-center gap-3">
+                {/* Profile Circle */}
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg font-bold text-[#008069]">
+                  C
+                </div>
+
+                <div>
+                  <div className="text-[16px] font-semibold">
+                    CollabConnect
+                  </div>
+                  <div className="text-xs opacity-90">
+                    Online
+                  </div>
+                </div>
               </div>
 
+              {/* CLOSE */}
               <button
                 onClick={() => setOpen(false)}
-                className="text-2xl leading-none"
+                className="flex h-9 w-9 items-center justify-center rounded-full text-2xl leading-none transition hover:bg-white/10"
                 aria-label="Close chat"
               >
                 ×
@@ -36,35 +60,67 @@ export function Whatsapp() {
             </div>
           </div>
 
+          {/* CHAT BODY */}
           <div className="bg-[#efeae2] p-4">
-            <div className="mb-4 w-fit max-w-[85%] rounded-xl bg-white px-4 py-3 text-sm text-gray-700 shadow-sm">
+            {/* MESSAGE */}
+            <div className="mb-4 w-fit max-w-[85%] rounded-[18px] rounded-tl-sm bg-white px-4 py-3 text-[15px] leading-6 text-gray-800 shadow-sm">
               Hi there 👋
               <br />
-              How can I help you?
+              How can I help you today?
+              <br />
+              Tell us what you’re looking for.
+              <div className="mt-1 text-right text-[10px] text-gray-400">
+                Now
+              </div>
             </div>
 
-            <textarea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Type your message..."
-              rows={2}
-              className="w-full resize-none rounded-xl border-0 bg-white p-3 text-sm outline-none"
-            />
+            {/* INPUT */}
+            <div className="relative">
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Type your message..."
+                rows={2}
+                className="w-full resize-none rounded-[18px] border border-gray-200 bg-white p-4 pr-14 text-[15px] text-black placeholder:text-gray-400 outline-none focus:border-[#25D366] focus:ring-1 focus:ring-[#25D366]"
+              />
 
+              {/* SEND BUTTON */}
+              <button
+                onClick={sendMessage}
+                aria-label="Send message"
+                className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366] text-white shadow-md transition hover:scale-105 hover:bg-[#20bd5a]"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5 fill-current"
+                  aria-hidden="true"
+                >
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+              </button>
+            </div>
+
+            {/* WHATSAPP BUTTON */}
             <button
               onClick={sendMessage}
-              className="mt-3 w-full rounded-full bg-[#25D366] px-4 py-3 font-semibold text-white"
+              className="mt-3 w-full rounded-full bg-[#25D366] px-4 py-3 text-[15px] font-semibold text-white shadow-sm transition hover:bg-[#20bd5a]"
             >
               Chat on WhatsApp
             </button>
+
+            <p className="mt-2 text-center text-[10px] text-gray-500">
+              We usually reply within a few minutes
+            </p>
           </div>
         </div>
       )}
 
+      {/* FLOATING WHATSAPP BUTTON */}
       <button
         onClick={() => setOpen(!open)}
         aria-label="Open WhatsApp chat"
-        className="flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition hover:scale-110"
+        className="flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition-all duration-200 hover:scale-110 hover:shadow-2xl"
       >
         <svg
           viewBox="0 0 24 24"

@@ -152,11 +152,13 @@ export const Route = createFileRoute("/")({
       {
         rel: "icon",
         type: "image/jpeg",
+        sizes: "512x512",
         href: "/favicon.jpg",
       },
 
       {
         rel: "apple-touch-icon",
+        sizes: "512x512",
         href: "/favicon.jpg",
       },
     ],

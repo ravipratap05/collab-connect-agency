@@ -285,7 +285,7 @@ export function Contact() {
                 className="glass-card hover:text-primary inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors"
               >
                 <Instagram size={16} />
-                @_collab.connect
+                _collab.connect
               </a>
 
               <a

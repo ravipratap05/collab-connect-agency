@@ -323,18 +323,18 @@ const pricingCategories: PricingCategory[] = [
 const addOns = [
   {
     title: "Meta Ads Management",
-    price: "₹1,499/month",
-    note: "Ad budget extra",
+    price: "₹2,499/month",
+    note: "Ad budget extra • Up to 4 ad creatives/month",
   },
   {
     title: "UGC Creator Outreach",
-    price: "Starting ₹1,999",
-    note: "Per campaign",
+    price: "Starting ₹3,999",
+    note: "Creator sourcing & outreach • Per campaign",
   },
   {
     title: "Campaign Management",
-    price: "Starting ₹2,999",
-    note: "Per campaign",
+    price: "Starting ₹4,999",
+    note: "Campaign planning & execution • Per campaign",
   },
 ];
 

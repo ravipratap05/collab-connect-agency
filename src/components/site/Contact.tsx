@@ -294,8 +294,8 @@ export function Contact() {
                     <Send size={16} />
 
                     {loading
-                      ? "Sending..."
-                      : "Get My Free Growth Plan"}
+                      ? "Submitting..."
+                      : "Get My Growth Plan"}
                   </button>
 
                 </form>

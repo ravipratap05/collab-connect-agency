@@ -69,71 +69,160 @@ const pricingCategories: PricingCategory[] = [
     icon: Users,
 
     plans: [
+  {
+    name: "Starter",
+    price: "₹4,999",
+    suffix: "/month",
+    blurb:
+      "For creators and businesses building a consistent social media presence.",
+
+    features: [
+      "12 Reels",
+      "4 Static / Carousel Posts",
+      "15 Stories",
+      "Content Planning",
+      "Content Strategy",
+      "Monthly Calendar",
+      "Captions + SEO Keywords",
+      "Profile Optimization",
+      "Posting & Basic Optimization",
+      "Basic Engagement Strategy",
+    ],
+  },
+
+  {
+    name: "Growth",
+    price: "₹7,999",
+    suffix: "/month",
+    blurb:
+      "For creators & businesses ready to grow organically and build a stronger presence.",
+
+    features: [
+      "16 Reels",
+      "6 Static / Carousel Posts",
+      "20 Stories",
+      "Complete Instagram Management",
+      "Monthly Content Calendar",
+      "Content Strategy",
+      "Reel Ideas + Hooks",
+      "Trend & Niche Research",
+      "Captions + SEO Keywords",
+      "Editing by Our Team",
+      "Posting & Optimization",
+      "Organic Growth Strategy",
+      "Community Engagement",
+      "Monthly Performance Insights",
+    ],
+
+    popular: true,
+  },
+
+  {
+    name: "Pro",
+    price: "₹11,999",
+    suffix: "/month",
+    blurb:
+      "For brands looking for a strategic, consistent and growth-focused Instagram presence.",
+
+    features: [
+      "20 Reels",
+      "8 Static / Carousel Posts",
+      "25 Stories",
+      "Complete Content & Growth Strategy",
+      "Trend-Based Content Planning",
+      "Seasonal Content Strategy",
+      "Hooks + Captions + SEO",
+      "Editing by Our Team",
+      "Organic Audience Growth Strategy",
+      "Community & Engagement Management",
+      "Profile Optimization",
+      "Website / Profile Traffic Strategy",
+      "Monthly Performance Report",
+      "Best-Performing Content Analysis",
+      "Next-Month Strategy",
+    ],
+  },
+
+  {
+    name: "Premium",
+    price: "₹15,999",
+    suffix: "/month",
+    blurb:
+      "Complete Instagram growth & management for brands ready to build a strong digital presence.",
+
+    features: [
+      "50+ Content Pieces / Month",
+      "12 Reels",
+      "8 Static / Carousel Posts",
+      "30–40 Stories",
+      "Complete Instagram Management",
+      "Advanced Content & Growth Strategy",
+      "Content Pillars + Reel Concepts",
+      "Hooks, Topics & Positioning",
+      "Beauty / Niche-Specific Trend Research",
+      "Seasonal & Off-Season Strategy",
+      "Editing by Our Team",
+      "Organic Audience Growth Strategy",
+      "Community & Engagement Management",
+      "Strategic CTAs for Enquiries & Conversions",
+      "Instagram → Website Traffic Strategy",
+      "Service & Booking-Focused Content",
+      "Monthly Analytics & Performance Report",
+      "Reach, Views, Engagement & Growth Tracking",
+      "Website Traffic & Profile Action Tracking",
+      "Best-Performing Content Analysis",
+      "Next-Month Growth Strategy",
+    ],
+  },
+],
+  },
+
+  /* =======================================================
+     PUBLIC FIGURE GROWTH
+  ======================================================= */
+  /* =======================================================
+     ELECTION CAMPAIGN
+  ======================================================= */
+
+  {
+    id: "election-campaign",
+    name: "Election Campaign",
+    description:
+      "End-to-end social media management for political and election campaigns.",
+    icon: TrendingUp,
+
+    plans: [
       {
-        name: "Starter",
-        price: "₹2,999",
-        suffix: "/month",
+        name: "Election Campaign",
+        price: "₹99,999",
+        suffix: "/election",
         blurb:
-          "For creators building their first serious presence.",
+          "Complete digital campaign management with on-ground photography and editing support.",
 
         features: [
-          "10–12 Reels",
-          "Profile Optimization",
-          "Content Strategy",
-          "Monthly Calendar",
-          "Captions",
-          "Analytics",
-          "Brand Outreach",
-        ],
-      },
-
-      {
-        name: "Growth",
-        price: "₹4,999",
-        suffix: "/month",
-        blurb:
-          "Our most chosen plan for creators & growing businesses.",
-
-        features: [
-          "18–20 Reels",
-          "Complete Instagram Management",
-          "Story Management",
-          "Lead Generation",
-          "Brand Outreach",
-          "Community Management",
-          "DM Management",
-          "Weekly Reports",
-          "Competitor Analysis",
-        ],
-
-        popular: true,
-      },
-
-      {
-        name: "Elite",
-        price: "₹7,999",
-        suffix: "/month",
-        blurb:
-          "Full-service partnership for brands scaling fast.",
-
-        features: [
-          "25–30 Reels",
-          "Complete Account Management",
-          "Daily Stories",
-          "Lead Generation",
-          "Influencer Outreach",
-          "Advanced Analytics",
-          "Growth Consultation",
-          "Priority Support",
+          "Complete Social Media Strategy & Campaign Planning",
+          "Instagram + Facebook Management",
+          "Daily Content Planning",
+          "Reels, Posts & Stories Strategy",
+          "Election Campaign Creatives & Messaging",
+          "Event & Rally Coverage Coordination",
+          "Candidate Branding & Positioning",
+          "Captions + Hooks + SEO Keywords",
+          "Content Editing & Optimization",
+          "Posting & Scheduling",
+          "Engagement & Community Management",
+          "Trend & Campaign-Based Content",
+          "Performance Tracking & Analytics",
+          "Regular Campaign Performance Updates",
+          "On-Ground Photography & Videography",
+          "Campaign Events, Rallies & Meetings Coverage",
+          "Public Appearance Coverage",
+          "Reels + Raw Footage Collection",
+          "Basic Content Editing & Delivery",
         ],
       },
     ],
   },
-
-  /* =======================================================
-     INSTAGRAM GROWTH
-  ======================================================= */
-
 
 
   /* =======================================================

@@ -51,253 +51,342 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden py-24 sm:py-32">
+    <section
+      id="contact"
+      className="relative overflow-hidden py-24 sm:py-32"
+    >
       <div className="grain-orb absolute -bottom-24 left-1/2 size-96 -translate-x-1/2 opacity-40" />
 
       <div className="relative mx-auto max-w-4xl px-5">
         <Reveal>
-          <div className="glass-panel rounded-[2.5rem] px-7 py-12 sm:px-14">
 
-            <div className="text-center">
-              <p className="eyebrow">Let’s Talk</p>
+          {/* CARD FLIP WRAPPER */}
+          <div className="relative [perspective:1200px]">
 
-              <h2 className="mt-5 text-4xl leading-[1.08] font-medium sm:text-6xl">
-                Let’s Grow Your{" "}
-                <span className="text-rose-gradient italic">Brand</span>{" "}
-                Together
-              </h2>
+            {/* FLIP CARD */}
+            <div
+              className={`relative transition-transform duration-700 ease-in-out [transform-style:preserve-3d] ${
+                success ? "[transform:rotateY(180deg)]" : ""
+              }`}
+            >
 
-              <p className="text-muted-foreground mx-auto mt-5 max-w-xl text-base leading-relaxed">
-                Tell us about your page or brand and we’ll get back to you
-                with the right growth strategy.
-              </p>
-            </div>
+              {/* ========================= */}
+              {/* FRONT — CONTACT FORM */}
+              {/* ========================= */}
 
-            <form onSubmit={handleSubmit} className="mt-10 space-y-5">
+              <div className="glass-panel relative rounded-[2.5rem] px-7 py-12 sm:px-14 [backface-visibility:hidden]">
 
-              {/* NAME + WHATSAPP */}
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div>
-                  <label className="mb-2 block text-sm font-medium">
-                    Name
-                  </label>
+                <div className="text-center">
+                  <p className="eyebrow">Let’s Talk</p>
 
-                  <input
-                    name="name"
-                    type="text"
-                    required
-                    placeholder="Your name"
-                    className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-medium">
-                    WhatsApp
-                  </label>
-
-                  <input
-                    name="whatsapp"
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
-                  />
-                </div>
-              </div>
-
-              {/* INSTAGRAM + TYPE */}
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div>
-                  <label className="mb-2 block text-sm font-medium">
-                    Instagram Profile Link
-                  </label>
-
-                  <input
-                    name="instagram"
-                    type="url"
-                    required
-                    placeholder="https://instagram.com/yourprofile"
-                    className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-medium">
-                    I am a
-                  </label>
-
-                  <select
-                    name="type"
-                    required
-                    value={type}
-                    onChange={(e) => setType(e.target.value)}
-                    className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
-                  >
-                    <option value="" disabled>
-                      Select type
-                    </option>
-
-                    <option value="Creator">
-                      Creator
-                    </option>
-
-                    <option value="Brand">
+                  <h2 className="mt-5 text-4xl leading-[1.08] font-medium sm:text-6xl">
+                    Let’s Grow Your{" "}
+                    <span className="text-rose-gradient italic">
                       Brand
-                    </option>
-                  </select>
+                    </span>{" "}
+                    Together
+                  </h2>
+
+                  <p className="text-muted-foreground mx-auto mt-5 max-w-xl text-base leading-relaxed">
+                    Tell us about your requirements and we’ll get back to you
+                    with the right growth strategy.
+                  </p>
                 </div>
-              </div>
 
-              {/* SERVICE + CONDITIONAL BUDGET */}
-              <div
-                className={`grid gap-5 ${
-                  type === "Brand" ? "sm:grid-cols-2" : "sm:grid-cols-1"
-                }`}
-              >
-                {/* SERVICE */}
-                <div>
-                  <label className="mb-2 block text-sm font-medium">
-                    Service you need
-                  </label>
+                <form
+                  onSubmit={handleSubmit}
+                  className="mt-10 space-y-5"
+                >
 
-                  <select
-                    name="service"
-                    required
-                    defaultValue=""
-                    className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
+                  {/* NAME + WHATSAPP */}
+                  <div className="grid gap-5 sm:grid-cols-2">
+
+                    <div>
+                      <label className="mb-2 block text-sm font-medium">
+                        Name
+                      </label>
+
+                      <input
+                        name="name"
+                        type="text"
+                        required
+                        placeholder="Your name"
+                        className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block text-sm font-medium">
+                        WhatsApp
+                      </label>
+
+                      <input
+                        name="whatsapp"
+                        type="tel"
+                        required
+                        placeholder="+91 98765 43210"
+                        className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
+                      />
+                    </div>
+
+                  </div>
+
+                  {/* INSTAGRAM + TYPE */}
+                  <div className="grid gap-5 sm:grid-cols-2">
+
+                    <div>
+                      <label className="mb-2 block text-sm font-medium">
+                        Instagram Profile Link
+                      </label>
+
+                      <input
+                        name="instagram"
+                        type="url"
+                        required
+                        placeholder="https://instagram.com/yourprofile"
+                        className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block text-sm font-medium">
+                        I am a
+                      </label>
+
+                      <select
+                        name="type"
+                        required
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
+                        className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
+                      >
+                        <option value="" disabled>
+                          Select type
+                        </option>
+
+                        <option value="Creator">
+                          Creator
+                        </option>
+
+                        <option value="Brand">
+                          Brand
+                        </option>
+                      </select>
+                    </div>
+
+                  </div>
+
+                  {/* SERVICE + CONDITIONAL BUDGET */}
+                  <div
+                    className={`grid gap-5 ${
+                      type === "Brand"
+                        ? "sm:grid-cols-2"
+                        : "sm:grid-cols-1"
+                    }`}
                   >
-                    <option value="" disabled>
-                      Choose a service
-                    </option>
 
-                    <option value="Instagram Management">
-                      Instagram Management
-                    </option>
+                    {/* SERVICE */}
+                    <div>
+                      <label className="mb-2 block text-sm font-medium">
+                        Service you need
+                      </label>
 
-                    <option value="Creator Growth">
-                      Creator Growth
-                    </option>
+                      <select
+                        name="service"
+                        required
+                        defaultValue=""
+                        className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
+                      >
+                        <option value="" disabled>
+                          Choose a service
+                        </option>
 
-                    <option value="Influencer Marketing">
-                      Influencer Marketing
-                    </option>
+                        <option value="Instagram Management">
+                          Instagram Management
+                        </option>
 
-                    <option value="UGC Campaigns">
-                      UGC Campaigns
-                    </option>
+                        <option value="Creator Growth">
+                          Creator Growth
+                        </option>
 
-                    <option value="Brand Campaigns">
-                      Brand Campaigns
-                    </option>
+                        <option value="Influencer Marketing">
+                          Influencer Marketing
+                        </option>
 
-                    <option value="Meta Ads">
-                      Meta Ads
-                    </option>
+                        <option value="UGC Campaigns">
+                          UGC Campaigns
+                        </option>
 
-                    <option value="Other">
-                      Other
-                    </option>
-                  </select>
-                </div>
+                        <option value="Brand Campaigns">
+                          Brand Campaigns
+                        </option>
 
-                {/* BUDGET — ONLY FOR BRAND */}
-                {type === "Brand" && (
+                        <option value="Meta Ads">
+                          Meta Ads
+                        </option>
+
+                        <option value="Other">
+                          Other
+                        </option>
+                      </select>
+                    </div>
+
+                    {/* BUDGET — ONLY FOR BRAND */}
+                    {type === "Brand" && (
+                      <div>
+                        <label className="mb-2 block text-sm font-medium">
+                          Budget
+                        </label>
+
+                        <select
+                          name="budget"
+                          required
+                          defaultValue=""
+                          className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
+                        >
+                          <option value="" disabled>
+                            Select budget
+                          </option>
+
+                          <option value="₹5,000 – ₹10,000">
+                            ₹5,000 – ₹10,000
+                          </option>
+
+                          <option value="₹10,000 – ₹20,000">
+                            ₹10,000 – ₹20,000
+                          </option>
+
+                          <option value="₹20,000 – ₹30,000">
+                            ₹20,000 – ₹30,000
+                          </option>
+
+                          <option value="₹30,000+">
+                            ₹30,000+
+                          </option>
+                        </select>
+                      </div>
+                    )}
+
+                  </div>
+
+                  {/* GOAL */}
                   <div>
                     <label className="mb-2 block text-sm font-medium">
-                      Budget
+                      What’s your goal?
                     </label>
 
-                    <select
-                      name="budget"
+                    <textarea
+                      name="goal"
                       required
-                      defaultValue=""
-                      className="w-full rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
-                    >
-                      <option value="" disabled>
-                        Select budget
-                      </option>
-
-                      <option value="₹3,000 – ₹5,000">
-                        ₹3,000 – ₹5,000
-                      </option>
-
-                      <option value="₹5,000 – ₹10,000">
-                        ₹5,000 – ₹10,000
-                      </option>
-
-                      <option value="₹10,000 – ₹25,000">
-                        ₹10,000 – ₹25,000
-                      </option>
-
-                      <option value="₹25,000+">
-                        ₹25,000+
-                      </option>
-                    </select>
+                      rows={4}
+                      placeholder="Tell us what you want to achieve..."
+                      className="w-full resize-none rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
+                    />
                   </div>
-                )}
-              </div>
 
-              {/* GOAL */}
-              <div>
-                <label className="mb-2 block text-sm font-medium">
-                  What’s your goal?
-                </label>
+                  {/* SUBMIT */}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="shadow-luxe inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
+                    style={{ background: "var(--gradient-rose)" }}
+                  >
+                    <Send size={16} />
 
-                <textarea
-                  name="goal"
-                  required
-                  rows={4}
-                  placeholder="Tell us what you want to achieve..."
-                  className="w-full resize-none rounded-2xl border border-border bg-background/60 px-4 py-3.5 outline-none transition focus:border-primary"
-                />
-              </div>
+                    {loading
+                      ? "Sending..."
+                      : "Get My Free Growth Plan"}
+                  </button>
 
-              {/* SUBMIT */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="shadow-luxe inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
-                style={{ background: "var(--gradient-rose)" }}
-              >
-                <Send size={16} />
+                </form>
 
-                {loading
-                  ? "Sending..."
-                  : "Get My Free Growth Plan"}
-              </button>
+                {/* DIRECT CONTACT */}
+                <div className="mt-8 flex flex-wrap justify-center gap-3">
 
-              {/* SUCCESS */}
-              {success && (
-                <div className="rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-center text-sm">
-                  🎉 Thanks! Your details have been received. We’ll get
-                  back to you shortly.
+                  <a
+                    href={INSTAGRAM}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="glass-card hover:text-primary inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors"
+                  >
+                    <Instagram size={16} />
+                    _collab.connect
+                  </a>
+
+                  <a
+                    href={EMAIL}
+                    className="glass-card hover:text-primary inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors"
+                  >
+                    <Mail size={16} />
+                    work.collabconnect@gmail.com
+                  </a>
+
                 </div>
-              )}
-            </form>
 
-            {/* DIRECT CONTACT */}
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a
-                href={INSTAGRAM}
-                target="_blank"
-                rel="noreferrer"
-                className="glass-card hover:text-primary inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors"
-              >
-                <Instagram size={16} />
-                _collab.connect
-              </a>
+              </div>
 
-              <a
-                href={EMAIL}
-                className="glass-card hover:text-primary inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors"
+
+              {/* ========================= */}
+              {/* BACK — THANK YOU */}
+              {/* ========================= */}
+
+              <div
+                className="glass-panel absolute inset-0 flex min-h-full items-center justify-center rounded-[2.5rem] px-7 py-12 text-center sm:px-14 [transform:rotateY(180deg)] [backface-visibility:hidden]"
               >
-                <Mail size={16} />
-                work.collabconnect@gmail.com
-              </a>
+
+                <div className="max-w-md">
+
+                  {/* SUCCESS ICON */}
+                  <div
+                    className="mx-auto mb-7 flex size-20 items-center justify-center rounded-full text-4xl"
+                    style={{
+                      background: "var(--gradient-rose)",
+                    }}
+                  >
+                    🎉
+                  </div>
+
+                  <p className="eyebrow">
+                    Thank You
+                  </p>
+
+                  <h3 className="mt-4 text-4xl font-medium sm:text-5xl">
+                    We’ve Got It!
+                  </h3>
+
+                  <p className="text-muted-foreground mx-auto mt-5 max-w-sm text-base leading-relaxed">
+                    Thanks for reaching out to CollabConnect.
+                    <br />
+                    Your details have been received.
+                    <br />
+                    We’ll get back to you shortly.
+                  </p>
+
+                  <div
+                    className="rose-rule mx-auto mt-8 max-w-xs"
+                  />
+
+                  <p className="text-muted-foreground mt-6 text-sm">
+                    Meanwhile, you can connect with us on Instagram.
+                  </p>
+
+                  <a
+                    href={INSTAGRAM}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="glass-card hover:text-primary mt-5 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors"
+                  >
+                    <Instagram size={16} />
+                    _collab.connect
+                  </a>
+
+                </div>
+
+              </div>
+
             </div>
-
           </div>
+
         </Reveal>
       </div>
     </section>

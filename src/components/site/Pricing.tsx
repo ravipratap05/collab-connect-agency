@@ -1146,7 +1146,7 @@ export function Pricing() {
 
                                     <p className="mt-6 flex flex-wrap items-baseline gap-2">
 
-                                      <span className="font-serif text-3xl font-medium sm:text-4xl">
+                                      <span className="font-serif text-3xl font-medium tracking-[0.02em] sm:text-4xl">
                                         {
                                           plan.price
                                         }

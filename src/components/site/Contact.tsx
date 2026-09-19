@@ -201,8 +201,8 @@ export function Contact() {
                           Choose a service
                         </option>
 
-                        <option value="Instagram Management">
-                          Instagram Management
+                        <option value="Social Media Management">
+                          Social Media Management
                         </option>
 
                         <option value="Creator Growth">
@@ -217,8 +217,8 @@ export function Contact() {
                           UGC Campaigns
                         </option>
 
-                        <option value="Brand Campaigns">
-                          Brand Campaigns
+                        <option value="Brand Collaborations">
+                          Brand Collaborations
                         </option>
 
                         <option value="Meta Ads">

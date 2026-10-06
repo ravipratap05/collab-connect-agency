@@ -10,7 +10,7 @@ export function Whatsapp() {
       "Hi CollabConnect, I would like to know more about your services.";
 
     window.open(
-      `https://wa.me/919568942885?text=${encodeURIComponent(text)}`,
+      `https://wa.me/917505314726?text=${encodeURIComponent(text)}`,
       "_blank"
     );
   };

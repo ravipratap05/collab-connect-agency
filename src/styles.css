@@ -6,10 +6,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * COLLABCONNECT — WINE & CHAMPAGNE
- * Light: Soft blush grey + Wine burgundy
- * Dark: Espresso + Deep wine
- * Hero component styling intentionally preserved.
+ * COLLABCONNECT — OPTION 1
+ * CLASSIC WINE & CHAMPAGNE
+ * Light + Dark Mode
+ * High contrast typography
  */
 
 @theme inline {
@@ -60,6 +60,7 @@
   color-scheme: light;
   --radius: 0.9rem;
 
+  /* Core */
   --background: #F3EFF0;
   --foreground: #321923;
 
@@ -69,14 +70,16 @@
   --popover: #F3EFF0;
   --popover-foreground: #321923;
 
-  --primary: #963E50;
+  /* Buttons */
+  --primary: #552632;
   --primary-foreground: #FFFFFF;
 
   --secondary: #E8DFE1;
   --secondary-foreground: #552632;
 
-  --muted: #EDE5E7;
-  --muted-foreground: #716166;
+  /* Text */
+  --muted: #E8DFE1;
+  --muted-foreground: #59464D;
 
   --accent: #F0E1E3;
   --accent-foreground: #702F40;
@@ -90,7 +93,7 @@
   --ring: #963E50;
   --glass-border: rgba(85, 38, 50, 0.16);
 
-  /* Palette */
+  /* Brand palette */
   --cream: #F3EFF0;
   --sand: #E8DFE1;
   --nude: #D9C9B9;
@@ -104,12 +107,12 @@
   --surface-card: #E8DFE1;
   --surface-strong: #DCCDD1;
 
-  /* Text */
+  /* Readable typography */
   --text-main: #321923;
-  --text-secondary: #716166;
-  --text-tertiary: #88777D;
+  --text-secondary: #59464D;
+  --text-tertiary: #716166;
 
-  /* Gradients */
+  /* Hero */
   --gradient-hero:
     radial-gradient(
       ellipse at 85% 10%,
@@ -123,6 +126,7 @@
       #E8D5D9
     );
 
+  /* Brand gradients */
   --gradient-rose: linear-gradient(
     135deg,
     #C78F91,
@@ -168,26 +172,29 @@
 .dark {
   color-scheme: dark;
 
+  /* Core */
   --background: #1D1418;
-  --foreground: #F2E8E9;
+  --foreground: #F7F0F1;
 
-  --card: #321923;
-  --card-foreground: #F2E8E9;
+  --card: #43232D;
+  --card-foreground: #F7F0F1;
 
   --popover: #321923;
-  --popover-foreground: #F2E8E9;
+  --popover-foreground: #F7F0F1;
 
-  --primary: #C46D7C;
+  /* Buttons */
+  --primary: #963E50;
   --primary-foreground: #FFFFFF;
 
   --secondary: #43232D;
-  --secondary-foreground: #F2E8E9;
+  --secondary-foreground: #F7F0F1;
 
+  /* Text */
   --muted: #38232B;
-  --muted-foreground: #C2AEB3;
+  --muted-foreground: #E8DADD;
 
   --accent: #542B37;
-  --accent-foreground: #E8B5BD;
+  --accent-foreground: #F0C7CE;
 
   --destructive: #E45D69;
   --destructive-foreground: #FFFFFF;
@@ -195,14 +202,14 @@
   /* Borders */
   --border: #65434D;
   --input: #73505B;
-  --ring: #C46D7C;
+  --ring: #D99AAE;
   --glass-border: rgba(226, 190, 198, 0.16);
 
-  /* Palette */
+  /* Brand palette */
   --cream: #1D1418;
   --sand: #321923;
   --nude: #43232D;
-  --rose: #C46D7C;
+  --rose: #D99AAE;
   --rose-deep: #963E50;
   --gold: #B98C91;
 
@@ -212,12 +219,12 @@
   --surface-card: #43232D;
   --surface-strong: #542B37;
 
-  /* Text */
-  --text-main: #F2E8E9;
-  --text-secondary: #C2AEB3;
-  --text-tertiary: #A99098;
+  /* Readable typography */
+  --text-main: #F7F0F1;
+  --text-secondary: #E8DADD;
+  --text-tertiary: #C2AEB3;
 
-  /* Gradients */
+  /* Hero */
   --gradient-hero:
     radial-gradient(
       ellipse at 85% 10%,
@@ -231,15 +238,16 @@
       #542B37
     );
 
+  /* Brand gradients */
   --gradient-rose: linear-gradient(
     135deg,
-    #C46D7C,
+    #D99AAE,
     #963E50
   );
 
   --gradient-sheen: linear-gradient(
     120deg,
-    rgba(196, 109, 124, 0.16),
+    rgba(217, 154, 174, 0.16),
     transparent 65%
   );
 
@@ -290,6 +298,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+
     transition:
       background-color 0.25s ease,
       color 0.25s ease;
@@ -460,14 +469,11 @@
 }
 
 /* =========================================
-   THEME-AWARE COMMON UTILITIES
-   Avoid broad heading, button and shadow overrides.
+   SEMANTIC THEME UTILITIES
+   Prefer these classes in components.
 ========================================= */
 
 @layer utilities {
-
-  /* Common background classes */
-
   .bg-background {
     background-color: var(--surface-page);
   }
@@ -484,59 +490,31 @@
     background-color: var(--muted);
   }
 
-  .bg-white,
-  .bg-gray-50,
-  .bg-gray-100 {
-    background-color: var(--surface-card);
-  }
-
-  .bg-gray-200,
-  .bg-gray-300 {
-    background-color: var(--surface-alt);
-  }
-
-  /* Common text classes */
-
-  .text-foreground,
-  .text-black,
-  .text-gray-900,
-  .text-gray-800 {
+  .text-foreground {
     color: var(--text-main);
   }
 
-  .text-muted-foreground,
-  .text-gray-700,
-  .text-gray-600,
-  .text-gray-500 {
+  .text-muted-foreground {
     color: var(--text-secondary);
   }
 
-  /* Borders: preserve existing widths and styles */
-
-  .border-white,
-  .border-gray-100,
-  .border-gray-200,
-  .border-gray-300,
   .border-border {
     border-color: var(--border);
   }
 
-  /* Theme-aware form borders */
-
-  input,
-  textarea,
-  select {
-    border-color: var(--input);
+  .placeholder-theme::placeholder {
+    color: var(--text-tertiary);
   }
 
-  input::placeholder,
-  textarea::placeholder {
-    color: var(--text-tertiary);
+  .theme-input {
+    color: var(--text-main);
+    background-color: var(--surface-card);
+    border-color: var(--input);
   }
 }
 
 /* =========================================
-   TARGETED TRANSPARENT SURFACES
+   TRANSPARENT SURFACES
 ========================================= */
 
 .bg-white\/5,
@@ -554,7 +532,7 @@
 .dark .bg-white\/10,
 .dark .bg-white\/\[0\.06\],
 .dark .bg-white\/\[0\.08\] {
-  background-color: rgba(242, 232, 233, 0.05);
+  background-color: rgba(247, 240, 241, 0.05);
 }
 
 /* =========================================

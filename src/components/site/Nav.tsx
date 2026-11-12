@@ -43,30 +43,38 @@ export function Nav() {
     <header className="fixed inset-x-0 top-0 z-50">
       <nav
         className={`border-b border-[#171717]/[0.07] bg-white/95 backdrop-blur-xl transition-all duration-300 ${
-          scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.045)]" : ""
+          scrolled
+            ? "shadow-[0_4px_24px_rgba(0,0,0,0.045)]"
+            : ""
         }`}
       >
-        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-4 px-5 lg:px-8">
+        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-5 lg:px-8">
 
           {/* BRAND */}
           <a
             href="#top"
             onClick={() => setOpen(false)}
-            className="group flex shrink-0 items-center gap-3"
+            className="group flex min-w-0 shrink-0 items-center gap-2.5 sm:gap-3"
             aria-label="CollabConnect home"
           >
-            {/* Replace this CC monogram with the official logo asset */}
-            <span className="grid size-10 place-items-center rounded-sm bg-[#171717] text-sm font-bold tracking-tight text-white transition-colors group-hover:bg-[#D52B32]">
-              CC<span className="text-[#F05A60]">.</span>
-            </span>
+            {/* OFFICIAL COLLABCONNECT LOGO */}
+            <img
+              src="/collabconnect-navbar-icon.png"
+              alt="CollabConnect logo"
+              className="size-10 shrink-0 object-contain transition-transform duration-300 group-hover:scale-105 sm:size-11"
+              width={44}
+              height={44}
+              fetchPriority="high"
+            />
 
-            <span className="flex flex-col">
-              <span className="text-[17px] font-bold leading-none tracking-[-0.04em] text-[#171717]">
+            {/* WORDMARK */}
+            <span className="flex min-w-0 flex-col">
+              <span className="whitespace-nowrap text-[15px] font-bold leading-none tracking-[-0.045em] text-[#171717] sm:text-[17px]">
                 COLLABCONNECT
                 <span className="text-[#D52B32]">.</span>
               </span>
 
-              <span className="mt-1.5 text-[9px] font-medium tracking-[0.2em] text-[#777777]">
+              <span className="mt-1.5 whitespace-nowrap text-[8px] font-medium tracking-[0.17em] text-[#777777] sm:text-[9px] sm:tracking-[0.2em]">
                 DIGITAL GROWTH AGENCY
               </span>
             </span>
@@ -104,7 +112,7 @@ export function Nav() {
           </div>
 
           {/* MOBILE CONTROLS */}
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex shrink-0 items-center gap-2 lg:hidden">
             <ThemeToggle />
 
             <button
@@ -112,6 +120,7 @@ export function Nav() {
               onClick={() => setOpen((value) => !value)}
               aria-label={open ? "Close navigation" : "Open navigation"}
               aria-expanded={open}
+              aria-controls="mobile-navigation"
               className="grid size-10 place-items-center border border-[#E8E8E8] text-[#171717] transition-colors hover:border-[#D52B32] hover:text-[#D52B32]"
             >
               {open ? <X size={19} /> : <Menu size={19} />}
@@ -121,7 +130,10 @@ export function Nav() {
 
         {/* MOBILE MENU */}
         {open && (
-          <div className="border-t border-[#EEEEEE] bg-white px-5 pb-6 pt-4 shadow-xl lg:hidden">
+          <div
+            id="mobile-navigation"
+            className="border-t border-[#EEEEEE] bg-white px-5 pb-6 pt-4 shadow-xl lg:hidden"
+          >
             <div className="mx-auto max-w-7xl">
               <div className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#999999]">
                 Navigation

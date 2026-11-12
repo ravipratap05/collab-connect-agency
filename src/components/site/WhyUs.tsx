@@ -57,7 +57,13 @@ const reasons = [
 
 export function WhyUs() {
   return (
-    <section className="bg-white py-20 text-[#171717] sm:py-28">
+    <section
+      className="py-20 sm:py-28"
+      style={{
+        background: "var(--surface-page)",
+        color: "var(--text-main)",
+      }}
+    >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
 
         {/* SECTION HEADING */}
@@ -66,7 +72,10 @@ export function WhyUs() {
           title={
             <>
               Not just another agency.
-              <span className="block italic text-[#D52B32]">
+              <span
+                className="block italic"
+                style={{ color: "var(--primary)" }}
+              >
                 A partner in your growth.
               </span>
             </>
@@ -78,36 +87,58 @@ export function WhyUs() {
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((reason, index) => (
             <Reveal key={reason.title} delay={index * 0.05}>
-              <article className="group flex h-full flex-col border border-[#E9E9E9] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#D52B32]/40 hover:shadow-[0_14px_36px_rgba(23,23,23,0.055)] sm:p-7">
-
+              <article
+                className="group flex h-full flex-col rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 sm:p-7"
+                style={{
+                  background: "var(--surface-card)",
+                  borderColor: "var(--border)",
+                }}
+              >
                 {/* ICON */}
                 <div className="flex items-center justify-between">
-                  <span className="grid size-10 place-items-center border border-[#EEEEEE] bg-white transition-colors duration-300 group-hover:border-[#D52B32] group-hover:bg-[#D52B32]">
+                  <span
+                    className="grid size-10 place-items-center rounded-xl border transition-all duration-300 group-hover:border-[var(--primary)] group-hover:bg-[var(--primary)]"
+                    style={{
+                      background: "var(--surface-page)",
+                      borderColor: "var(--border)",
+                    }}
+                  >
                     <reason.icon
                       size={18}
                       strokeWidth={1.7}
-                      className="text-[#D52B32] transition-colors duration-300 group-hover:text-white"
+                      className="transition-colors duration-300 group-hover:text-white"
+                      style={{ color: "var(--primary)" }}
                     />
                   </span>
 
                   <ArrowUpRight
                     size={15}
-                    className="text-[#CCCCCC] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#D52B32]"
+                    className="transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    style={{ color: "var(--text-secondary)" }}
                   />
                 </div>
 
                 {/* CONTENT */}
-                <h3 className="mt-6 font-display text-[21px] font-semibold leading-snug tracking-[-0.02em] text-[#171717]">
+                <h3
+                  className="mt-6 font-display text-[21px] font-semibold leading-snug tracking-[-0.02em]"
+                  style={{ color: "var(--text-main)" }}
+                >
                   {reason.title}
                 </h3>
 
-                <p className="mt-3 text-[13px] leading-[1.85] text-[#777777]">
+                <p
+                  className="mt-3 text-[13px] leading-[1.85]"
+                  style={{ color: "var(--text-secondary)" }}
+                >
                   {reason.copy}
                 </p>
 
                 {/* BOTTOM ACCENT */}
                 <div className="mt-auto pt-7">
-                  <div className="h-px w-9 bg-[#D52B32] transition-all duration-300 group-hover:w-full" />
+                  <div
+                    className="h-px w-9 transition-all duration-300 group-hover:w-full"
+                    style={{ background: "var(--primary)" }}
+                  />
                 </div>
               </article>
             </Reveal>
@@ -116,22 +147,35 @@ export function WhyUs() {
 
         {/* CLOSING STATEMENT */}
         <Reveal delay={0.2}>
-          <div className="mt-14 flex flex-col justify-between gap-5 border-t border-[#E8E8E8] pt-8 sm:flex-row sm:items-center">
-            <p className="max-w-2xl font-display text-2xl leading-snug text-[#333333] sm:text-3xl">
+          <div
+            className="mt-14 flex flex-col justify-between gap-5 border-t pt-8 sm:flex-row sm:items-center"
+            style={{ borderColor: "var(--border)" }}
+          >
+            <p
+              className="max-w-2xl font-display text-2xl leading-snug sm:text-3xl"
+              style={{ color: "var(--text-main)" }}
+            >
               Your vision leads.
-              <span className="italic text-[#D52B32]">
+              <span
+                className="italic"
+                style={{ color: "var(--primary)" }}
+              >
                 {" "}We bring the strategy and execution.
               </span>
             </p>
 
             <a
               href="#contact"
-              className="group inline-flex shrink-0 items-center gap-2 text-[13px] font-semibold text-[#171717] transition-colors hover:text-[#D52B32]"
+              className="group inline-flex shrink-0 items-center gap-2 rounded-full px-5 py-3 text-[13px] font-semibold transition-all duration-300 hover:opacity-90"
+              style={{
+                background: "var(--primary)",
+                color: "#FFFFFF",
+              }}
             >
               Let's work together
               <ArrowUpRight
                 size={16}
-                className="text-[#D52B32] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
               />
             </a>
           </div>

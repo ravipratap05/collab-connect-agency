@@ -6,10 +6,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * COLLABCONNECT — WINE & CHAMPAGNE DESIGN SYSTEM
+ * COLLABCONNECT — WINE & CHAMPAGNE
  * Light: Soft blush grey + Wine burgundy
- * Dark: Espresso + Deep wine only
- * Typography: Cormorant Garamond + Jost
+ * Dark: Espresso + Deep wine
+ * Hero component styling intentionally preserved.
  */
 
 @theme inline {
@@ -53,7 +53,7 @@
 }
 
 /* =========================================
-   LIGHT MODE — WINE & CHAMPAGNE
+   LIGHT MODE
 ========================================= */
 
 :root {
@@ -84,11 +84,13 @@
   --destructive: #B42332;
   --destructive-foreground: #FFFFFF;
 
-  /* Muted grey-wine borders */
+  /* Borders */
   --border: #C9BEC3;
   --input: #C9BEC3;
   --ring: #963E50;
+  --glass-border: rgba(85, 38, 50, 0.16);
 
+  /* Palette */
   --cream: #F3EFF0;
   --sand: #E8DFE1;
   --nude: #D9C9B9;
@@ -96,14 +98,18 @@
   --rose-deep: #963E50;
   --gold: #B69A87;
 
+  /* Surfaces */
   --surface-page: #F3EFF0;
   --surface-alt: #E8DFE1;
   --surface-card: #E8DFE1;
   --surface-strong: #DCCDD1;
 
+  /* Text */
   --text-main: #321923;
   --text-secondary: #716166;
+  --text-tertiary: #88777D;
 
+  /* Gradients */
   --gradient-hero:
     radial-gradient(
       ellipse at 85% 10%,
@@ -112,9 +118,9 @@
     ),
     linear-gradient(
       135deg,
-      #F3EFF0 0%,
+      #F3EFF0,
       #F0E5E7 55%,
-      #E8D5D9 100%
+      #E8D5D9
     );
 
   --gradient-rose: linear-gradient(
@@ -144,6 +150,7 @@
     #963E50
   );
 
+  /* Shadows */
   --shadow-luxe:
     0 24px 60px -32px rgba(50, 25, 35, 0.22);
 
@@ -152,12 +159,10 @@
 
   --shadow-red:
     0 12px 35px -15px rgba(150, 62, 80, 0.28);
-
-  --glass-border: rgba(85, 38, 50, 0.16);
 }
 
 /* =========================================
-   DARK MODE — ESPRESSO & DEEP WINE
+   DARK MODE
 ========================================= */
 
 .dark {
@@ -187,10 +192,13 @@
   --destructive: #E45D69;
   --destructive-foreground: #FFFFFF;
 
-  --border: rgba(226, 190, 198, 0.14);
-  --input: rgba(226, 190, 198, 0.20);
+  /* Borders */
+  --border: #65434D;
+  --input: #73505B;
   --ring: #C46D7C;
+  --glass-border: rgba(226, 190, 198, 0.16);
 
+  /* Palette */
   --cream: #1D1418;
   --sand: #321923;
   --nude: #43232D;
@@ -198,14 +206,18 @@
   --rose-deep: #963E50;
   --gold: #B98C91;
 
+  /* Surfaces */
   --surface-page: #1D1418;
   --surface-alt: #321923;
   --surface-card: #43232D;
   --surface-strong: #542B37;
 
+  /* Text */
   --text-main: #F2E8E9;
   --text-secondary: #C2AEB3;
+  --text-tertiary: #A99098;
 
+  /* Gradients */
   --gradient-hero:
     radial-gradient(
       ellipse at 85% 10%,
@@ -245,6 +257,7 @@
     #652F40
   );
 
+  /* Shadows */
   --shadow-luxe:
     0 24px 60px -30px rgba(0, 0, 0, 0.60);
 
@@ -253,8 +266,6 @@
 
   --shadow-red:
     0 12px 35px -15px rgba(150, 62, 80, 0.30);
-
-  --glass-border: rgba(226, 190, 198, 0.12);
 }
 
 /* =========================================
@@ -273,7 +284,7 @@
 
   body {
     min-height: 100vh;
-    background: var(--surface-page);
+    background-color: var(--surface-page);
     color: var(--text-main);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -282,16 +293,6 @@
     transition:
       background-color 0.25s ease,
       color 0.25s ease;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    color: var(--text-main);
-    font-family: var(--font-display);
-    letter-spacing: -0.025em;
-    font-weight: 600;
   }
 
   button,
@@ -313,7 +314,8 @@
 
   input::placeholder,
   textarea::placeholder {
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
+    opacity: 1;
   }
 
   ::selection {
@@ -343,7 +345,7 @@
 }
 
 /* =========================================
-   GLOBAL SURFACE UTILITIES
+   SURFACE UTILITIES
 ========================================= */
 
 @utility surface-hero {
@@ -445,11 +447,7 @@
   &:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-luxe);
-    border-color: color-mix(
-      in srgb,
-      var(--primary) 30%,
-      var(--border)
-    );
+    border-color: var(--primary);
   }
 }
 
@@ -462,22 +460,13 @@
 }
 
 /* =========================================
-   THEME-AWARE TAILWIND OVERRIDES
+   THEME-AWARE COMMON UTILITIES
+   Avoid broad heading, button and shadow overrides.
 ========================================= */
 
 @layer utilities {
 
-  /* Backgrounds */
-
-  .bg-white,
-  .bg-gray-50,
-  .bg-gray-100 {
-    background-color: var(--surface-card);
-  }
-
-  .bg-black {
-    background-color: var(--surface-alt);
-  }
+  /* Common background classes */
 
   .bg-background {
     background-color: var(--surface-page);
@@ -495,59 +484,44 @@
     background-color: var(--muted);
   }
 
+  .bg-white,
+  .bg-gray-50,
+  .bg-gray-100 {
+    background-color: var(--surface-card);
+  }
+
   .bg-gray-200,
   .bg-gray-300 {
     background-color: var(--surface-alt);
   }
 
-  /* Text */
+  /* Common text classes */
 
+  .text-foreground,
   .text-black,
   .text-gray-900,
   .text-gray-800 {
     color: var(--text-main);
   }
 
+  .text-muted-foreground,
   .text-gray-700,
   .text-gray-600,
-  .text-gray-500,
-  .text-gray-400 {
+  .text-gray-500 {
     color: var(--text-secondary);
   }
 
-  .text-foreground {
-    color: var(--text-main);
-  }
-
-  .text-muted-foreground {
-    color: var(--text-secondary);
-  }
-
-  .text-white {
-    color: #FFFFFF;
-  }
-
-  /* Borders — theme-aware grey-wine */
+  /* Borders: preserve existing widths and styles */
 
   .border-white,
   .border-gray-100,
   .border-gray-200,
   .border-gray-300,
-  .border-border,
-  [class*="border-white/"] {
-    border-color: var(--border) !important;
+  .border-border {
+    border-color: var(--border);
   }
 
-  /* Shadows */
-
-  .shadow-sm,
-  .shadow-md,
-  .shadow-lg,
-  .shadow-xl {
-    box-shadow: var(--shadow-soft);
-  }
-
-  /* Form elements */
+  /* Theme-aware form borders */
 
   input,
   textarea,
@@ -557,27 +531,12 @@
 
   input::placeholder,
   textarea::placeholder {
-    color: var(--text-secondary);
-    opacity: 0.8;
-  }
-
-  /* Rounded buttons */
-
-  button:not([data-no-pill]),
-  a[role="button"],
-  button[role="button"] {
-    border-radius: 9999px;
-  }
-
-  /* Selection */
-
-  .selection-brand::selection {
-    background: rgba(150, 62, 80, 0.25);
+    color: var(--text-tertiary);
   }
 }
 
 /* =========================================
-   TRANSPARENT SURFACES
+   TARGETED TRANSPARENT SURFACES
 ========================================= */
 
 .bg-white\/5,

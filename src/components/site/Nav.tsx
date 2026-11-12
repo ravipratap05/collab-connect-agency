@@ -7,7 +7,7 @@ import {
   Mail,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
@@ -24,6 +24,9 @@ export const EMAIL = "mailto:work.collabconnect@gmail.com";
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -46,6 +49,21 @@ export function Nav() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [open]);
 
+  const handleBrandClick = (
+    event: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    setOpen(false);
+
+    if (isHomePage) {
+      event.preventDefault();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <nav
@@ -59,10 +77,10 @@ export function Nav() {
       >
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-5 lg:px-8">
 
-          {/* BRAND - CLICK TO GO TO HOMEPAGE */}
+          {/* BRAND - HOME / SCROLL TO TOP */}
           <Link
             to="/"
-            onClick={() => setOpen(false)}
+            onClick={handleBrandClick}
             className="group flex min-w-0 shrink-0 items-center gap-2.5 sm:gap-3"
             aria-label="CollabConnect home"
           >

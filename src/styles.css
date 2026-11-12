@@ -6,10 +6,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * COLLABCONNECT — MASTER DESIGN SYSTEM
- * Light: Burgundy / Cool Grey / Dusty Rose Grey
- * Dark: Burgundy / Charcoal only
- * Centralized theme styling.
+ * COLLABCONNECT — WINE & CHAMPAGNE DESIGN SYSTEM
+ * Light: Soft blush grey + Wine burgundy
+ * Dark: Espresso + Deep wine only
+ * Typography: Cormorant Garamond + Jost
  */
 
 @theme inline {
@@ -53,205 +53,207 @@
 }
 
 /* =========================================
-   LIGHT MODE
+   LIGHT MODE — WINE & CHAMPAGNE
 ========================================= */
 
 :root {
   color-scheme: light;
   --radius: 0.9rem;
 
-  --background: #f0eff1;
-  --foreground: #21191b;
+  --background: #F3EFF0;
+  --foreground: #321923;
 
-  --card: #eae6e8;
-  --card-foreground: #21191b;
+  --card: #E8DFE1;
+  --card-foreground: #321923;
 
-  --popover: #eae6e8;
-  --popover-foreground: #21191b;
+  --popover: #F3EFF0;
+  --popover-foreground: #321923;
 
-  --primary: #d52b32;
-  --primary-foreground: #ffffff;
+  --primary: #963E50;
+  --primary-foreground: #FFFFFF;
 
-  --secondary: #e5dfe2;
-  --secondary-foreground: #302326;
+  --secondary: #E8DFE1;
+  --secondary-foreground: #552632;
 
-  --muted: #e8e4e6;
-  --muted-foreground: #71676c;
+  --muted: #EDE5E7;
+  --muted-foreground: #716166;
 
-  --accent: #f0dfe1;
-  --accent-foreground: #92242d;
+  --accent: #F0E1E3;
+  --accent-foreground: #702F40;
 
-  --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
+  --destructive: #B42332;
+  --destructive-foreground: #FFFFFF;
 
-  --border: #d9d1d5;
-  --input: #d9d1d5;
-  --ring: #d52b32;
+  --border: #DCCDD1;
+  --input: #D7C7CC;
+  --ring: #963E50;
 
-  --cream: #f0eff1;
-  --sand: #eae6e8;
-  --nude: #ded8dc;
-  --rose: #d52b32;
-  --rose-deep: #a5232d;
-  --gold: #ad858d;
+  --cream: #F3EFF0;
+  --sand: #E8DFE1;
+  --nude: #D9C9B9;
+  --rose: #C78F91;
+  --rose-deep: #963E50;
+  --gold: #B69A87;
+
+  --surface-page: #F3EFF0;
+  --surface-alt: #E8DFE1;
+  --surface-card: #E8DFE1;
+  --surface-strong: #DCCDD1;
+
+  --text-main: #321923;
+  --text-secondary: #716166;
 
   --gradient-hero:
     radial-gradient(
       ellipse at 85% 10%,
-      rgba(213, 43, 50, 0.34),
-      transparent 42%
+      rgba(199, 143, 145, 0.35),
+      transparent 45%
     ),
     linear-gradient(
       135deg,
-      #21191b 0%,
-      #3a2025 55%,
-      #70252d 100%
+      #F3EFF0 0%,
+      #F0E5E7 55%,
+      #E8D5D9 100%
     );
 
   --gradient-rose: linear-gradient(
     135deg,
-    #d52b32,
-    #a5232d
+    #C78F91,
+    #963E50
   );
 
   --gradient-sheen: linear-gradient(
     120deg,
-    rgba(213, 43, 50, 0.13),
-    rgba(112, 37, 45, 0.04) 55%,
+    rgba(150, 62, 80, 0.12),
+    rgba(199, 143, 145, 0.08) 55%,
     transparent 80%
   );
 
   --gradient-burgundy: linear-gradient(
     135deg,
-    #21191b,
-    #3a2025 55%,
-    #70252d
+    #321923,
+    #552632 55%,
+    #783947
   );
 
   --gradient-contact: linear-gradient(
     135deg,
-    #171315,
-    #302025 50%,
-    #70252d
+    #321923,
+    #552632 55%,
+    #963E50
   );
 
   --shadow-luxe:
-    0 24px 60px -32px rgba(33, 25, 27, 0.28);
+    0 24px 60px -32px rgba(50, 25, 35, 0.22);
 
   --shadow-soft:
-    0 8px 28px -18px rgba(33, 25, 27, 0.18);
+    0 8px 28px -18px rgba(50, 25, 35, 0.15);
 
   --shadow-red:
-    0 12px 35px -15px rgba(213, 43, 50, 0.35);
+    0 12px 35px -15px rgba(150, 62, 80, 0.28);
 
-  --glass-border: rgba(33, 25, 27, 0.09);
-
-  --surface-page: #f0eff1;
-  --surface-alt: #eae6e8;
-  --surface-card: #e5dfe2;
-  --surface-strong: #ded8dc;
-  --text-main: #21191b;
-  --text-secondary: #71676c;
+  --glass-border: rgba(85, 38, 50, 0.10);
 }
 
 /* =========================================
-   DARK MODE
+   DARK MODE — ESPRESSO & DEEP WINE
 ========================================= */
 
 .dark {
   color-scheme: dark;
 
-  --background: #171315;
-  --foreground: #f7f2f1;
+  --background: #1D1418;
+  --foreground: #F2E8E9;
 
-  --card: #241d20;
-  --card-foreground: #f7f2f1;
+  --card: #321923;
+  --card-foreground: #F2E8E9;
 
-  --popover: #2b2023;
-  --popover-foreground: #f7f2f1;
+  --popover: #321923;
+  --popover-foreground: #F2E8E9;
 
-  --primary: #ef515a;
-  --primary-foreground: #ffffff;
+  --primary: #C46D7C;
+  --primary-foreground: #FFFFFF;
 
-  --secondary: #302528;
-  --secondary-foreground: #f5e9e9;
+  --secondary: #43232D;
+  --secondary-foreground: #F2E8E9;
 
-  --muted: #292123;
-  --muted-foreground: #b8a9aa;
+  --muted: #38232B;
+  --muted-foreground: #C2AEB3;
 
-  --accent: #48252c;
-  --accent-foreground: #ffb9bc;
+  --accent: #542B37;
+  --accent-foreground: #E8B5BD;
 
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
+  --destructive: #E45D69;
+  --destructive-foreground: #FFFFFF;
 
-  --border: rgba(255, 255, 255, 0.11);
-  --input: rgba(255, 255, 255, 0.16);
-  --ring: #ef515a;
+  --border: rgba(226, 190, 198, 0.14);
+  --input: rgba(226, 190, 198, 0.20);
+  --ring: #C46D7C;
 
-  --cream: #21191b;
-  --sand: #302528;
-  --nude: #403236;
-  --rose: #ef515a;
-  --rose-deep: #b82730;
-  --gold: #c08e91;
+  --cream: #1D1418;
+  --sand: #321923;
+  --nude: #43232D;
+  --rose: #C46D7C;
+  --rose-deep: #963E50;
+  --gold: #B98C91;
+
+  --surface-page: #1D1418;
+  --surface-alt: #321923;
+  --surface-card: #43232D;
+  --surface-strong: #542B37;
+
+  --text-main: #F2E8E9;
+  --text-secondary: #C2AEB3;
 
   --gradient-hero:
     radial-gradient(
       ellipse at 85% 10%,
-      rgba(213, 43, 50, 0.24),
-      transparent 44%
+      rgba(150, 62, 80, 0.28),
+      transparent 45%
     ),
     linear-gradient(
       135deg,
-      #171315,
-      #302025 55%,
-      #57232b
+      #1D1418,
+      #321923 55%,
+      #542B37
     );
 
   --gradient-rose: linear-gradient(
     135deg,
-    #ef515a,
-    #b82730
+    #C46D7C,
+    #963E50
   );
 
   --gradient-sheen: linear-gradient(
     120deg,
-    rgba(239, 81, 90, 0.15),
+    rgba(196, 109, 124, 0.16),
     transparent 65%
   );
 
   --gradient-burgundy: linear-gradient(
     135deg,
-    #171315,
-    #302025 55%,
-    #57232b
+    #1D1418,
+    #321923 55%,
+    #542B37
   );
 
   --gradient-contact: linear-gradient(
     135deg,
-    #111011,
-    #261b1f 50%,
-    #57232b
+    #171114,
+    #321923 55%,
+    #652F40
   );
 
   --shadow-luxe:
-    0 24px 60px -30px rgba(0, 0, 0, 0.65);
+    0 24px 60px -30px rgba(0, 0, 0, 0.60);
 
   --shadow-soft:
-    0 8px 28px -18px rgba(0, 0, 0, 0.5);
+    0 8px 28px -18px rgba(0, 0, 0, 0.45);
 
   --shadow-red:
-    0 12px 35px -15px rgba(213, 43, 50, 0.3);
+    0 12px 35px -15px rgba(150, 62, 80, 0.30);
 
-  --glass-border: rgba(255, 255, 255, 0.1);
-
-  --surface-page: #171315;
-  --surface-alt: #21191b;
-  --surface-card: #302025;
-  --surface-strong: #39252b;
-  --text-main: #f7f2f1;
-  --text-secondary: #b8a9aa;
+  --glass-border: rgba(226, 190, 198, 0.12);
 }
 
 /* =========================================
@@ -260,7 +262,7 @@
 
 @layer base {
   * {
-    border-color: var(--color-border);
+    border-color: var(--border);
   }
 
   html {
@@ -304,15 +306,21 @@
   textarea,
   select {
     color: var(--text-main);
+    background-color: var(--surface-card);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--text-secondary);
   }
 
   ::selection {
-    background: rgba(213, 43, 50, 0.24);
+    background: rgba(150, 62, 80, 0.25);
     color: var(--text-main);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-ring);
+    outline: 2px solid var(--ring);
     outline-offset: 3px;
   }
 
@@ -338,17 +346,17 @@
 
 @utility surface-hero {
   background: var(--gradient-hero);
-  color: #ffffff;
+  color: var(--text-main);
 }
 
 @utility surface-burgundy {
   background: var(--gradient-burgundy);
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 @utility surface-contact {
   background: var(--gradient-contact);
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 @utility surface-ivory {
@@ -394,9 +402,9 @@
 @utility text-burgundy-gradient {
   background: linear-gradient(
     135deg,
-    #70252d,
-    #d52b32,
-    #a5232d
+    #552632,
+    #963E50,
+    #C78F91
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -408,7 +416,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--color-primary),
+    var(--primary),
     transparent
   );
 }
@@ -419,11 +427,11 @@
   letter-spacing: 0.22em;
   line-height: 1.5;
   text-transform: uppercase;
-  color: var(--color-muted-foreground);
+  color: var(--text-secondary);
 }
 
 /* =========================================
-   GLOBAL INTERACTION UTILITIES
+   INTERACTION UTILITIES
 ========================================= */
 
 @utility lift {
@@ -437,8 +445,8 @@
     box-shadow: var(--shadow-luxe);
     border-color: color-mix(
       in srgb,
-      var(--color-primary) 25%,
-      var(--color-border)
+      var(--primary) 30%,
+      var(--border)
     );
   }
 }
@@ -452,14 +460,15 @@
 }
 
 /* =========================================
-   GLOBAL TAILWIND COLOR OVERRIDES
-   Theme-aware common utility classes.
+   THEME-AWARE TAILWIND OVERRIDES
 ========================================= */
 
 @layer utilities {
   /* Backgrounds */
 
-  .bg-white {
+  .bg-white,
+  .bg-gray-50,
+  .bg-gray-100 {
     background-color: var(--surface-card);
   }
 
@@ -483,11 +492,6 @@
     background-color: var(--muted);
   }
 
-  .bg-gray-50,
-  .bg-gray-100 {
-    background-color: var(--surface-page);
-  }
-
   .bg-gray-200,
   .bg-gray-300 {
     background-color: var(--surface-alt);
@@ -508,10 +512,6 @@
     color: var(--text-secondary);
   }
 
-  .text-white {
-    color: #ffffff;
-  }
-
   .text-foreground {
     color: var(--text-main);
   }
@@ -520,20 +520,23 @@
     color: var(--text-secondary);
   }
 
+  /* Preserve white text for dark surfaces and buttons */
+
+  .text-white {
+    color: #FFFFFF;
+  }
+
   /* Borders */
 
   .border-white,
   .border-gray-100,
   .border-gray-200,
-  .border-gray-300 {
-    border-color: var(--border);
-  }
-
+  .border-gray-300,
   .border-border {
     border-color: var(--border);
   }
 
-  /* Cards and surfaces */
+  /* Shadows */
 
   .shadow-sm,
   .shadow-md,
@@ -552,11 +555,11 @@
 
   input::placeholder,
   textarea::placeholder {
-    color: var(--muted-foreground);
+    color: var(--text-secondary);
     opacity: 0.8;
   }
 
-  /* Buttons */
+  /* Rounded buttons */
 
   button:not([data-no-pill]),
   a[role="button"],
@@ -567,12 +570,12 @@
   /* Selection */
 
   .selection-brand::selection {
-    background: rgba(213, 43, 50, 0.25);
+    background: rgba(150, 62, 80, 0.25);
   }
 }
 
 /* =========================================
-   THEME-AWARE TRANSPARENT SURFACES
+   TRANSPARENT SURFACES
 ========================================= */
 
 .bg-white\/5,
@@ -590,7 +593,7 @@
 .dark .bg-white\/10,
 .dark .bg-white\/\[0\.06\],
 .dark .bg-white\/\[0\.08\] {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(242, 232, 233, 0.05);
 }
 
 /* =========================================

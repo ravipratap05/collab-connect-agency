@@ -329,11 +329,9 @@ const addOns = [
 
 export function Pricing() {
   const [market, setMarket] = useState<Market>("india");
-  const [openCategory, setOpenCategory] =
-    useState("social-media");
+  const [openCategory, setOpenCategory] = useState("social-media");
 
-  const currencyLabel =
-    market === "india" ? "INR" : "USD";
+  const currencyLabel = market === "india" ? "INR" : "USD";
 
   const visibleCategories = pricingCategories.filter(
     (category) =>
@@ -345,12 +343,23 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative overflow-hidden bg-white py-24 text-[#171717] sm:py-32"
+      className="relative overflow-hidden py-24 sm:py-32"
+      style={{
+        background: "var(--surface-page)",
+        color: "var(--text-main)",
+      }}
     >
       {/* BACKGROUND ACCENTS */}
 
-      <div className="pointer-events-none absolute -right-32 top-20 size-80 rounded-full bg-[#D52B32]/[0.035] blur-3xl" />
-      <div className="pointer-events-none absolute -left-32 bottom-20 size-80 rounded-full bg-black/[0.025] blur-3xl" />
+      <div
+        className="pointer-events-none absolute -right-32 top-20 size-80 rounded-full blur-3xl"
+        style={{ background: "var(--primary)", opacity: 0.06 }}
+      />
+
+      <div
+        className="pointer-events-none absolute -left-32 bottom-20 size-80 rounded-full blur-3xl"
+        style={{ background: "var(--accent)", opacity: 0.05 }}
+      />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
 
@@ -364,7 +373,10 @@ export function Pricing() {
                 The right investment
                 <br />
                 for your{" "}
-                <span className="italic text-[#D52B32]">
+                <span
+                  className="italic"
+                  style={{ color: "var(--primary)" }}
+                >
                   next stage.
                 </span>
               </>
@@ -376,20 +388,39 @@ export function Pricing() {
         {/* MARKET SELECTOR */}
 
         <div className="mx-auto mt-10 flex max-w-md flex-col items-center">
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#777]">
+          <p
+            className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em]"
+            style={{ color: "var(--text-secondary)" }}
+          >
             Select your market
           </p>
 
-          <div className="inline-flex w-full max-w-[340px] rounded-full border border-[#E7E7E7] bg-[#F7F7F7] p-1.5">
+          <div
+            className="inline-flex w-full max-w-[340px] rounded-full border p-1.5"
+            style={{
+              background: "var(--surface-card)",
+              borderColor: "var(--border)",
+            }}
+          >
             <button
               type="button"
               onClick={() => setMarket("india")}
               aria-pressed={market === "india"}
-              className={`flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-medium transition-all duration-200 ${
-                market === "india"
-                  ? "bg-[#171717] text-white shadow-sm"
-                  : "text-[#666] hover:text-[#171717]"
-              }`}
+              className="flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-medium transition-all duration-200"
+              style={{
+                background:
+                  market === "india"
+                    ? "var(--primary)"
+                    : "transparent",
+                color:
+                  market === "india"
+                    ? "#FFFFFF"
+                    : "var(--text-secondary)",
+                boxShadow:
+                  market === "india"
+                    ? "0 2px 8px rgba(0,0,0,0.12)"
+                    : "none",
+              }}
             >
               <span>🇮🇳</span>
               India
@@ -400,11 +431,21 @@ export function Pricing() {
               type="button"
               onClick={() => setMarket("international")}
               aria-pressed={market === "international"}
-              className={`flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-medium transition-all duration-200 ${
-                market === "international"
-                  ? "bg-[#171717] text-white shadow-sm"
-                  : "text-[#666] hover:text-[#171717]"
-              }`}
+              className="flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-medium transition-all duration-200"
+              style={{
+                background:
+                  market === "international"
+                    ? "var(--primary)"
+                    : "transparent",
+                color:
+                  market === "international"
+                    ? "#FFFFFF"
+                    : "var(--text-secondary)",
+                boxShadow:
+                  market === "international"
+                    ? "0 2px 8px rgba(0,0,0,0.12)"
+                    : "none",
+              }}
             >
               <Globe size={15} />
               International
@@ -412,7 +453,10 @@ export function Pricing() {
             </button>
           </div>
 
-          <p className="mt-3 text-center text-xs text-[#888]">
+          <p
+            className="mt-3 text-center text-xs"
+            style={{ color: "var(--text-secondary)" }}
+          >
             Displaying prices in {currencyLabel}
           </p>
         </div>
@@ -420,7 +464,6 @@ export function Pricing() {
         {/* PRICING CATEGORIES */}
 
         <div className="mx-auto mt-14 max-w-6xl space-y-4">
-
           {visibleCategories.map((category, index) => {
             const isOpen = openCategory === category.id;
             const Icon = category.icon;
@@ -428,13 +471,17 @@ export function Pricing() {
             return (
               <Reveal key={category.id} delay={index * 0.04}>
                 <div
-                  className={`overflow-hidden rounded-3xl border transition-all duration-300 ${
-                    isOpen
-                      ? "border-[#DADADA] bg-white shadow-[0_12px_40px_rgba(0,0,0,0.045)]"
-                      : "border-[#EAEAEA] bg-white hover:border-[#D5D5D5]"
-                  }`}
+                  className="overflow-hidden rounded-3xl border transition-all duration-300"
+                  style={{
+                    background: "var(--surface-card)",
+                    borderColor: isOpen
+                      ? "var(--primary)"
+                      : "var(--border)",
+                    boxShadow: isOpen
+                      ? "0 12px 40px rgba(0,0,0,0.08)"
+                      : "none",
+                  }}
                 >
-
                   {/* CATEGORY HEADER */}
 
                   <button
@@ -448,29 +495,41 @@ export function Pricing() {
                     className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-7 sm:py-6"
                   >
                     <span
-                      className={`grid size-12 shrink-0 place-items-center rounded-2xl transition-colors duration-200 ${
-                        isOpen
-                          ? "bg-[#D52B32] text-white"
-                          : "bg-[#F5F5F5] text-[#333]"
-                      }`}
+                      className="grid size-12 shrink-0 place-items-center rounded-2xl transition-colors duration-200"
+                      style={{
+                        background: isOpen
+                          ? "var(--primary)"
+                          : "var(--surface-strong)",
+                        color: isOpen
+                          ? "#FFFFFF"
+                          : "var(--text-main)",
+                      }}
                     >
                       <Icon size={21} strokeWidth={1.7} />
                     </span>
 
                     <span className="min-w-0 flex-1">
-                      <span className="block text-base font-semibold tracking-[-0.02em] sm:text-lg">
+                      <span
+                        className="block text-base font-semibold tracking-[-0.02em] sm:text-lg"
+                        style={{ color: "var(--text-main)" }}
+                      >
                         {category.name}
                       </span>
-                      <span className="mt-1 block text-xs leading-relaxed text-[#777] sm:text-sm">
+
+                      <span
+                        className="mt-1 block text-xs leading-relaxed sm:text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
                         {category.description}
                       </span>
                     </span>
 
                     <ChevronDown
                       size={19}
-                      className={`shrink-0 text-[#777] transition-transform duration-300 ${
+                      className={`shrink-0 transition-transform duration-300 ${
                         isOpen ? "rotate-180" : ""
                       }`}
+                      style={{ color: "var(--text-secondary)" }}
                     />
                   </button>
 
@@ -483,8 +542,10 @@ export function Pricing() {
                     aria-hidden={!isOpen}
                   >
                     <div className="min-h-0 overflow-hidden">
-                      <div className="border-t border-[#EEEEEE] px-5 pb-7 pt-7 sm:px-7 sm:pb-9">
-
+                      <div
+                        className="border-t px-5 pb-7 pt-7 sm:px-7 sm:pb-9"
+                        style={{ borderColor: "var(--border)" }}
+                      >
                         {/* PLANS */}
 
                         <div
@@ -497,27 +558,42 @@ export function Pricing() {
                           {category.plans.map((plan) => (
                             <article
                               key={plan.name}
-                              className={`relative flex flex-col rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-1 ${
-                                plan.popular
-                                  ? "border-[#D52B32] bg-[#FFFDFD] shadow-[0_12px_35px_rgba(213,43,50,0.08)]"
-                                  : "border-[#E9E9E9] bg-white hover:border-[#CFCFCF]"
-                              }`}
+                              className="relative flex flex-col rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-1"
+                              style={{
+                                background: plan.popular
+                                  ? "var(--surface-strong)"
+                                  : "var(--surface-page)",
+                                borderColor: plan.popular
+                                  ? "var(--primary)"
+                                  : "var(--border)",
+                                boxShadow: plan.popular
+                                  ? "0 12px 35px rgba(150,62,80,0.12)"
+                                  : "none",
+                              }}
                             >
-
                               {/* POPULAR LABEL */}
 
                               {plan.popular && (
-                                <div className="absolute -top-3 left-6 inline-flex items-center gap-1.5 rounded-full bg-[#D52B32] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
+                                <div
+                                  className="absolute -top-3 left-6 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white"
+                                  style={{ background: "var(--primary)" }}
+                                >
                                   <Crown size={12} />
                                   Most Popular
                                 </div>
                               )}
 
-                              <h3 className="text-xl font-semibold tracking-[-0.03em]">
+                              <h3
+                                className="text-xl font-semibold tracking-[-0.03em]"
+                                style={{ color: "var(--text-main)" }}
+                              >
                                 {plan.name}
                               </h3>
 
-                              <p className="mt-2 min-h-[48px] text-sm leading-relaxed text-[#777]">
+                              <p
+                                className="mt-2 min-h-[48px] text-sm leading-relaxed"
+                                style={{ color: "var(--text-secondary)" }}
+                              >
                                 {plan.blurb}
                               </p>
 
@@ -525,26 +601,40 @@ export function Pricing() {
 
                               <div className="mt-6">
                                 {plan.suffix === "Starting from" && (
-                                  <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#888]">
+                                  <p
+                                    className="mb-1 text-[10px] font-semibold uppercase tracking-[0.16em]"
+                                    style={{ color: "var(--text-secondary)" }}
+                                  >
                                     Starting from
                                   </p>
                                 )}
 
                                 <div className="flex flex-wrap items-baseline gap-2">
-                                  <span className="font-serif text-3xl font-medium tracking-tight sm:text-4xl">
+                                  <span
+                                    className="font-serif text-3xl font-medium tracking-tight sm:text-4xl"
+                                    style={{ color: "var(--text-main)" }}
+                                  >
                                     {getPrice(plan.price)}
                                   </span>
 
                                   {plan.suffix &&
                                     plan.suffix !== "Starting from" && (
-                                      <span className="text-xs text-[#777]">
+                                      <span
+                                        className="text-xs"
+                                        style={{
+                                          color: "var(--text-secondary)",
+                                        }}
+                                      >
                                         {plan.suffix}
                                       </span>
                                     )}
                                 </div>
                               </div>
 
-                              <div className="my-6 h-px bg-[#EAEAEA]" />
+                              <div
+                                className="my-6 h-px"
+                                style={{ background: "var(--border)" }}
+                              />
 
                               {/* FEATURES */}
 
@@ -552,11 +642,15 @@ export function Pricing() {
                                 {plan.features.map((feature) => (
                                   <li
                                     key={feature}
-                                    className="flex items-start gap-2.5 text-[13px] leading-relaxed text-[#555]"
+                                    className="flex items-start gap-2.5 text-[13px] leading-relaxed"
+                                    style={{
+                                      color: "var(--text-secondary)",
+                                    }}
                                   >
                                     <Check
                                       size={15}
-                                      className="mt-0.5 shrink-0 text-[#D52B32]"
+                                      className="mt-0.5 shrink-0"
+                                      style={{ color: "var(--primary)" }}
                                       strokeWidth={2.2}
                                     />
                                     <span>{feature}</span>
@@ -568,11 +662,19 @@ export function Pricing() {
 
                               <a
                                 href="#contact"
-                                className={`mt-8 flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 ${
+                                className="mt-8 flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 hover:opacity-90"
+                                style={
                                   plan.popular
-                                    ? "bg-[#D52B32] text-white hover:bg-[#B9232A]"
-                                    : "border border-[#222] text-[#171717] hover:bg-[#171717] hover:text-white"
-                                }`}
+                                    ? {
+                                        background: "var(--primary)",
+                                        color: "#FFFFFF",
+                                      }
+                                    : {
+                                        background: "transparent",
+                                        color: "var(--text-main)",
+                                        border: "1px solid var(--primary)",
+                                      }
+                                }
                               >
                                 Get Started
                                 <ArrowUpRight size={16} />
@@ -586,15 +688,24 @@ export function Pricing() {
                         {category.id === "social-media" && (
                           <div className="mt-12">
                             <div className="mb-5 text-center">
-                              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#D52B32]">
+                              <p
+                                className="text-[10px] font-semibold uppercase tracking-[0.22em]"
+                                style={{ color: "var(--primary)" }}
+                              >
                                 Extend Your Strategy
                               </p>
 
-                              <h3 className="mt-2 font-serif text-2xl font-medium sm:text-3xl">
+                              <h3
+                                className="mt-2 font-serif text-2xl font-medium sm:text-3xl"
+                                style={{ color: "var(--text-main)" }}
+                              >
                                 Optional Add-ons
                               </h3>
 
-                              <p className="mt-2 text-sm text-[#777]">
+                              <p
+                                className="mt-2 text-sm"
+                                style={{ color: "var(--text-secondary)" }}
+                              >
                                 Additional services to support your growth.
                               </p>
                             </div>
@@ -603,23 +714,42 @@ export function Pricing() {
                               {addOns.map((addon) => (
                                 <div
                                   key={addon.title}
-                                  className="rounded-2xl border border-[#EAEAEA] bg-[#FAFAFA] p-5 transition-colors hover:border-[#D52B32]/40"
+                                  className="rounded-2xl border p-5 transition-colors"
+                                  style={{
+                                    background: "var(--surface-page)",
+                                    borderColor: "var(--border)",
+                                  }}
                                 >
-                                  <h4 className="text-sm font-semibold">
+                                  <h4
+                                    className="text-sm font-semibold"
+                                    style={{ color: "var(--text-main)" }}
+                                  >
                                     {addon.title}
                                   </h4>
 
-                                  <p className="mt-3 text-xl font-semibold tracking-tight">
+                                  <p
+                                    className="mt-3 text-xl font-semibold tracking-tight"
+                                    style={{ color: "var(--text-main)" }}
+                                  >
                                     {getPrice(addon.price)}
                                   </p>
 
-                                  <p className="mt-1 text-xs text-[#888]">
+                                  <p
+                                    className="mt-1 text-xs"
+                                    style={{ color: "var(--text-secondary)" }}
+                                  >
                                     {addon.suffix}
                                   </p>
 
-                                  <div className="my-4 h-px bg-[#E8E8E8]" />
+                                  <div
+                                    className="my-4 h-px"
+                                    style={{ background: "var(--border)" }}
+                                  />
 
-                                  <p className="text-xs leading-relaxed text-[#777]">
+                                  <p
+                                    className="text-xs leading-relaxed"
+                                    style={{ color: "var(--text-secondary)" }}
+                                  >
                                     {addon.note}
                                   </p>
                                 </div>
@@ -627,7 +757,6 @@ export function Pricing() {
                             </div>
                           </div>
                         )}
-
                       </div>
                     </div>
                   </div>
@@ -639,12 +768,24 @@ export function Pricing() {
 
         {/* CUSTOM QUOTATION */}
 
-        <div className="mx-auto mt-12 max-w-3xl rounded-3xl border border-[#EAEAEA] bg-[#FAFAFA] px-6 py-8 text-center sm:px-10">
-          <p className="font-serif text-2xl font-medium sm:text-3xl">
+        <div
+          className="mx-auto mt-12 max-w-3xl rounded-3xl border px-6 py-8 text-center sm:px-10"
+          style={{
+            background: "var(--surface-card)",
+            borderColor: "var(--border)",
+          }}
+        >
+          <p
+            className="font-serif text-2xl font-medium sm:text-3xl"
+            style={{ color: "var(--text-main)" }}
+          >
             Need something more specific?
           </p>
 
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-[#777]">
+          <p
+            className="mx-auto mt-3 max-w-xl text-sm leading-relaxed"
+            style={{ color: "var(--text-secondary)" }}
+          >
             Every business has different goals. Contact our team for a
             customised quotation based on your requirements, scope and market.
           </p>
@@ -653,14 +794,18 @@ export function Pricing() {
 
           <a
             href="#contact"
-            className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#171717] px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#D52B32]"
+            className="mt-6 inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:opacity-90"
+            style={{ background: "var(--primary)" }}
           >
             Discuss Your Project
             <ArrowUpRight size={16} />
           </a>
         </div>
 
-        <p className="mt-6 text-center text-[11px] leading-relaxed text-[#999]">
+        <p
+          className="mt-6 text-center text-[11px] leading-relaxed"
+          style={{ color: "var(--text-secondary)" }}
+        >
           Pricing is displayed according to your selected market. Final
           quotations may vary depending on project scope and requirements.
         </p>

@@ -1,3 +1,4 @@
+
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
@@ -37,13 +38,35 @@ export function SectionHeading({
   return (
     <Reveal
       className={
-        align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl text-left"
+        align === "center"
+          ? "mx-auto max-w-2xl text-center"
+          : "max-w-2xl text-left"
       }
     >
-      <p className="eyebrow">{eyebrow}</p>
-      <h2 className="mt-4 text-4xl leading-[1.1] font-medium sm:text-5xl">{title}</h2>
+      {/* EYEBROW */}
+      <p
+        className="eyebrow text-[10px] font-semibold uppercase tracking-[0.24em] sm:text-xs"
+        style={{ color: "var(--primary)" }}
+      >
+        {eyebrow}
+      </p>
+
+      {/* HEADING */}
+      <h2
+        className="mt-4 font-display text-4xl leading-[1.1] font-medium sm:text-5xl"
+        style={{ color: "var(--text-main)" }}
+      >
+        {title}
+      </h2>
+
+      {/* SUBTITLE */}
       {subtitle ? (
-        <p className="text-muted-foreground mt-5 text-base leading-relaxed">{subtitle}</p>
+        <p
+          className="mt-5 text-base leading-relaxed"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          {subtitle}
+        </p>
       ) : null}
     </Reveal>
   );

@@ -13,12 +13,17 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+const SITE_URL = "https://www.collabconnect.co.in";
+const BRAND_LOGO = `${SITE_URL}/collabconnect-navbar-icon.png`;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">
+          Page not found
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
@@ -35,12 +40,20 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
   console.error(error);
   const router = useRouter();
 
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportLovableError(error, {
+      boundary: "tanstack_root_error_component",
+    });
   }, [error]);
 
   return (
@@ -77,7 +90,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient;
+}>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -150,12 +165,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
       {
         property: "og:url",
-        content: "https://www.collabconnect.co.in/",
+        content: `${SITE_URL}/`,
       },
 
       {
         property: "og:image",
-        content: "https://www.collabconnect.co.in/og-image.jpg",
+        content: `${SITE_URL}/og-image.jpg`,
       },
 
       {
@@ -194,32 +209,38 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
       {
         name: "twitter:image",
-        content: "https://www.collabconnect.co.in/og-image.jpg",
+        content: `${SITE_URL}/og-image.jpg`,
       },
 
       {
         name: "twitter:url",
-        content: "https://www.collabconnect.co.in/",
+        content: `${SITE_URL}/`,
       },
     ],
 
     links: [
       {
         rel: "canonical",
-        href: "https://www.collabconnect.co.in/",
+        href: `${SITE_URL}/`,
       },
 
       // Official CollabConnect Favicon
       {
         rel: "icon",
-        href: "/collabconnect-navbar-icon.png",
+        href: BRAND_LOGO,
         type: "image/png",
       },
 
       {
-        rel: "apple-touch-icon",
-        href: "/collabconnect-navbar-icon.png",
+        rel: "shortcut icon",
+        href: BRAND_LOGO,
         type: "image/png",
+      },
+
+      // Apple Touch Icon
+      {
+        rel: "apple-touch-icon",
+        href: BRAND_LOGO,
       },
 
       {
@@ -266,8 +287,8 @@ function RootShell({ children }: { children: ReactNode }) {
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 name: "CollabConnect",
-                url: "https://www.collabconnect.co.in/",
-                logo: "https://www.collabconnect.co.in/logo.jpg",
+                url: `${SITE_URL}/`,
+                logo: BRAND_LOGO,
                 sameAs: [
                   "https://www.instagram.com/veer.collabs",
                   "https://www.threads.net/@veer.collabs",
@@ -279,7 +300,7 @@ function RootShell({ children }: { children: ReactNode }) {
                 "@type": "WebSite",
                 name: "CollabConnect",
                 alternateName: "CollabConnect",
-                url: "https://www.collabconnect.co.in/",
+                url: `${SITE_URL}/`,
               },
             ]),
           }}

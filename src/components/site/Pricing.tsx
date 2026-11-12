@@ -6,7 +6,6 @@ import {
   Globe,
   MessageCircle,
   QrCode,
-  TrendingUp,
   Users,
   Megaphone,
   ArrowUpRight,
@@ -166,7 +165,6 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
-
   {
     id: "election-campaign",
     name: "Election Campaign",
@@ -207,7 +205,6 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
-
   {
     id: "website",
     name: "Website Development",
@@ -236,7 +233,6 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
-
   {
     id: "qr-menu",
     name: "QR Digital Menu",
@@ -263,7 +259,6 @@ const pricingCategories: PricingCategory[] = [
       },
     ],
   },
-
   {
     id: "whatsapp-ai",
     name: "WhatsApp Automation & AI",
@@ -352,7 +347,8 @@ export function Pricing() {
       id="pricing"
       className="relative overflow-hidden bg-white py-24 text-[#171717] sm:py-32"
     >
-      {/* Subtle background accents */}
+      {/* BACKGROUND ACCENTS */}
+
       <div className="pointer-events-none absolute -right-32 top-20 size-80 rounded-full bg-[#D52B32]/[0.035] blur-3xl" />
       <div className="pointer-events-none absolute -left-32 bottom-20 size-80 rounded-full bg-black/[0.025] blur-3xl" />
 
@@ -432,7 +428,7 @@ export function Pricing() {
             return (
               <Reveal key={category.id} delay={index * 0.04}>
                 <div
-                  className={`overflow-hidden border transition-all duration-300 ${
+                  className={`overflow-hidden rounded-3xl border transition-all duration-300 ${
                     isOpen
                       ? "border-[#DADADA] bg-white shadow-[0_12px_40px_rgba(0,0,0,0.045)]"
                       : "border-[#EAEAEA] bg-white hover:border-[#D5D5D5]"
@@ -452,7 +448,7 @@ export function Pricing() {
                     className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-7 sm:py-6"
                   >
                     <span
-                      className={`grid size-12 shrink-0 place-items-center transition-colors duration-200 ${
+                      className={`grid size-12 shrink-0 place-items-center rounded-2xl transition-colors duration-200 ${
                         isOpen
                           ? "bg-[#D52B32] text-white"
                           : "bg-[#F5F5F5] text-[#333]"
@@ -478,7 +474,7 @@ export function Pricing() {
                     />
                   </button>
 
-                  {/* CATEGORY CONTENT */}
+                  {/* ACCORDION CONTENT */}
 
                   <div
                     className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
@@ -501,7 +497,7 @@ export function Pricing() {
                           {category.plans.map((plan) => (
                             <article
                               key={plan.name}
-                              className={`relative flex flex-col border p-6 transition-all duration-300 hover:-translate-y-1 ${
+                              className={`relative flex flex-col rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-1 ${
                                 plan.popular
                                   ? "border-[#D52B32] bg-[#FFFDFD] shadow-[0_12px_35px_rgba(213,43,50,0.08)]"
                                   : "border-[#E9E9E9] bg-white hover:border-[#CFCFCF]"
@@ -511,7 +507,7 @@ export function Pricing() {
                               {/* POPULAR LABEL */}
 
                               {plan.popular && (
-                                <div className="absolute -top-3 left-6 inline-flex items-center gap-1.5 bg-[#D52B32] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
+                                <div className="absolute -top-3 left-6 inline-flex items-center gap-1.5 rounded-full bg-[#D52B32] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
                                   <Crown size={12} />
                                   Most Popular
                                 </div>
@@ -568,11 +564,11 @@ export function Pricing() {
                                 ))}
                               </ul>
 
-                              {/* CTA */}
+                              {/* CTA BUTTON */}
 
                               <a
                                 href="#contact"
-                                className={`mt-8 flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-semibold transition-all duration-200 ${
+                                className={`mt-8 flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 ${
                                   plan.popular
                                     ? "bg-[#D52B32] text-white hover:bg-[#B9232A]"
                                     : "border border-[#222] text-[#171717] hover:bg-[#171717] hover:text-white"
@@ -593,9 +589,11 @@ export function Pricing() {
                               <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#D52B32]">
                                 Extend Your Strategy
                               </p>
+
                               <h3 className="mt-2 font-serif text-2xl font-medium sm:text-3xl">
                                 Optional Add-ons
                               </h3>
+
                               <p className="mt-2 text-sm text-[#777]">
                                 Additional services to support your growth.
                               </p>
@@ -605,7 +603,7 @@ export function Pricing() {
                               {addOns.map((addon) => (
                                 <div
                                   key={addon.title}
-                                  className="border border-[#EAEAEA] bg-[#FAFAFA] p-5 transition-colors hover:border-[#D52B32]/40"
+                                  className="rounded-2xl border border-[#EAEAEA] bg-[#FAFAFA] p-5 transition-colors hover:border-[#D52B32]/40"
                                 >
                                   <h4 className="text-sm font-semibold">
                                     {addon.title}
@@ -639,9 +637,9 @@ export function Pricing() {
           })}
         </div>
 
-        {/* CUSTOM QUOTATION NOTE */}
+        {/* CUSTOM QUOTATION */}
 
-        <div className="mx-auto mt-12 max-w-3xl border border-[#EAEAEA] bg-[#FAFAFA] px-6 py-8 text-center sm:px-10">
+        <div className="mx-auto mt-12 max-w-3xl rounded-3xl border border-[#EAEAEA] bg-[#FAFAFA] px-6 py-8 text-center sm:px-10">
           <p className="font-serif text-2xl font-medium sm:text-3xl">
             Need something more specific?
           </p>
@@ -651,9 +649,11 @@ export function Pricing() {
             customised quotation based on your requirements, scope and market.
           </p>
 
+          {/* CTA BUTTON */}
+
           <a
             href="#contact"
-            className="mt-6 inline-flex items-center justify-center gap-2 bg-[#171717] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#D52B32]"
+            className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#171717] px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#D52B32]"
           >
             Discuss Your Project
             <ArrowUpRight size={16} />

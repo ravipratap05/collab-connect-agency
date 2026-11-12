@@ -33,8 +33,8 @@ const sections = [
   {
     h: "1. Introduction",
     p: [
-      'Welcome to CollabConnect ("we", "our", "us" or the "Agency").',
-      "CollabConnect operates https://www.collabconnect.co.in and provides digital marketing, social media management, content creation, influencer marketing, website development, QR digital menus, WhatsApp automation and related digital services.",
+      'Welcome to CollabConnect,
+      "CollabConnect provides digital marketing, social media management, content creation, influencer marketing, website development, QR digital menus, WhatsApp automation and related digital services.",
       "This Privacy Policy explains what personal information we collect, how we use it, when we share it and the choices available to you when you visit our website, contact us or use our services.",
     ],
   },
@@ -273,8 +273,8 @@ function PrivacyPage() {
             <div className="rose-rule mt-8" />
 
             <div className="text-muted-foreground mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs">
-              <span>Effective Date: 13 November 2026</span>
-              <span>Last Updated: 13 November 2026</span>
+              <span>Effective Date: 01 Jan 2026</span>
+              <span>Last Updated: 01 Jan 2026</span>
             </div>
           </div>
 

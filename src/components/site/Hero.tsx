@@ -1,125 +1,184 @@
+
 import { motion } from "motion/react";
-import { ArrowUpRight, Heart, Instagram, MessageCircle, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Instagram } from "lucide-react";
 import heroImage from "@/assests/hero-dashboard.jpg";
 
-const stats = [
-  { value: "100+", label: "Campaigns" },
-  { value: "500+", label: "Creators" },
-  { value: "12M+", label: "Views Driven" },
+const capabilities = [
+  "Social Media Strategy",
+  "Content & Creative",
+  "Brand Growth",
 ];
 
 export function Hero() {
   return (
-    <section id="top" className="surface-hero relative overflow-hidden pt-32 pb-20 sm:pt-40">
-      <div className="grain-orb absolute -top-24 -left-24 size-72 sm:size-96" />
-      <div className="grain-orb absolute -right-32 bottom-0 size-72 opacity-40 sm:size-[26rem]" />
+    <section
+      id="top"
+      className="relative overflow-hidden bg-white pb-16 pt-28 text-[#171717] sm:pb-24 sm:pt-36 lg:pt-40"
+    >
+      {/* Subtle brand accent */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-28 h-80 w-80 rounded-full bg-[#D52B32]/[0.035] blur-3xl"
+      />
 
-      <div className="relative mx-auto grid max-w-6xl gap-14 px-5 lg:grid-cols-[1.05fr_1fr] lg:items-center">
-        <div>
-          <motion.p
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 xl:gap-20">
+
+        {/* LEFT: EDITORIAL CONTENT */}
+        <div className="relative z-10">
+
+          <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="glass-card inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs tracking-[0.22em] uppercase"
+            className="mb-8 flex flex-wrap items-center gap-3"
           >
-            <Instagram size={13} className="text-primary" /> _collab.connect
-          </motion.p>
+            <span className="inline-flex items-center gap-2 border border-[#E8E8E8] bg-white px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#555555]">
+              <Instagram size={13} className="text-[#D52B32]" />
+              @_collab.connect
+            </span>
+
+            <span className="hidden h-px w-10 bg-[#D52B32] sm:block" />
+
+            <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#888888]">
+              Strategy · Creativity · Growth
+            </span>
+          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 text-[2.6rem] leading-[1.05] font-medium sm:text-6xl lg:text-[4.2rem]"
+            transition={{
+              duration: 0.8,
+              delay: 0.08,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="max-w-[720px] font-display text-[2.85rem] font-medium leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-[4.35rem] xl:text-[4.8rem]"
           >
-            We Don’t Just Manage Social Media.
-            <span className="text-rose-gradient block italic">
-              We Build Brands That Grow.
+            We Don't Just
+            <br />
+            Manage Social Media.
+            <span className="mt-2 block italic text-[#D52B32]">
+              We Build Brands
+              <br className="hidden sm:block" /> That Grow.
             </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.18 }}
-            className="text-muted-foreground mt-6 max-w-xl text-base leading-relaxed sm:text-lg"
+            transition={{ duration: 0.75, delay: 0.2 }}
+            className="mt-7 max-w-[540px] text-[15px] leading-[1.9] text-[#666666] sm:text-[17px]"
           >
-            Helping Creators & Businesses grow through strategic content, social media
-            management, influencer marketing and paid collaborations.
+            Helping creators and businesses build a stronger digital presence
+            through thoughtful content, strategic social media management,
+            influencer marketing and digital solutions.
           </motion.p>
 
+          {/* CALLS TO ACTION */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.26 }}
-            className="mt-9 flex flex-wrap gap-3"
+            transition={{ duration: 0.75, delay: 0.3 }}
+            className="mt-9 flex flex-col gap-3 min-[420px]:flex-row"
           >
             <a
               href="#contact"
-              className="text-primary-foreground shadow-luxe inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium transition-transform hover:scale-[1.03]"
-              style={{ background: "var(--gradient-rose)" }}
+              className="group inline-flex min-h-14 items-center justify-center gap-3 bg-[#D52B32] px-7 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#B51F28]"
             >
-              Book Free Consultation <ArrowUpRight size={16} />
+              Book a Free Consultation
+              <ArrowUpRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
             </a>
+
             <a
-              href="#pricing"
-              className="glass-card hover:text-primary inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium transition-colors"
+              href="#services"
+              className="inline-flex min-h-14 items-center justify-center gap-3 border border-[#DEDEDE] bg-white px-7 py-4 text-sm font-semibold text-[#171717] transition-all duration-300 hover:border-[#D52B32] hover:text-[#D52B32]"
             >
-              View Packages
+              Explore Our Services
+              <ArrowUpRight size={16} />
             </a>
           </motion.div>
 
-          <motion.dl
+          {/* POSITIONING STRIP */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="mt-12 grid max-w-md grid-cols-3 gap-4"
+            transition={{ duration: 0.8, delay: 0.45 }}
+            className="mt-12 border-t border-[#EAEAEA] pt-6"
           >
-            {stats.map((s) => (
-              <div key={s.label}>
-                <dt className="font-display text-3xl font-medium">{s.value}</dt>
-                <dd className="text-muted-foreground mt-1 text-[0.72rem] tracking-[0.16em] uppercase">
-                  {s.label}
-                </dd>
-              </div>
-            ))}
-          </motion.dl>
+            <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#999999]">
+              One creative partner. Multiple ways to grow.
+            </p>
+
+            <div className="flex flex-wrap gap-x-5 gap-y-3">
+              {capabilities.map((item, index) => (
+                <div key={item} className="flex items-center gap-3">
+                  <span className="text-[12px] font-medium text-[#444444]">
+                    {item}
+                  </span>
+
+                  {index !== capabilities.length - 1 && (
+                    <span className="h-1 w-1 rounded-full bg-[#D52B32]" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
+        {/* RIGHT: EDITORIAL VISUAL */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="relative"
+          initial={{ opacity: 0, x: 28 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            duration: 0.9,
+            delay: 0.18,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="relative mx-auto w-full max-w-[620px] lg:ml-auto"
         >
-          <div className="glass-panel overflow-hidden rounded-[2.5rem] p-3">
+          {/* Red vertical accent */}
+          <div
+            aria-hidden="true"
+            className="absolute -right-2 -top-3 z-10 h-20 w-20 border-r-2 border-t-2 border-[#D52B32] sm:-right-4 sm:-top-4"
+          />
+
+          {/* Main image frame */}
+          <div className="relative overflow-hidden border border-[#E7E7E7] bg-[#F5F5F5] p-2.5 sm:p-3">
             <img
               src={heroImage}
-              alt="Luxury Instagram analytics dashboard on a phone with growth charts for collab connect"
+              alt="CollabConnect digital growth and social media analytics dashboard"
               width={1280}
               height={1280}
-              className="w-full rounded-[2rem] object-cover"
+              fetchPriority="high"
+              className="aspect-[1/1.04] w-full object-cover"
             />
           </div>
 
-          <div className="glass-card float-slow absolute -top-4 -left-4 flex items-center gap-2 rounded-2xl px-4 py-3">
-            <TrendingUp size={16} className="text-primary" />
-            <span className="text-xs">
-              <span className="font-medium">+312%</span> reach
+          {/* Bottom editorial caption */}
+          <div className="mt-5 flex items-center justify-between gap-4 border-b border-[#E8E8E8] pb-4">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#D52B32]">
+                The CollabConnect approach
+              </p>
+              <p className="mt-1 text-sm font-medium text-[#171717]">
+                Creative thinking. Strategic execution.
+              </p>
+            </div>
+
+            <span className="shrink-0 text-[11px] font-medium tracking-[0.12em] text-[#999999]">
+              CC / 001
             </span>
           </div>
+
+          {/* Subtle background watermark */}
           <div
-            className="glass-card float-slow absolute -bottom-5 left-8 flex items-center gap-2 rounded-2xl px-4 py-3"
-            style={{ animationDelay: "1.4s" }}
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-16 -left-12 -z-10 select-none font-display text-[9rem] font-semibold leading-none text-[#171717]/[0.035] sm:text-[12rem]"
           >
-            <Heart size={16} className="text-primary" />
-            <span className="text-xs">48.2k engagements</span>
-          </div>
-          <div
-            className="glass-card float-slow absolute top-1/3 -right-4 flex items-center gap-2 rounded-2xl px-4 py-3"
-            style={{ animationDelay: "0.7s" }}
-          >
-            <MessageCircle size={16} className="text-primary" />
-            <span className="text-xs">120 brand DMs</span>
+            CC
           </div>
         </motion.div>
       </div>

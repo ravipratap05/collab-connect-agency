@@ -1,6 +1,6 @@
 
 import { Link } from "@tanstack/react-router";
-import { Instagram, Mail, Sparkles } from "lucide-react";
+import { Instagram, Mail } from "lucide-react";
 import { EMAIL, INSTAGRAM } from "./Nav";
 
 export function Footer() {
@@ -16,16 +16,18 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2.5">
-              <span
-                className="grid size-9 shrink-0 place-items-center rounded-full"
-                style={{ background: "var(--gradient-rose)" }}
-              >
-                <Sparkles
-                  size={16}
-                  style={{ color: "var(--primary-foreground)" }}
-                />
-              </span>
+            <Link
+              to="/"
+              className="group inline-flex items-center gap-3"
+              aria-label="CollabConnect Homepage"
+            >
+              <img
+                src="/collabconnect-navbar-icon.png"
+                alt="CollabConnect Logo"
+                className="size-11 shrink-0 object-contain transition-transform duration-300 group-hover:scale-105"
+                width={44}
+                height={44}
+              />
 
               <span
                 className="font-display text-xl font-medium"
@@ -33,7 +35,7 @@ export function Footer() {
               >
                 Collab Connect
               </span>
-            </div>
+            </Link>
 
             <p
               className="mt-4 text-xs tracking-[0.28em] uppercase"

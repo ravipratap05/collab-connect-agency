@@ -50,17 +50,25 @@ export function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="bg-white py-24 text-[#171717] sm:py-32"
+      className="py-24 sm:py-32"
+      style={{
+        background: "var(--surface-page)",
+        color: "var(--text-main)",
+      }}
     >
       <div className="mx-auto max-w-6xl px-5">
-
         <SectionHeading
           eyebrow="Selected Work"
           title={
             <>
               Work that speaks.
               <br />
-              <span className="italic text-[#D52B32]">
+              <span
+                className="italic"
+                style={{
+                  color: "var(--primary)",
+                }}
+              >
                 Strategy that delivers.
               </span>
             </>
@@ -69,17 +77,17 @@ export function Portfolio() {
         />
 
         <div className="mt-14 grid gap-x-6 gap-y-12 lg:grid-cols-3">
-
           {projects.map((project, index) => (
-            <div
-              key={project.title}
-              className={project.span}
-            >
+            <div key={project.title} className={project.span}>
               <Reveal delay={index * 0.08}>
                 <article className="group h-full">
-
                   {/* PROJECT IMAGE */}
-                  <div className="relative overflow-hidden bg-[#F4F4F4]">
+                  <div
+                    className="relative overflow-hidden rounded-2xl"
+                    style={{
+                      background: "var(--surface-card)",
+                    }}
+                  >
                     <img
                       src={project.image}
                       alt={`${project.title} — ${project.tag}`}
@@ -89,56 +97,84 @@ export function Portfolio() {
                       className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
 
-                    <div className="pointer-events-none absolute inset-0 border border-black/[0.06]" />
+                    <div
+                      className="pointer-events-none absolute inset-0 rounded-2xl border"
+                      style={{
+                        borderColor: "var(--border)",
+                      }}
+                    />
                   </div>
 
                   {/* PROJECT DETAILS */}
-                  <div className="border-b border-[#E9E9E9] py-5">
-
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#D52B32]">
+                  <div
+                    className="border-b py-5"
+                    style={{
+                      borderColor: "var(--border)",
+                    }}
+                  >
+                    <p
+                      className="text-[10px] font-semibold uppercase tracking-[0.2em]"
+                      style={{ color: "var(--primary)" }}
+                    >
                       {project.tag}
                     </p>
 
-                    <h3 className="mt-2 text-xl font-medium leading-snug tracking-[-0.03em] text-[#171717] sm:text-2xl">
+                    <h3
+                      className="mt-2 text-xl font-medium leading-snug tracking-[-0.03em] sm:text-2xl"
+                      style={{ color: "var(--text-main)" }}
+                    >
                       {project.title}
                     </h3>
 
                     {/* PROJECT RESULT */}
-                    <p className="mt-3 text-sm font-semibold leading-6 text-[#D52B32]">
+                    <p
+                      className="mt-3 text-sm font-semibold leading-6"
+                      style={{ color: "var(--accent, var(--primary))" }}
+                    >
                       {project.result}
                     </p>
 
-                    <p className="mt-2 max-w-md text-sm leading-6 text-[#777777]">
+                    <p
+                      className="mt-2 max-w-md text-sm leading-6"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
                       {project.description}
                     </p>
-
                   </div>
-
                 </article>
               </Reveal>
             </div>
           ))}
-
         </div>
 
         {/* BOTTOM CTA */}
-        <div className="mt-16 flex flex-col items-start justify-between gap-5 border-t border-[#E9E9E9] pt-8 sm:flex-row sm:items-center">
-
-          <p className="max-w-lg text-sm leading-6 text-[#777777]">
+        <div
+          className="mt-16 flex flex-col items-start justify-between gap-5 border-t pt-8 sm:flex-row sm:items-center"
+          style={{ borderColor: "var(--border)" }}
+        >
+          <p
+            className="max-w-lg text-sm leading-6"
+            style={{ color: "var(--text-secondary)" }}
+          >
             Every project starts with understanding the brand, its audience
             and the outcome it wants to achieve.
           </p>
 
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#171717] transition-colors hover:text-[#D52B32]"
+            className="group inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300 hover:opacity-90"
+            style={{
+              background: "var(--primary)",
+              color: "#FFFFFF",
+            }}
           >
             Have a project in mind?
-            <ArrowUpRight size={17} />
+            <ArrowUpRight
+              size={17}
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </a>
-
         </div>
-
       </div>
     </section>
   );

@@ -170,9 +170,7 @@ export function Hero() {
               </p>
             </div>
 
-            <span className="shrink-0 text-[11px] font-medium tracking-[0.12em] text-[#999999]">
-              CC / 001
-            </span>
+            
           </div>
 
           {/* Subtle background watermark */}

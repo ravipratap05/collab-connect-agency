@@ -54,13 +54,13 @@ export function Faq() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden bg-white py-24 text-[#171717] sm:py-32"
+      className="relative overflow-hidden bg-[var(--surface-page)] py-24 text-[var(--text-main)] transition-colors duration-300 sm:py-32"
     >
-      {/* SUBTLE BACKGROUND ACCENTS */}
+      {/* BACKGROUND ACCENTS */}
 
-      <div className="pointer-events-none absolute -right-32 top-20 size-72 rounded-full bg-[#D52B32]/[0.035] blur-3xl" />
+      <div className="pointer-events-none absolute -right-32 top-20 size-72 rounded-full bg-[#C78F91]/15 blur-3xl dark:bg-[#963E50]/15" />
 
-      <div className="pointer-events-none absolute -left-32 bottom-10 size-72 rounded-full bg-black/[0.025] blur-3xl" />
+      <div className="pointer-events-none absolute -left-32 bottom-10 size-72 rounded-full bg-[#963E50]/[0.04] blur-3xl dark:bg-[#D99AAE]/[0.05]" />
 
       <div className="relative mx-auto max-w-4xl px-5 sm:px-8">
 
@@ -73,7 +73,10 @@ export function Faq() {
               <>
                 A few things
                 <br />
-                worth <span className="italic text-[#D52B32]">knowing.</span>
+                worth{" "}
+                <span className="italic text-[#963E50] dark:text-[#D99AAE]">
+                  knowing.
+                </span>
               </>
             }
             subtitle="Have questions before getting started? Here are some answers to help you understand how working with CollabConnect works."
@@ -86,19 +89,21 @@ export function Faq() {
           <Accordion
             type="single"
             collapsible
-            className="mt-12 overflow-hidden rounded-3xl border border-[#EAEAEA] bg-white px-5 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.025)] sm:px-8"
+            className="mt-12 overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface-card)] px-5 py-2 shadow-[0_12px_40px_rgba(50,25,35,0.06)] transition-colors duration-300 sm:px-8 dark:shadow-[0_12px_40px_rgba(0,0,0,0.2)]"
           >
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={faq.q}
                 value={`faq-${index}`}
-                className="border-b border-[#EEEEEE] last:border-b-0"
+                className="border-b border-[var(--border)] last:border-b-0"
               >
-                <AccordionTrigger className="gap-4 py-6 text-left text-sm font-semibold leading-relaxed text-[#171717] transition-colors hover:text-[#D52B32] hover:no-underline sm:text-base [&>svg]:shrink-0 [&>svg]:text-[#D52B32]">
+                <AccordionTrigger
+                  className="gap-4 py-6 text-left text-sm font-semibold leading-relaxed text-[var(--text-main)] transition-colors hover:text-[#963E50] hover:no-underline sm:text-base dark:hover:text-[#D99AAE] [&>svg]:shrink-0 [&>svg]:text-[#963E50] dark:[&>svg]:text-[#D99AAE]"
+                >
                   {faq.q}
                 </AccordionTrigger>
 
-                <AccordionContent className="max-w-3xl pb-6 text-sm leading-7 text-[#707070]">
+                <AccordionContent className="max-w-3xl pb-6 text-sm leading-7 text-[var(--text-secondary)]">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>
@@ -110,13 +115,13 @@ export function Faq() {
 
         <Reveal delay={0.15}>
           <div className="mt-10 text-center">
-            <p className="text-sm text-[#777]">
+            <p className="text-sm text-[var(--text-secondary)]">
               Still have questions about your project?
             </p>
 
             <a
               href="#contact"
-              className="mt-4 inline-flex items-center justify-center rounded-full border border-[#171717] px-7 py-3 text-sm font-semibold text-[#171717] transition-all duration-300 hover:bg-[#171717] hover:text-white"
+              className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full border border-[#552632] px-7 py-3 text-sm font-semibold text-[#552632] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#552632] hover:text-white dark:border-[#C78F91] dark:text-[#F7F0F1] dark:hover:bg-[#963E50]"
             >
               Talk to Our Team
             </a>

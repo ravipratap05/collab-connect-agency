@@ -80,9 +80,7 @@ export function About() {
                   Our Core Capabilities
                 </p>
 
-                <span className="text-[11px] font-medium text-[#D52B32]">
-                  01 — 08
-                </span>
+                
               </div>
             </Reveal>
 

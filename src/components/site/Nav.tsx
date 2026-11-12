@@ -7,6 +7,7 @@ import {
   Mail,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
@@ -58,9 +59,9 @@ export function Nav() {
       >
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-5 lg:px-8">
 
-          {/* BRAND */}
-          <a
-            href="#top"
+          {/* BRAND - CLICK TO GO TO HOMEPAGE */}
+          <Link
+            to="/"
             onClick={() => setOpen(false)}
             className="group flex min-w-0 shrink-0 items-center gap-2.5 sm:gap-3"
             aria-label="CollabConnect home"
@@ -90,7 +91,7 @@ export function Nav() {
                 DIGITAL GROWTH AGENCY
               </span>
             </span>
-          </a>
+          </Link>
 
           {/* DESKTOP NAVIGATION */}
           <div className="hidden items-center gap-8 lg:flex">

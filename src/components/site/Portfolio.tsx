@@ -90,10 +90,6 @@ export function Portfolio() {
                     />
 
                     <div className="pointer-events-none absolute inset-0 border border-black/[0.06]" />
-
-                    <div className="absolute bottom-4 right-4 flex size-10 items-center justify-center rounded-full bg-white text-[#171717] transition-colors duration-300 group-hover:bg-[#D52B32] group-hover:text-white">
-                      <ArrowUpRight size={19} />
-                    </div>
                   </div>
 
                   {/* PROJECT DETAILS */}

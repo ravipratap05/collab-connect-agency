@@ -1,5 +1,11 @@
 
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import {
+  ArrowUpRight,
+  Menu,
+  X,
+  Instagram,
+  Mail,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -59,7 +65,6 @@ export function Nav() {
             className="group flex min-w-0 shrink-0 items-center gap-2.5 sm:gap-3"
             aria-label="CollabConnect home"
           >
-            {/* OFFICIAL COLLABCONNECT LOGO */}
             <img
               src="/collabconnect-navbar-icon.png"
               alt="CollabConnect logo"
@@ -69,7 +74,6 @@ export function Nav() {
               fetchPriority="high"
             />
 
-            {/* WORDMARK */}
             <span className="flex min-w-0 flex-col">
               <span
                 className="whitespace-nowrap text-[15px] font-bold leading-none tracking-[-0.045em] sm:text-[17px]"
@@ -156,6 +160,7 @@ export function Nav() {
             }}
           >
             <div className="mx-auto max-w-7xl">
+
               <div
                 className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em]"
                 style={{ color: "var(--text-secondary)" }}
@@ -163,8 +168,9 @@ export function Nav() {
                 Navigation
               </div>
 
+              {/* NAVIGATION LINKS */}
               <ul>
-                {links.map((link, index) => (
+                {links.map((link) => (
                   <li
                     key={link.href}
                     className="border-b"
@@ -177,17 +183,12 @@ export function Nav() {
                       style={{ color: "var(--text-main)" }}
                     >
                       {link.label}
-                      <span
-                        className="text-xs"
-                        style={{ color: "var(--text-secondary)" }}
-                      >
-                        0{index + 1}
-                      </span>
                     </a>
                   </li>
                 ))}
               </ul>
 
+              {/* CTA */}
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
@@ -198,6 +199,7 @@ export function Nav() {
                 <ArrowUpRight size={16} />
               </a>
 
+              {/* SOCIAL & EMAIL LINKS */}
               <div
                 className="mt-5 flex items-center justify-between border-t pt-5"
                 style={{ borderColor: "var(--border)" }}
@@ -206,20 +208,23 @@ export function Nav() {
                   href={INSTAGRAM}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-medium transition-colors hover:text-[var(--primary)]"
+                  className="inline-flex items-center gap-2 text-xs font-medium transition-colors hover:text-[var(--primary)]"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  Instagram ↗
+                  <Instagram size={15} />
+                  Instagram
                 </a>
 
                 <a
                   href={EMAIL}
-                  className="text-xs font-medium transition-colors hover:text-[var(--primary)]"
+                  className="inline-flex items-center gap-2 text-xs font-medium transition-colors hover:text-[var(--primary)]"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  Email Us ↗
+                  <Mail size={15} />
+                  Email Us
                 </a>
               </div>
+
             </div>
           </div>
         )}

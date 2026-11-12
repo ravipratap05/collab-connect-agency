@@ -1,3 +1,4 @@
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -208,15 +209,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://www.collabconnect.co.in/",
       },
 
+      // Official CollabConnect Favicon
       {
         rel: "icon",
-        href: "/favicon.jpg",
-        type: "image/jpeg",
+        href: "/collabconnect-navbar-icon.png",
+        type: "image/png",
       },
 
       {
         rel: "apple-touch-icon",
-        href: "/favicon.jpg",
+        href: "/collabconnect-navbar-icon.png",
+        type: "image/png",
       },
 
       {
@@ -296,7 +299,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
   );

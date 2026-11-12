@@ -25,7 +25,6 @@ export function Hero() {
 
         {/* LEFT: EDITORIAL CONTENT */}
         <div className="relative z-10">
-
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -74,30 +73,33 @@ export function Hero() {
             influencer marketing and digital solutions.
           </motion.p>
 
-          {/* CALLS TO ACTION */}
+          {/* PREMIUM CALLS TO ACTION */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.3 }}
-            className="mt-9 flex flex-col gap-3 min-[420px]:flex-row"
+            className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4"
           >
             <a
               href="#contact"
-              className="group inline-flex min-h-14 items-center justify-center gap-3 bg-[#D52B32] px-7 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#B51F28]"
+              className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-md bg-[#D52B32] px-5 py-3 text-[13px] font-semibold text-white shadow-[0_5px_16px_rgba(213,43,50,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B51F28] hover:shadow-[0_8px_22px_rgba(213,43,50,0.22)]"
             >
-              Book a Free Consultation
+              Book a Consultation
               <ArrowUpRight
-                size={17}
-                className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                size={16}
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
             </a>
 
             <a
               href="#services"
-              className="inline-flex min-h-14 items-center justify-center gap-3 border border-[#DEDEDE] bg-white px-7 py-4 text-sm font-semibold text-[#171717] transition-all duration-300 hover:border-[#D52B32] hover:text-[#D52B32]"
+              className="group inline-flex min-h-12 items-center gap-2 py-2 text-[13px] font-semibold text-[#252525] transition-colors hover:text-[#D52B32]"
             >
               Explore Our Services
-              <ArrowUpRight size={16} />
+              <ArrowUpRight
+                size={15}
+                className="text-[#D52B32] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
             </a>
           </motion.div>
 

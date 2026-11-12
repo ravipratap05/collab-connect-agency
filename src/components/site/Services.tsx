@@ -102,7 +102,11 @@ export function Services() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden bg-[#F8F8F8] py-20 text-[#171717] sm:py-28"
+      className="relative overflow-hidden py-20 sm:py-28"
+      style={{
+        background: "var(--surface-page)",
+        color: "var(--text-main)",
+      }}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
@@ -110,7 +114,10 @@ export function Services() {
           title={
             <>
               The right services.
-              <span className="block italic text-[#D52B32]">
+              <span
+                className="block italic"
+                style={{ color: "var(--primary)" }}
+              >
                 One connected strategy.
               </span>
             </>
@@ -121,41 +128,65 @@ export function Services() {
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {services.map((service, index) => (
             <Reveal key={service.title} delay={index * 0.055}>
-              <article className="group relative flex h-full flex-col border border-[#E8E8E8] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#D52B32]/40 hover:shadow-[0_16px_40px_rgba(23,23,23,0.06)] sm:p-7">
+              <article
+                className="group relative flex h-full flex-col rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 sm:p-7"
+                style={{
+                  background: "var(--surface-card)",
+                  borderColor: "var(--border)",
+                }}
+              >
                 {/* ICON */}
                 <div className="flex items-center">
-                  <span className="grid size-11 place-items-center border border-[#EEEEEE] bg-white transition-colors duration-300 group-hover:border-[#D52B32] group-hover:bg-[#D52B32]">
+                  <span
+                    className="grid size-11 place-items-center rounded-xl border transition-all duration-300 group-hover:border-[var(--primary)] group-hover:bg-[var(--primary)]"
+                    style={{
+                      borderColor: "var(--border)",
+                      background: "var(--surface-page)",
+                    }}
+                  >
                     <service.icon
                       size={19}
                       strokeWidth={1.6}
-                      className="text-[#D52B32] transition-colors duration-300 group-hover:text-white"
+                      className="transition-colors duration-300 group-hover:text-white"
+                      style={{ color: "var(--primary)" }}
                     />
                   </span>
                 </div>
 
                 {/* TITLE & DESCRIPTION */}
-                <h3 className="mt-7 font-display text-[25px] font-semibold leading-tight tracking-[-0.025em] text-[#171717]">
+                <h3
+                  className="mt-7 font-display text-[25px] font-semibold leading-tight tracking-[-0.025em]"
+                  style={{ color: "var(--text-main)" }}
+                >
                   {service.title}
                 </h3>
 
-                <p className="mt-3 min-h-[68px] text-[13px] leading-[1.8] text-[#777777]">
+                <p
+                  className="mt-3 min-h-[68px] text-[13px] leading-[1.8]"
+                  style={{ color: "var(--text-secondary)" }}
+                >
                   {service.description}
                 </p>
 
                 {/* ACCENT LINE */}
-                <div className="mt-5 h-px w-full bg-[#EAEAEA] transition-colors duration-300 group-hover:bg-[#D52B32]/50" />
+                <div
+                  className="mt-5 h-px w-full transition-colors duration-300 group-hover:bg-[var(--primary)]"
+                  style={{ background: "var(--border)" }}
+                />
 
                 {/* SERVICE FEATURES */}
                 <ul className="mt-5 grid gap-x-3 gap-y-3 sm:grid-cols-2">
                   {service.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-2 text-[12px] leading-relaxed text-[#555555]"
+                      className="flex items-start gap-2 text-[12px] leading-relaxed"
+                      style={{ color: "var(--text-secondary)" }}
                     >
                       <Check
                         size={14}
                         strokeWidth={2}
-                        className="mt-0.5 shrink-0 text-[#D52B32]"
+                        className="mt-0.5 shrink-0"
+                        style={{ color: "var(--primary)" }}
                       />
                       <span>{item}</span>
                     </li>
@@ -167,12 +198,14 @@ export function Services() {
                   <a
                     href="#contact"
                     aria-label={`Enquire about ${service.title}`}
-                    className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#777777] transition-colors hover:text-[#D52B32]"
+                    className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors hover:text-[var(--primary)]"
+                    style={{ color: "var(--text-secondary)" }}
                   >
                     Enquire
                     <ArrowUpRight
                       size={15}
-                      className="text-[#D52B32] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                      className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                      style={{ color: "var(--primary)" }}
                     />
                   </a>
                 </div>
@@ -183,19 +216,30 @@ export function Services() {
 
         {/* BOTTOM CTA */}
         <Reveal delay={0.2}>
-          <div className="mt-12 flex flex-col items-start justify-between gap-5 border-t border-[#E4E4E4] pt-7 sm:flex-row sm:items-center">
+          <div
+            className="mt-12 flex flex-col items-start justify-between gap-5 border-t pt-7 sm:flex-row sm:items-center"
+            style={{ borderColor: "var(--border)" }}
+          >
             <div>
-              <p className="font-display text-2xl font-medium text-[#171717] sm:text-3xl">
+              <p
+                className="font-display text-2xl font-medium sm:text-3xl"
+                style={{ color: "var(--text-main)" }}
+              >
                 Have a project in mind?
               </p>
-              <p className="mt-1 text-sm text-[#777777]">
+
+              <p
+                className="mt-1 text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
                 Let's find the right way to grow your brand.
               </p>
             </div>
 
             <a
               href="#contact"
-              className="group inline-flex items-center gap-3 bg-[#D52B32] px-5 py-3.5 text-[13px] font-semibold text-white transition-colors hover:bg-[#B51F28]"
+              className="group inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-[13px] font-semibold text-white transition-all duration-300 hover:opacity-90"
+              style={{ background: "var(--primary)" }}
             >
               Discuss Your Project
               <ArrowUpRight

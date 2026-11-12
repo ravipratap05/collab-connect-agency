@@ -166,7 +166,7 @@ export function WhyUs() {
 
             <a
               href="#contact"
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full px-5 py-3 text-[13px] font-semibold transition-all duration-300 hover:opacity-90"
+              className="group inline-flex self-start items-center gap-2 rounded-full px-5 py-3 text-[13px] font-semibold transition-all duration-300 hover:opacity-90"
               style={{
                 background: "var(--primary)",
                 color: "#FFFFFF",

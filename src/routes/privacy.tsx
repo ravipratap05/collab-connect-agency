@@ -33,7 +33,7 @@ const sections = [
   {
     h: "1. Introduction",
     p: [
-      'Welcome to CollabConnect,'
+      "Welcome to CollabConnect.",
       "CollabConnect provides digital marketing, social media management, content creation, influencer marketing, website development, QR digital menus, WhatsApp automation and related digital services.",
       "This Privacy Policy explains what personal information we collect, how we use it, when we share it and the choices available to you when you visit our website, contact us or use our services.",
     ],

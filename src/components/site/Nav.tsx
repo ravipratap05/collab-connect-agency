@@ -42,11 +42,13 @@ export function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <nav
-        className={`border-b border-[#171717]/[0.07] bg-white/95 backdrop-blur-xl transition-all duration-300 ${
-          scrolled
-            ? "shadow-[0_4px_24px_rgba(0,0,0,0.045)]"
-            : ""
+        className={`border-b backdrop-blur-xl transition-all duration-300 ${
+          scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.12)]" : ""
         }`}
+        style={{
+          background: "var(--surface-page)",
+          borderColor: "var(--border)",
+        }}
       >
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-5 lg:px-8">
 
@@ -69,12 +71,18 @@ export function Nav() {
 
             {/* WORDMARK */}
             <span className="flex min-w-0 flex-col">
-              <span className="whitespace-nowrap text-[15px] font-bold leading-none tracking-[-0.045em] text-[#171717] sm:text-[17px]">
+              <span
+                className="whitespace-nowrap text-[15px] font-bold leading-none tracking-[-0.045em] sm:text-[17px]"
+                style={{ color: "var(--text-main)" }}
+              >
                 COLLABCONNECT
-                <span className="text-[#D52B32]">.</span>
+                <span style={{ color: "var(--primary)" }}>.</span>
               </span>
 
-              <span className="mt-1.5 whitespace-nowrap text-[8px] font-medium tracking-[0.17em] text-[#777777] sm:text-[9px] sm:tracking-[0.2em]">
+              <span
+                className="mt-1.5 whitespace-nowrap text-[8px] font-medium tracking-[0.17em] sm:text-[9px] sm:tracking-[0.2em]"
+                style={{ color: "var(--text-secondary)" }}
+              >
                 DIGITAL GROWTH AGENCY
               </span>
             </span>
@@ -87,7 +95,8 @@ export function Nav() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="relative py-2 text-[13px] font-medium text-[#555555] transition-colors duration-200 hover:text-[#D52B32] after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#D52B32] after:transition-all hover:after:w-full"
+                    className="relative py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[var(--primary)] after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[var(--primary)] after:transition-all hover:after:w-full"
+                    style={{ color: "var(--text-secondary)" }}
                   >
                     {link.label}
                   </a>
@@ -95,13 +104,17 @@ export function Nav() {
               ))}
             </ul>
 
-            <div className="h-5 w-px bg-[#E5E5E5]" />
+            <div
+              className="h-5 w-px"
+              style={{ background: "var(--border)" }}
+            />
 
             <ThemeToggle />
 
             <a
               href="#contact"
-              className="group inline-flex items-center gap-3 rounded-sm bg-[#D52B32] px-5 py-3 text-[13px] font-semibold text-white transition-all duration-300 hover:bg-[#B91F28]"
+              className="group inline-flex items-center gap-3 rounded-full px-5 py-3 text-[13px] font-semibold text-white transition-all duration-300 hover:opacity-90"
+              style={{ background: "var(--primary)" }}
             >
               Let's Talk
               <ArrowUpRight
@@ -121,7 +134,11 @@ export function Nav() {
               aria-label={open ? "Close navigation" : "Open navigation"}
               aria-expanded={open}
               aria-controls="mobile-navigation"
-              className="grid size-10 place-items-center border border-[#E8E8E8] text-[#171717] transition-colors hover:border-[#D52B32] hover:text-[#D52B32]"
+              className="grid size-10 place-items-center rounded-full border transition-colors hover:text-[var(--primary)]"
+              style={{
+                borderColor: "var(--border)",
+                color: "var(--text-main)",
+              }}
             >
               {open ? <X size={19} /> : <Menu size={19} />}
             </button>
@@ -132,23 +149,38 @@ export function Nav() {
         {open && (
           <div
             id="mobile-navigation"
-            className="border-t border-[#EEEEEE] bg-white px-5 pb-6 pt-4 shadow-xl lg:hidden"
+            className="border-t px-5 pb-6 pt-4 shadow-xl lg:hidden"
+            style={{
+              background: "var(--surface-card)",
+              borderColor: "var(--border)",
+            }}
           >
             <div className="mx-auto max-w-7xl">
-              <div className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#999999]">
+              <div
+                className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em]"
+                style={{ color: "var(--text-secondary)" }}
+              >
                 Navigation
               </div>
 
-              <ul className="divide-y divide-[#EEEEEE]">
+              <ul>
                 {links.map((link, index) => (
-                  <li key={link.href}>
+                  <li
+                    key={link.href}
+                    className="border-b"
+                    style={{ borderColor: "var(--border)" }}
+                  >
                     <a
                       href={link.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-center justify-between py-4 text-[15px] font-medium text-[#171717] transition-colors hover:text-[#D52B32]"
+                      className="flex items-center justify-between py-4 text-[15px] font-medium transition-colors hover:text-[var(--primary)]"
+                      style={{ color: "var(--text-main)" }}
                     >
                       {link.label}
-                      <span className="text-xs text-[#AAAAAA]">
+                      <span
+                        className="text-xs"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
                         0{index + 1}
                       </span>
                     </a>
@@ -159,25 +191,31 @@ export function Nav() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="mt-5 flex items-center justify-center gap-2 bg-[#D52B32] px-5 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#B91F28]"
+                className="mt-5 flex items-center justify-center gap-2 rounded-full px-5 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ background: "var(--primary)" }}
               >
                 Book a Strategy Call
                 <ArrowUpRight size={16} />
               </a>
 
-              <div className="mt-5 flex items-center justify-between border-t border-[#EEEEEE] pt-5">
+              <div
+                className="mt-5 flex items-center justify-between border-t pt-5"
+                style={{ borderColor: "var(--border)" }}
+              >
                 <a
                   href={INSTAGRAM}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-medium text-[#666666] hover:text-[#D52B32]"
+                  className="text-xs font-medium transition-colors hover:text-[var(--primary)]"
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   Instagram ↗
                 </a>
 
                 <a
                   href={EMAIL}
-                  className="text-xs font-medium text-[#666666] hover:text-[#D52B32]"
+                  className="text-xs font-medium transition-colors hover:text-[var(--primary)]"
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   Email Us ↗
                 </a>

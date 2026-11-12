@@ -6,9 +6,9 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * COLLABCONNECT — EDITORIAL LUXURY / CORPORATE AUTHORITY
- * Palette: White / Soft Black / Brand Red
- * Keep semantic tokens so existing components remain compatible.
+ * COLLABCONNECT — SIGNATURE BURGUNDY THEME
+ * Deep Burgundy / Charcoal / Brand Red / Soft Ivory
+ * Premium editorial creative agency design system.
  */
 
 @theme inline {
@@ -52,155 +52,208 @@
   --font-sans: "Jost", Arial, sans-serif;
 }
 
-/* -----------------------------------------
-   LIGHT THEME
------------------------------------------ */
+/* =========================================
+   LIGHT THEME — SIGNATURE BURGUNDY
+========================================= */
 
 :root {
   color-scheme: light;
 
-  --radius: 0.85rem;
+  --radius: 0.9rem;
 
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f5f4;
+  --foreground: #21191b;
 
   --card: #ffffff;
-  --card-foreground: #171717;
+  --card-foreground: #21191b;
 
   --popover: #ffffff;
-  --popover-foreground: #171717;
+  --popover-foreground: #21191b;
 
   --primary: #d52b32;
   --primary-foreground: #ffffff;
 
-  --secondary: #f5f5f5;
-  --secondary-foreground: #252525;
+  --secondary: #eee8e7;
+  --secondary-foreground: #302326;
 
-  --muted: #f4f4f4;
-  --muted-foreground: #707070;
+  --muted: #eeeae9;
+  --muted-foreground: #766b6c;
 
-  --accent: #fcebed;
-  --accent-foreground: #a91e26;
+  --accent: #f5e3e4;
+  --accent-foreground: #9f2530;
 
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  --border: #e9e9e9;
-  --input: #e2e2e2;
+  --border: #e7dfde;
+  --input: #e2dada;
   --ring: #d52b32;
 
-  /* Legacy aliases mapped to the new brand */
-  --cream: #ffffff;
-  --sand: #f5f5f5;
-  --nude: #eeeeee;
+  /* Legacy aliases */
+  --cream: #f7f5f4;
+  --sand: #eee8e7;
+  --nude: #e5dcda;
   --rose: #d52b32;
-  --rose-deep: #a91e26;
-  --gold: #b7b7b7;
+  --rose-deep: #a5232d;
+  --gold: #b78b8d;
 
-  /* Visual system */
+  /* Background gradients */
+
   --gradient-hero:
     radial-gradient(
-      ellipse at 90% 5%,
-      rgba(213, 43, 50, 0.055),
+      ellipse at 85% 10%,
+      rgba(213, 43, 50, 0.34),
       transparent 42%
     ),
-    linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    radial-gradient(
+      ellipse at 5% 85%,
+      rgba(112, 37, 45, 0.45),
+      transparent 40%
+    ),
+    linear-gradient(
+      135deg,
+      #21191b 0%,
+      #3a2025 55%,
+      #70252d 100%
+    );
 
   --gradient-rose: linear-gradient(
     135deg,
     #d52b32 0%,
-    #a91e26 100%
+    #a5232d 100%
   );
 
   --gradient-sheen: linear-gradient(
     120deg,
-    rgba(213, 43, 50, 0.08),
-    transparent 60%
+    rgba(213, 43, 50, 0.13),
+    rgba(112, 37, 45, 0.04) 55%,
+    transparent 80%
   );
 
+  --gradient-burgundy: linear-gradient(
+    135deg,
+    #21191b 0%,
+    #3a2025 55%,
+    #70252d 100%
+  );
+
+  --gradient-contact: linear-gradient(
+    135deg,
+    #171315 0%,
+    #302025 50%,
+    #70252d 100%
+  );
+
+  /* Shadows */
+
   --shadow-luxe:
-    0 24px 60px -38px rgba(23, 23, 23, 0.28);
+    0 24px 60px -32px rgba(33, 25, 27, 0.28);
 
   --shadow-soft:
-    0 8px 28px -18px rgba(23, 23, 23, 0.18);
+    0 8px 28px -18px rgba(33, 25, 27, 0.18);
 
-  --glass-border: rgba(23, 23, 23, 0.08);
+  --shadow-red:
+    0 12px 35px -15px rgba(213, 43, 50, 0.35);
+
+  --glass-border: rgba(33, 25, 27, 0.09);
 }
 
-/* -----------------------------------------
-   DARK THEME
------------------------------------------ */
+/* =========================================
+   DARK THEME — CHARCOAL / BURGUNDY
+========================================= */
 
 .dark {
   color-scheme: dark;
 
-  --background: #111111;
-  --foreground: #f5f5f5;
+  --background: #171315;
+  --foreground: #f7f2f1;
 
-  --card: #1b1b1b;
-  --card-foreground: #f5f5f5;
+  --card: #241d20;
+  --card-foreground: #f7f2f1;
 
-  --popover: #202020;
-  --popover-foreground: #f5f5f5;
+  --popover: #2b2023;
+  --popover-foreground: #f7f2f1;
 
-  --primary: #ef454c;
+  --primary: #ef515a;
   --primary-foreground: #ffffff;
 
-  --secondary: #252525;
-  --secondary-foreground: #f2f2f2;
+  --secondary: #302528;
+  --secondary-foreground: #f5e9e9;
 
-  --muted: #242424;
-  --muted-foreground: #a5a5a5;
+  --muted: #292123;
+  --muted-foreground: #b8a9aa;
 
-  --accent: #351b1d;
+  --accent: #48252c;
   --accent-foreground: #ffb9bc;
 
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
 
-  --border: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.11);
   --input: rgba(255, 255, 255, 0.16);
-  --ring: #ef454c;
+  --ring: #ef515a;
 
-  --cream: #171717;
-  --sand: #222222;
-  --nude: #303030;
-  --rose: #ef454c;
+  --cream: #21191b;
+  --sand: #302528;
+  --nude: #403236;
+  --rose: #ef515a;
   --rose-deep: #b82730;
-  --gold: #a5a5a5;
+  --gold: #c08e91;
 
   --gradient-hero:
     radial-gradient(
-      ellipse at 90% 5%,
-      rgba(213, 43, 50, 0.12),
-      transparent 45%
+      ellipse at 85% 10%,
+      rgba(213, 43, 50, 0.24),
+      transparent 44%
     ),
-    linear-gradient(180deg, #151515 0%, #111111 100%);
+    linear-gradient(
+      135deg,
+      #171315 0%,
+      #302025 55%,
+      #57232b 100%
+    );
 
   --gradient-rose: linear-gradient(
     135deg,
-    #ef454c 0%,
+    #ef515a 0%,
     #b82730 100%
   );
 
   --gradient-sheen: linear-gradient(
     120deg,
-    rgba(239, 69, 76, 0.12),
-    transparent 60%
+    rgba(239, 81, 90, 0.15),
+    transparent 65%
+  );
+
+  --gradient-burgundy: linear-gradient(
+    135deg,
+    #171315 0%,
+    #302025 55%,
+    #57232b 100%
+  );
+
+  --gradient-contact: linear-gradient(
+    135deg,
+    #111011 0%,
+    #261b1f 50%,
+    #57232b 100%
   );
 
   --shadow-luxe:
-    0 24px 60px -35px rgba(0, 0, 0, 0.7);
+    0 24px 60px -30px rgba(0, 0, 0, 0.65);
 
   --shadow-soft:
-    0 8px 28px -18px rgba(0, 0, 0, 0.55);
+    0 8px 28px -18px rgba(0, 0, 0, 0.5);
 
-  --glass-border: rgba(255, 255, 255, 0.09);
+  --shadow-red:
+    0 12px 35px -15px rgba(213, 43, 50, 0.3);
+
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-/* -----------------------------------------
+/* =========================================
    BASE STYLES
------------------------------------------ */
+========================================= */
 
 @layer base {
   * {
@@ -220,6 +273,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+
     transition:
       background-color 0.25s ease,
       color 0.25s ease;
@@ -245,7 +299,7 @@
   }
 
   ::selection {
-    background: rgba(213, 43, 50, 0.18);
+    background: rgba(213, 43, 50, 0.24);
     color: var(--color-foreground);
   }
 
@@ -270,12 +324,32 @@
   }
 }
 
-/* -----------------------------------------
+/* =========================================
    BACKGROUND UTILITIES
------------------------------------------ */
+========================================= */
 
 @utility surface-hero {
   background: var(--gradient-hero);
+}
+
+@utility surface-burgundy {
+  background: var(--gradient-burgundy);
+  color: #ffffff;
+}
+
+@utility surface-contact {
+  background: var(--gradient-contact);
+  color: #ffffff;
+}
+
+@utility surface-ivory {
+  background: #f7f5f4;
+  color: #21191b;
+}
+
+@utility surface-charcoal {
+  background: #21191b;
+  color: #ffffff;
 }
 
 @utility glass-card {
@@ -301,6 +375,18 @@
   color: transparent;
 }
 
+@utility text-burgundy-gradient {
+  background: linear-gradient(
+    135deg,
+    #70252d,
+    #d52b32,
+    #a5232d
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 @utility rose-rule {
   height: 1px;
   background: linear-gradient(
@@ -320,9 +406,9 @@
   color: var(--color-muted-foreground);
 }
 
-/* -----------------------------------------
+/* =========================================
    INTERACTION UTILITIES
------------------------------------------ */
+========================================= */
 
 @utility lift {
   transition:
@@ -349,9 +435,9 @@
   pointer-events: none;
 }
 
-/* -----------------------------------------
+/* =========================================
    ANIMATIONS
------------------------------------------ */
+========================================= */
 
 @keyframes float-slow {
   0%,

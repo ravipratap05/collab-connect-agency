@@ -17,10 +17,10 @@ const SCRIPT_URL =
 type Market = "India" | "International";
 
 const inputClass =
-  "w-full rounded-2xl border border-[#E5E5E5] bg-white px-4 py-3.5 text-sm text-[#171717] outline-none transition-all duration-200 placeholder:text-[#A0A0A0] hover:border-[#CCCCCC] focus:border-[#D52B32] focus:ring-2 focus:ring-[#D52B32]/10";
+  "w-full rounded-2xl border border-[var(--input)] bg-[var(--surface-card)] px-4 py-3.5 text-sm text-[var(--text-main)] outline-none transition-all duration-200 placeholder:text-[var(--text-tertiary)] hover:border-[#963E50] focus:border-[#963E50] focus:ring-2 focus:ring-[#963E50]/10 dark:focus:border-[#D99AAE]";
 
 const labelClass =
-  "mb-2 block text-sm font-semibold text-[#333333]";
+  "mb-2 block text-sm font-semibold text-[var(--text-main)]";
 
 export function Contact() {
   const [loading, setLoading] = useState(false);
@@ -74,16 +74,26 @@ export function Contact() {
     }
   }
 
+  const marketButtonClass = (active: boolean) =>
+    `flex items-center justify-center gap-2 rounded-full border px-4 py-3.5 text-sm font-semibold transition-all duration-200 ${
+      active
+        ? "border-[#552632] bg-[#552632] text-white dark:border-[#963E50] dark:bg-[#963E50] dark:text-white"
+        : "border-[var(--border)] bg-[var(--surface-card)] text-[var(--text-secondary)] hover:border-[#963E50] hover:text-[#552632] dark:hover:border-[#D99AAE] dark:hover:text-[#F7F0F1]"
+    }`;
+
+  const directLinkClass =
+    "inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--text-main)] transition-all duration-200 hover:border-[#963E50] hover:text-[#963E50] dark:hover:border-[#D99AAE] dark:hover:text-[#D99AAE]";
+
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-white py-24 text-[#171717] sm:py-32"
+      className="relative overflow-hidden bg-[var(--surface-page)] py-24 text-[var(--text-main)] transition-colors duration-300 sm:py-32"
     >
       {/* BACKGROUND ACCENTS */}
 
-      <div className="pointer-events-none absolute -left-32 top-20 size-80 rounded-full bg-[#D52B32]/[0.045] blur-3xl" />
+      <div className="pointer-events-none absolute -left-32 top-20 size-80 rounded-full bg-[#C78F91]/15 blur-3xl dark:bg-[#963E50]/15" />
 
-      <div className="pointer-events-none absolute -right-32 bottom-10 size-80 rounded-full bg-black/[0.025] blur-3xl" />
+      <div className="pointer-events-none absolute -right-32 bottom-10 size-80 rounded-full bg-[#963E50]/[0.04] blur-3xl dark:bg-[#D99AAE]/[0.06]" />
 
       <div className="relative mx-auto max-w-5xl px-5 sm:px-8">
         <Reveal>
@@ -95,27 +105,25 @@ export function Contact() {
                 success ? "[transform:rotateY(180deg)]" : ""
               }`}
             >
-              {/* =====================================
-                  FRONT — CONTACT FORM
-              ===================================== */}
+              {/* FRONT — CONTACT FORM */}
 
-              <div className="relative rounded-[2rem] border border-[#EAEAEA] bg-white px-6 py-12 shadow-[0_20px_70px_rgba(0,0,0,0.045)] [backface-visibility:hidden] sm:rounded-[2.5rem] sm:px-12 sm:py-14">
+              <div className="relative rounded-[2rem] border border-[var(--border)] bg-[var(--surface-card)] px-6 py-12 shadow-[0_20px_70px_rgba(50,25,35,0.08)] [backface-visibility:hidden] transition-colors duration-300 sm:rounded-[2.5rem] sm:px-12 sm:py-14 dark:shadow-[0_20px_70px_rgba(0,0,0,0.3)]">
 
                 {/* HEADER */}
 
                 <div className="mx-auto max-w-2xl text-center">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#D52B32] sm:text-xs">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#963E50] sm:text-xs dark:text-[#D99AAE]">
                     Let's Talk
                   </p>
 
-                  <h2 className="mt-5 font-serif text-4xl leading-[1.1] font-medium tracking-tight sm:text-6xl">
+                  <h2 className="mt-5 font-display text-4xl leading-[1.1] font-medium tracking-tight text-[var(--text-main)] sm:text-6xl">
                     Let's Grow Your{" "}
-                    <span className="italic text-[#D52B32]">
+                    <span className="italic text-[#963E50] dark:text-[#D99AAE]">
                       Brand.
                     </span>
                   </h2>
 
-                  <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[#777777] sm:text-base">
+                  <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[var(--text-secondary)] sm:text-base">
                     Tell us about your requirements and we'll get back
                     to you with the right strategy for your business.
                   </p>
@@ -173,11 +181,7 @@ export function Contact() {
                         type="button"
                         onClick={() => setMarket("India")}
                         aria-pressed={market === "India"}
-                        className={`flex items-center justify-center gap-2 rounded-full border px-4 py-3.5 text-sm font-semibold transition-all duration-200 ${
-                          market === "India"
-                            ? "border-[#171717] bg-[#171717] text-white"
-                            : "border-[#E5E5E5] bg-white text-[#666] hover:border-[#BBBBBB]"
-                        }`}
+                        className={marketButtonClass(market === "India")}
                       >
                         <span>🇮🇳</span>
                         India
@@ -188,11 +192,9 @@ export function Contact() {
                         type="button"
                         onClick={() => setMarket("International")}
                         aria-pressed={market === "International"}
-                        className={`flex items-center justify-center gap-2 rounded-full border px-4 py-3.5 text-sm font-semibold transition-all duration-200 ${
-                          market === "International"
-                            ? "border-[#171717] bg-[#171717] text-white"
-                            : "border-[#E5E5E5] bg-white text-[#666] hover:border-[#BBBBBB]"
-                        }`}
+                        className={marketButtonClass(
+                          market === "International",
+                        )}
                       >
                         <Globe size={16} />
                         International
@@ -207,7 +209,7 @@ export function Contact() {
                     <div>
                       <label className={labelClass}>
                         Instagram Profile
-                        <span className="ml-1 font-normal text-[#999]">
+                        <span className="ml-1 font-normal text-[var(--text-tertiary)]">
                           (Optional)
                         </span>
                       </label>
@@ -235,14 +237,8 @@ export function Contact() {
                         <option value="" disabled>
                           Select your category
                         </option>
-
-                        <option value="Creator">
-                          Creator
-                        </option>
-
-                        <option value="Brand">
-                          Brand
-                        </option>
+                        <option value="Creator">Creator</option>
+                        <option value="Brand">Brand</option>
                       </select>
                     </div>
                   </div>
@@ -256,8 +252,6 @@ export function Contact() {
                         : "sm:grid-cols-1"
                     }`}
                   >
-                    {/* SERVICE */}
-
                     <div>
                       <label className={labelClass}>
                         Service You Need *
@@ -276,43 +270,33 @@ export function Contact() {
                         <option value="Social Media Management">
                           Social Media Management
                         </option>
-
                         <option value="Content Creation & Video Editing">
                           Content Creation & Video Editing
                         </option>
-
                         <option value="Creator Growth">
                           Creator Growth
                         </option>
-
                         <option value="Influencer Marketing">
                           Influencer Marketing
                         </option>
-
                         <option value="UGC Creator Outreach">
                           UGC Creator Outreach
                         </option>
-
                         <option value="Brand Collaborations">
                           Brand Collaborations
                         </option>
-
                         <option value="Campaign Management">
                           Campaign Management
                         </option>
-
                         <option value="Meta Ads Management">
                           Meta Ads Management
                         </option>
-
                         <option value="Website Development">
                           Website Development
                         </option>
-
                         <option value="QR Digital Menu">
                           QR Digital Menu
                         </option>
-
                         <option value="WhatsApp Automation & AI">
                           WhatsApp Automation & AI
                         </option>
@@ -326,14 +310,9 @@ export function Contact() {
                         <option value="Multiple Services">
                           Multiple Services
                         </option>
-
-                        <option value="Other">
-                          Other
-                        </option>
+                        <option value="Other">Other</option>
                       </select>
                     </div>
-
-                    {/* BUDGET — ONLY FOR BRAND */}
 
                     {type === "Brand" && (
                       <div>
@@ -353,51 +332,20 @@ export function Contact() {
 
                           {market === "India" ? (
                             <>
-                              <option value="Below ₹5,000">
-                                Below ₹5,000
-                              </option>
-
-                              <option value="₹5,000 – ₹10,000">
-                                ₹5,000 – ₹10,000
-                              </option>
-
-                              <option value="₹10,000 – ₹20,000">
-                                ₹10,000 – ₹20,000
-                              </option>
-
-                              <option value="₹20,000 – ₹30,000">
-                                ₹20,000 – ₹30,000
-                              </option>
-
-                              <option value="₹30,000 – ₹50,000">
-                                ₹30,000 – ₹50,000
-                              </option>
-
-                              <option value="₹50,000+">
-                                ₹50,000+
-                              </option>
+                              <option value="Below ₹5,000">Below ₹5,000</option>
+                              <option value="₹5,000 – ₹10,000">₹5,000 – ₹10,000</option>
+                              <option value="₹10,000 – ₹20,000">₹10,000 – ₹20,000</option>
+                              <option value="₹20,000 – ₹30,000">₹20,000 – ₹30,000</option>
+                              <option value="₹30,000 – ₹50,000">₹30,000 – ₹50,000</option>
+                              <option value="₹50,000+">₹50,000+</option>
                             </>
                           ) : (
                             <>
-                              <option value="Below $100">
-                                Below $100
-                              </option>
-
-                              <option value="$100 – $250">
-                                $100 – $250
-                              </option>
-
-                              <option value="$250 – $500">
-                                $250 – $500
-                              </option>
-
-                              <option value="$500 – $1,000">
-                                $500 – $1,000
-                              </option>
-
-                              <option value="$1,000+">
-                                $1,000+
-                              </option>
+                              <option value="Below $100">Below $100</option>
+                              <option value="$100 – $250">$100 – $250</option>
+                              <option value="$250 – $500">$250 – $500</option>
+                              <option value="$500 – $1,000">$500 – $1,000</option>
+                              <option value="$1,000+">$1,000+</option>
                             </>
                           )}
                         </select>
@@ -426,16 +374,14 @@ export function Contact() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#D52B32] px-7 py-4 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(213,43,50,0.16)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B9232A] hover:shadow-[0_12px_30px_rgba(213,43,50,0.22)] disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#552632] px-7 py-4 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(85,38,50,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#963E50] hover:shadow-[0_12px_30px_rgba(85,38,50,0.25)] disabled:cursor-not-allowed disabled:opacity-60 dark:bg-[#963E50] dark:hover:bg-[#B75B70]"
                   >
                     <Send size={16} />
-
                     {loading ? "Submitting..." : "Get My Growth Plan"}
-
                     {!loading && <ArrowUpRight size={16} />}
                   </button>
 
-                  <p className="text-center text-[11px] leading-relaxed text-[#999]">
+                  <p className="text-center text-[11px] leading-relaxed text-[var(--text-tertiary)]">
                     By submitting this form, you agree to be contacted
                     by CollabConnect regarding your enquiry.
                   </p>
@@ -443,8 +389,8 @@ export function Contact() {
 
                 {/* DIRECT CONTACT */}
 
-                <div className="mx-auto mt-9 max-w-3xl border-t border-[#EEEEEE] pt-7">
-                  <p className="mb-4 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-[#999]">
+                <div className="mx-auto mt-9 max-w-3xl border-t border-[var(--border)] pt-7">
+                  <p className="mb-4 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--text-secondary)]">
                     Prefer to connect directly?
                   </p>
 
@@ -453,7 +399,7 @@ export function Contact() {
                       href={INSTAGRAM}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-[#E5E5E5] px-5 py-3 text-sm font-medium text-[#444] transition-all duration-200 hover:border-[#D52B32] hover:text-[#D52B32]"
+                      className={directLinkClass}
                     >
                       <Instagram size={16} />
                       @_collab.connect
@@ -461,7 +407,7 @@ export function Contact() {
 
                     <a
                       href={EMAIL}
-                      className="inline-flex items-center gap-2 rounded-full border border-[#E5E5E5] px-5 py-3 text-sm font-medium text-[#444] transition-all duration-200 hover:border-[#D52B32] hover:text-[#D52B32]"
+                      className={directLinkClass}
                     >
                       <Mail size={16} />
                       Email Us
@@ -470,33 +416,31 @@ export function Contact() {
                 </div>
               </div>
 
-              {/* =====================================
-                  BACK — THANK YOU
-              ===================================== */}
+              {/* BACK — THANK YOU */}
 
-              <div className="absolute inset-0 flex min-h-full items-center justify-center rounded-[2rem] border border-[#EAEAEA] bg-white px-7 py-12 text-center shadow-[0_20px_70px_rgba(0,0,0,0.045)] [transform:rotateY(180deg)] [backface-visibility:hidden] sm:rounded-[2.5rem] sm:px-14">
+              <div className="absolute inset-0 flex min-h-full items-center justify-center rounded-[2rem] border border-[var(--border)] bg-[var(--surface-card)] px-7 py-12 text-center shadow-[0_20px_70px_rgba(50,25,35,0.08)] [transform:rotateY(180deg)] [backface-visibility:hidden] sm:rounded-[2.5rem] sm:px-14 dark:shadow-[0_20px_70px_rgba(0,0,0,0.3)]">
                 <div className="max-w-md">
-                  <div className="mx-auto mb-7 flex size-20 items-center justify-center rounded-full bg-[#D52B32]/[0.08] text-[#D52B32]">
+                  <div className="mx-auto mb-7 flex size-20 items-center justify-center rounded-full bg-[#963E50]/10 text-[#963E50] dark:bg-[#D99AAE]/10 dark:text-[#D99AAE]">
                     <CheckCircle2 size={42} strokeWidth={1.5} />
                   </div>
 
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#D52B32]">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#963E50] dark:text-[#D99AAE]">
                     Thank You
                   </p>
 
-                  <h3 className="mt-4 font-serif text-4xl font-medium sm:text-5xl">
+                  <h3 className="mt-4 font-display text-4xl font-medium text-[var(--text-main)] sm:text-5xl">
                     We've Got It!
                   </h3>
 
-                  <p className="mx-auto mt-5 max-w-sm text-sm leading-7 text-[#777] sm:text-base">
+                  <p className="mx-auto mt-5 max-w-sm text-sm leading-7 text-[var(--text-secondary)] sm:text-base">
                     Thanks for reaching out to CollabConnect.
                     Your enquiry has been submitted. Our team will
                     review your requirements and get in touch.
                   </p>
 
-                  <div className="mx-auto mt-8 h-px max-w-xs bg-[#EAEAEA]" />
+                  <div className="mx-auto mt-8 h-px max-w-xs bg-[var(--border)]" />
 
-                  <p className="mt-6 text-sm text-[#888]">
+                  <p className="mt-6 text-sm text-[var(--text-secondary)]">
                     Meanwhile, connect with us on Instagram.
                   </p>
 
@@ -504,7 +448,7 @@ export function Contact() {
                     href={INSTAGRAM}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#E5E5E5] px-6 py-3 text-sm font-semibold text-[#333] transition-all duration-200 hover:border-[#D52B32] hover:text-[#D52B32]"
+                    className={`mt-5 ${directLinkClass}`}
                   >
                     <Instagram size={16} />
                     @_collab.connect

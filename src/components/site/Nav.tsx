@@ -1,13 +1,14 @@
-import { Instagram, Mail, Menu, Sparkles, X } from "lucide-react";
+
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Our Work", href: "#portfolio" },
   { label: "Pricing", href: "#pricing" },
-  { label: "Work", href: "#portfolio" },
-  { label: "FAQ", href: "#faq" },
+  { label: "FAQs", href: "#faq" },
 ];
 
 export const INSTAGRAM = "https://instagram.com/_collab.connect";
@@ -18,99 +19,161 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+    <header className="fixed inset-x-0 top-0 z-50">
       <nav
-        className={`mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-full px-4 py-2.5 transition-all duration-500 sm:px-6 ${
-          scrolled ? "glass-panel" : "glass-card"
+        className={`border-b border-[#171717]/[0.07] bg-white/95 backdrop-blur-xl transition-all duration-300 ${
+          scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.045)]" : ""
         }`}
       >
-        <a href="#top" className="flex min-w-0 items-center gap-2.5">
-          <span
-            className="grid size-9 shrink-0 place-items-center rounded-full"
-            style={{ background: "var(--gradient-rose)" }}
-          >
-            <Sparkles size={16} className="text-primary-foreground" />
-          </span>
-          <span className="min-w-0">
-            <span className="font-display block truncate text-lg leading-none font-medium">
-              Collab Connect
-            </span>
-            <span className="text-muted-foreground hidden text-[0.6rem] tracking-[0.28em] uppercase sm:block">
-              Creators • Brands • Growth
-            </span>
-          </span>
-        </a>
+        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-4 px-5 lg:px-8">
 
-        <div className="flex items-center gap-2">
-          <ul className="text-foreground/75 hidden items-center gap-7 pr-2 text-sm lg:flex">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} className="hover:text-primary transition-colors">
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <ThemeToggle />
+          {/* BRAND */}
           <a
-            href="#contact"
-            className="text-primary-foreground shadow-soft hidden rounded-full px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.03] sm:inline-flex"
-            style={{ background: "var(--gradient-rose)" }}
+            href="#top"
+            onClick={() => setOpen(false)}
+            className="group flex shrink-0 items-center gap-3"
+            aria-label="CollabConnect home"
           >
-            Book a Call
-          </a>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-            className="glass-card grid size-10 shrink-0 place-items-center rounded-full lg:hidden"
-          >
-            {open ? <X size={16} /> : <Menu size={16} />}
-          </button>
-        </div>
-      </nav>
+            {/* Replace this CC monogram with the official logo asset */}
+            <span className="grid size-10 place-items-center rounded-sm bg-[#171717] text-sm font-bold tracking-tight text-white transition-colors group-hover:bg-[#D52B32]">
+              CC<span className="text-[#F05A60]">.</span>
+            </span>
 
-      {open ? (
-        <div className="glass-panel animate-fade-in mx-auto mt-3 max-w-6xl rounded-3xl p-5 lg:hidden">
-          <ul className="grid gap-1">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="hover:bg-secondary block rounded-2xl px-4 py-3 text-sm transition-colors"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-4 flex gap-2">
+            <span className="flex flex-col">
+              <span className="text-[17px] font-bold leading-none tracking-[-0.04em] text-[#171717]">
+                COLLABCONNECT
+                <span className="text-[#D52B32]">.</span>
+              </span>
+
+              <span className="mt-1.5 text-[9px] font-medium tracking-[0.2em] text-[#777777]">
+                DIGITAL GROWTH AGENCY
+              </span>
+            </span>
+          </a>
+
+          {/* DESKTOP NAVIGATION */}
+          <div className="hidden items-center gap-8 lg:flex">
+            <ul className="flex items-center gap-7">
+              {links.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="relative py-2 text-[13px] font-medium text-[#555555] transition-colors duration-200 hover:text-[#D52B32] after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#D52B32] after:transition-all hover:after:w-full"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div className="h-5 w-px bg-[#E5E5E5]" />
+
+            <ThemeToggle />
+
             <a
-              href={INSTAGRAM}
-              target="_blank"
-              rel="noreferrer"
-              className="glass-card flex flex-1 items-center justify-center gap-2 rounded-2xl py-3 text-sm"
+              href="#contact"
+              className="group inline-flex items-center gap-3 rounded-sm bg-[#D52B32] px-5 py-3 text-[13px] font-semibold text-white transition-all duration-300 hover:bg-[#B91F28]"
             >
-              <Instagram size={15} /> Instagram
-            </a>
-            <a
-              href={EMAIL}
-              className="text-primary-foreground flex flex-1 items-center justify-center gap-2 rounded-2xl py-3 text-sm"
-              style={{ background: "var(--gradient-rose)" }}
-            >
-              <Mail size={15} /> Email
+              Let's Talk
+              <ArrowUpRight
+                size={15}
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
             </a>
           </div>
+
+          {/* MOBILE CONTROLS */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
+
+            <button
+              type="button"
+              onClick={() => setOpen((value) => !value)}
+              aria-label={open ? "Close navigation" : "Open navigation"}
+              aria-expanded={open}
+              className="grid size-10 place-items-center border border-[#E8E8E8] text-[#171717] transition-colors hover:border-[#D52B32] hover:text-[#D52B32]"
+            >
+              {open ? <X size={19} /> : <Menu size={19} />}
+            </button>
+          </div>
         </div>
-      ) : null}
+
+        {/* MOBILE MENU */}
+        {open && (
+          <div className="border-t border-[#EEEEEE] bg-white px-5 pb-6 pt-4 shadow-xl lg:hidden">
+            <div className="mx-auto max-w-7xl">
+              <div className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#999999]">
+                Navigation
+              </div>
+
+              <ul className="divide-y divide-[#EEEEEE]">
+                {links.map((link, index) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center justify-between py-4 text-[15px] font-medium text-[#171717] transition-colors hover:text-[#D52B32]"
+                    >
+                      {link.label}
+                      <span className="text-xs text-[#AAAAAA]">
+                        0{index + 1}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="mt-5 flex items-center justify-center gap-2 bg-[#D52B32] px-5 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#B91F28]"
+              >
+                Book a Strategy Call
+                <ArrowUpRight size={16} />
+              </a>
+
+              <div className="mt-5 flex items-center justify-between border-t border-[#EEEEEE] pt-5">
+                <a
+                  href={INSTAGRAM}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-medium text-[#666666] hover:text-[#D52B32]"
+                >
+                  Instagram ↗
+                </a>
+
+                <a
+                  href={EMAIL}
+                  className="text-xs font-medium text-[#666666] hover:text-[#D52B32]"
+                >
+                  Email Us ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </nav>
     </header>
   );
 }

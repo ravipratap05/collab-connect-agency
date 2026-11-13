@@ -24,7 +24,7 @@ const projects = [
   {
     title: "Brand Campaigns",
     tag: "Beauty & Skincare",
-    result: "50+ Brand Campaigns",
+    result: "10+ Paid Campaigns",
     description:
       "Influencer collaborations and creator-led campaigns connecting brands with relevant audiences.",
     image: "/03-brand-campaigns.png",

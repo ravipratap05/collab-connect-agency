@@ -17,11 +17,6 @@ const enquiries = [
     message:
       "Hi CollabConnect! I'm looking for website development services. Could you please share your services and pricing?",
   },
-  {
-    label: "Something Else",
-    message:
-      "Hi CollabConnect! I have a different enquiry. Could you please help me?",
-  },
 ];
 export function Whatsapp() {
   const [open, setOpen] = useState(false);
@@ -103,19 +98,12 @@ className="absolute bottom-[68px] right-0 w-[calc(100vw-32px)] max-w-[360px] max
               }}
             >
               <p className="text-[14px] font-semibold">
-                Hey there! 👋 Welcome to CollabConnect.
+                Hey! Welcome to CollabConnect.
               </p>
               <p className="mt-2 text-[13px] leading-[1.8]" style={{
                 color: "var(--text-secondary)",
               }}>
-                Looking to grow your brand, build your online presence or
-                collaborate with creators?
-              </p>
-              <p className="mt-2 text-[13px] leading-[1.8]" style={{
-                color: "var(--text-secondary)",
-              }}>
-                Tell us what you're looking for. We'd love to help you find
-                the right solution!
+                Looking to grow your brand or collaborate with creators? Tell us what you need — we're here to help!
               </p>
               <div
                 className="mt-2 text-right text-[10px]"

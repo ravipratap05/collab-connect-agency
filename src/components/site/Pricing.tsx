@@ -141,9 +141,9 @@ const pricingCategories: PricingCategory[] = [
           "Complete Instagram growth and management for brands building a strong digital presence.",
         features: [
           "50+ Content Pieces / Month",
-          "12 Reels",
+          "25 Reels",
           "8 Static / Carousel Posts",
-          "30–40 Stories",
+          "20-30 Stories",
           "Complete Instagram Management",
           "Advanced Content & Growth Strategy",
           "Content Pillars + Reel Concepts",

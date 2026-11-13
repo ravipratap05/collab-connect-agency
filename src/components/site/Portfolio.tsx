@@ -2,46 +2,41 @@
 import { ArrowUpRight } from "lucide-react";
 import { Reveal, SectionHeading } from "./Reveal";
 
-import p1 from "@/assests/portfolio-1.jpg";
-import p2 from "@/assests/portfolio-2.jpg";
-import p3 from "@/assests/portfolio-3.jpg";
-import hero from "@/assests/hero-dashboard.jpg";
-
 const projects = [
   {
     title: "Instagram Management",
     tag: "Fashion & Lifestyle",
-    result: "42K Followers in 5 Months",
+    result: "3,532 → 45.2K Followers",
     description:
       "Brand positioning, content strategy and consistent social media management to build a stronger digital presence.",
-    image: p1,
+    image: "/01-instagram-management.png",
     span: "lg:col-span-2",
   },
   {
     title: "Creator Growth",
-    tag: "Personal Branding",
-    result: "3.1M Monthly Reel Views",
+    tag: "Lifestyle & Daily Vlogs",
+    result: "4.36M+ Views in 30 Days",
     description:
       "Content planning and creative direction designed to expand reach and strengthen audience engagement.",
-    image: p2,
+    image: "/02-creator-growth.png",
     span: "",
   },
   {
     title: "Brand Campaigns",
     tag: "Beauty & Skincare",
-    result: "28 Paid Collaborations Delivered",
+    result: "50+ Brand Campaigns",
     description:
       "Influencer collaborations and creator-led campaigns connecting brands with relevant audiences.",
-    image: p3,
+    image: "/03-brand-campaigns.png",
     span: "",
   },
   {
     title: "UGC & Campaign Management",
     tag: "Multi-brand Projects",
-    result: "180 UGC Assets Delivered",
+    result: "50+ Campaigns · 1K+ Creator Network",
     description:
       "Creative campaign coordination, UGC content production and performance-focused reporting.",
-    image: hero,
+    image: "/04-ugc-campaign-management.png",
     span: "lg:col-span-2",
   },
 ];
@@ -58,7 +53,6 @@ export function Portfolio() {
     >
       <div className="mx-auto max-w-6xl px-5">
 
-        {/* SECTION HEADING */}
         <SectionHeading
           eyebrow="Selected Work"
           title={
@@ -76,7 +70,6 @@ export function Portfolio() {
           subtitle="A look at the brands, creators and campaigns we've worked with — bringing ideas to life through thoughtful strategy and creative execution."
         />
 
-        {/* PROJECT GRID */}
         <div className="mt-14 grid gap-x-6 gap-y-12 lg:grid-cols-3">
           {projects.map((project, index) => (
             <div
@@ -97,8 +90,8 @@ export function Portfolio() {
                       src={project.image}
                       alt={`${project.title} — ${project.tag}`}
                       loading="lazy"
-                      width={900}
-                      height={600}
+                      width={1536}
+                      height={1024}
                       className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
 
@@ -137,11 +130,9 @@ export function Portfolio() {
 
                     {/* PROJECT RESULT */}
                     <p
-                      className="mt-4 inline-flex w-fit items-center rounded-lg border px-3 py-2 text-sm font-bold leading-6 sm:text-base"
+                      className="mt-3 text-base font-bold leading-7 sm:text-lg"
                       style={{
-                        color: "var(--text-main)",
-                        background: "var(--surface-card)",
-                        borderColor: "var(--border)",
+                        color: "var(--accent)",
                       }}
                     >
                       {project.result}

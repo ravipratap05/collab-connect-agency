@@ -53,7 +53,7 @@ export function Whatsapp() {
         <div
           role="dialog"
           aria-label="Chat with CollabConnect"
-          className="absolute bottom-[68px] right-0 w-[calc(100vw-32px)] max-w-[360px] overflow-hidden rounded-[22px] border shadow-[0_20px_70px_rgba(0,0,0,0.2)] sm:w-[360px]"
+className="absolute bottom-[68px] right-0 w-[calc(100vw-32px)] max-w-[360px] max-h-[calc(100dvh-110px)] overflow-y-auto overscroll-contain rounded-[22px] border shadow-[0_20px_70px_rgba(0,0,0,0.2)] sm:w-[360px]"
           style={{
             background: "var(--surface-card)",
             borderColor: "var(--border)",

@@ -1,7 +1,7 @@
 
 import { motion } from "motion/react";
 import { ArrowUpRight, Instagram } from "lucide-react";
-import heroImage from "@/assests/hero-dashboard.jpg";
+import heroImage from "@/assests/hero-collabconnect.png";
 
 const capabilities = [
   "Social Media Strategy",

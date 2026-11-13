@@ -137,9 +137,11 @@ export function Portfolio() {
 
                     {/* PROJECT RESULT */}
                     <p
-                      className="mt-3 text-base font-bold leading-7 sm:text-lg"
+                      className="mt-4 inline-flex w-fit items-center rounded-lg border px-3 py-2 text-sm font-bold leading-6 sm:text-base"
                       style={{
-                        color: "var(--accent, var(--primary))",
+                        color: "var(--text-main)",
+                        background: "var(--surface-card)",
+                        borderColor: "var(--border)",
                       }}
                     >
                       {project.result}
@@ -162,7 +164,7 @@ export function Portfolio() {
           ))}
         </div>
 
-        {/* BOTTOM CTA - ONLY TOP DIVIDER REMOVED */}
+        {/* BOTTOM CTA */}
         <div className="mt-16 flex flex-col items-start justify-between gap-5 pt-8 sm:flex-row sm:items-center">
 
           <p

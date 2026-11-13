@@ -14,7 +14,7 @@ const projects = [
   },
   {
     title: "Creator Growth",
-    tag: "Lifestyle & Daily Vlogs",
+    tag: "Lifestyle Creator",
     result: "4.36M+ Views in 30 Days",
     description:
       "Content planning and creative direction designed to expand reach and strengthen audience engagement.",
@@ -53,6 +53,7 @@ export function Portfolio() {
     >
       <div className="mx-auto max-w-6xl px-5">
 
+        {/* SECTION HEADING */}
         <SectionHeading
           eyebrow="Selected Work"
           title={
@@ -70,6 +71,7 @@ export function Portfolio() {
           subtitle="A look at the brands, creators and campaigns we've worked with — bringing ideas to life through thoughtful strategy and creative execution."
         />
 
+        {/* PROJECT GRID */}
         <div className="mt-14 grid gap-x-6 gap-y-12 lg:grid-cols-3">
           {projects.map((project, index) => (
             <div
@@ -92,7 +94,7 @@ export function Portfolio() {
                       loading="lazy"
                       width={1536}
                       height={1024}
-                      className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      className="block h-auto w-full rounded-2xl transition-transform duration-700 group-hover:scale-[1.02]"
                     />
 
                     <div
@@ -128,11 +130,13 @@ export function Portfolio() {
                       {project.title}
                     </h3>
 
-                    {/* PROJECT RESULT */}
+                    {/* PROJECT RESULT BADGE */}
                     <p
-                      className="mt-3 text-base font-bold leading-7 sm:text-lg"
+                      className="mt-4 inline-flex w-fit max-w-full items-center rounded-xl border px-4 py-2.5 text-sm font-bold leading-6 sm:text-base"
                       style={{
-                        color: "var(--accent)",
+                        color: "var(--text-main)",
+                        background: "var(--surface-card)",
+                        borderColor: "var(--border)",
                       }}
                     >
                       {project.result}
